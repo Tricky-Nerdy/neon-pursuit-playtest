@@ -22,5 +22,5 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
 
     // UVC webcam preview and hardware camera controls.
-    implementation("com.github.jiangdongguo:AndroidUSBCamera:3.3.0")
+    implementation("com.github.jiangdongguo.AndroidUSBCamera:libausbc:3.2.7")
 }

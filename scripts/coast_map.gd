@@ -20,6 +20,13 @@ var navigation := AStar3D.new()
 var road_widths := [42.0,30.0,34.0,34.0,34.0]
 var district_roads: Array[Curve3D] = []
 var event_sites: Array[Vector3] = []
+var world_environment: WorldEnvironment
+var sky_material: ProceduralSkyMaterial
+var sun_light: DirectionalLight3D
+var time_of_day := 180.0 # Start just after sunrise.
+const DAY_SECONDS := 15.0 * 60.0
+const NIGHT_SECONDS := 6.0 * 60.0
+const CYCLE_SECONDS := DAY_SECONDS + NIGHT_SECONDS
 
 func _ready() -> void:
     physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
@@ -34,6 +41,23 @@ func _ready() -> void:
     scenery.populate(self)
     _batch_boxes()
     _build_navigation()
+
+func advance_day_night(delta: float) -> void:
+    time_of_day = fmod(time_of_day + delta, CYCLE_SECONDS)
+    var daylight := time_of_day < DAY_SECONDS
+    var sun_t := (time_of_day / DAY_SECONDS) if daylight else ((time_of_day - DAY_SECONDS) / NIGHT_SECONDS)
+    # The sun completes a visible arc during day and stays below the horizon at night.
+    var elevation := lerpf(-12.0, 62.0, sin(sun_t * PI)) if daylight else -16.0
+    sun_light.rotation_degrees = Vector3(-elevation, lerpf(-118.0, 62.0, sun_t), 0.0)
+    var warm := clampf(sin(sun_t * PI), 0.0, 1.0) if daylight else 0.0
+    sun_light.light_energy = lerpf(0.04, 1.35, warm)
+    sun_light.light_color = Color(0.30, 0.42, 0.72).lerp(Color(1.0, 0.91, 0.76), warm)
+    world_environment.environment.ambient_light_energy = lerpf(0.22, 0.85, warm)
+    sky_material.sky_top_color = Color(0.008, 0.018, 0.065).lerp(Color(0.12, 0.32, 0.55), warm)
+    sky_material.sky_horizon_color = Color(0.035, 0.06, 0.16).lerp(Color(0.75, 0.84, 0.88), warm)
+    sky_material.ground_horizon_color = Color(0.025, 0.045, 0.09).lerp(Color(0.60, 0.72, 0.75), warm)
+    sky_material.ground_bottom_color = Color(0.008, 0.012, 0.035).lerp(Color(0.17, 0.26, 0.32), warm)
+    world_environment.environment.fog_light_color = Color(0.08, 0.13, 0.28).lerp(Color(0.57, 0.72, 0.8), warm)
 
 func _open_curve(points: Array[Vector3]) -> Curve3D:
     var path := Curve3D.new()
@@ -301,6 +325,7 @@ func _environment() -> void:
     var env := Environment.new()
     var sky := Sky.new()
     var sky_mat := ProceduralSkyMaterial.new()
+    sky_material = sky_mat
     sky_mat.sky_top_color = Color(0.12,0.32,0.55)
     sky_mat.sky_horizon_color = Color(0.75,0.84,0.88)
     sky_mat.ground_horizon_color = Color(0.60,0.72,0.75)
@@ -318,6 +343,7 @@ func _environment() -> void:
     env.fog_density = 0.00048
     env.fog_light_color = Color(0.57,0.72,0.8)
     world.environment = env
+    world_environment = world
     add_child(world)
     var sun := DirectionalLight3D.new()
     sun.rotation_degrees = Vector3(-38,-28,0)
@@ -325,7 +351,9 @@ func _environment() -> void:
     sun.light_energy = 1.35
     sun.shadow_enabled = true
     sun.directional_shadow_max_distance = 220
+    sun_light = sun
     add_child(sun)
+    advance_day_night(0.0)
 
 func _island() -> void:
     box(Vector3(12000,0.2,12000), Vector3(0,-2.5,0), Color(0.04,0.34,0.43))

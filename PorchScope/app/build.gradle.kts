@@ -21,6 +21,10 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
 
-    // UVC webcam preview and hardware camera controls.
-    implementation("com.github.jiangdongguo.AndroidUSBCamera:libausbc:3.2.7")
+    // UVC webcam preview and hardware camera controls. The excluded UI/demo
+    // libraries are not used by PorchScope and no longer resolve from JCenter.
+    implementation("com.github.jiangdongguo.AndroidUSBCamera:libausbc:3.2.7") {
+        exclude(group = "com.gyf.immersionbar", module = "immersionbar")
+        exclude(group = "com.zlc.glide", module = "webpdecoder")
+    }
 }

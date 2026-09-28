@@ -6,13 +6,21 @@ An open-map arcade pursuit racer for Android and PC. Cruise a connected coastal 
 
 The map connects 8.44 km of roads through the coast, harbor, canyon and airfield. The main route is 5.09 km, with an irregular shoreline, inland reservoir, ridge tunnel, city blocks, piers and a container yard. Roads and driving physics stay level; the mountains add terrain relief rather than jump physics.
 
-### Scene review renders
+### Blender scene shots
 
-These are renders of the exported game scene used to review map layout and geometry. They are not in-game gameplay screenshots.
+These Blender renders use the exported game scene. They show the world layout and representative driving areas; they are not direct captures from the running game.
 
-| Map overview | Driving view | City district |
-| --- | --- | --- |
-| ![Aurora Bay map layout](tests/geometry_review/map.png) | ![Road and player craft scene review](tests/geometry_review/road.png) | ![City street scene review](tests/geometry_review/city.png) |
+**Aurora Bay map**
+
+![Blender render of the Aurora Bay map](docs/screenshots/aurora-bay-map.jpg)
+
+**Canyon road**
+
+![Blender render of the canyon driving route](docs/screenshots/canyon-route.jpg)
+
+**City district**
+
+![Blender render of a Neon Pursuit city street](docs/screenshots/city-district.jpg)
 
 ## Driving and events
 

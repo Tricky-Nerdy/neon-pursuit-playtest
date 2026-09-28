@@ -12,6 +12,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven(url = "https://jcenter.bintray.com/")
         maven(url = "https://jitpack.io")
     }
 }

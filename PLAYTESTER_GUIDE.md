@@ -29,7 +29,7 @@ Push a version tag such as `v0.1.0` after the automated test job passes. GitHub 
 
 Create the keystore once on a trusted computer with `keytool -genkeypair -v -keystore neon-pursuit-testers.keystore -alias neon-pursuit-testers -keyalg RSA -keysize 2048 -validity 10000`. Store the alias and password in the matching repository secrets, then base64-encode the keystore into `ANDROID_TESTER_KEYSTORE_BASE64`. Never commit or send the keystore or its password in chat.
 
-GitHub prerelease downloads are manual installs. Android requires the tester to accept the package installer; silent APK replacement is not available to an ordinary app. Automatic Android installation updates require a Play Console internal-testing track and tester opt-in. Windows/Linux builds are published automatically on each version tag, but replacing an installed build is still a tester action. This repo does not yet have a connected GitHub remote, so the workflow will start when the project is pushed to the playtest repository.
+GitHub prerelease downloads are manual installs. Android requires the tester to accept the package installer; silent APK replacement is not available to an ordinary app. Automatic Android installation updates require a Play Console internal-testing track and tester opt-in. Windows/Linux builds are published automatically on each version tag, but replacing an installed build is still a tester action. The source is in the private [`neon-pursuit-playtest`](https://github.com/Tricky-Nerdy/neon-pursuit-playtest) repository on `main`.
 
 ## Build and test
 

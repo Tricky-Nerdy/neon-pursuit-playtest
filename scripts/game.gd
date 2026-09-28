@@ -112,6 +112,8 @@ func _ready() -> void:
     telemetry.record("INFO", "world_ready", {"route_meters":coast.length,"checkpoints":coast.route.size(),"landmarks":coast.landmark_count})
 
 func _process(delta: float) -> void:
+    if coast:
+        coast.advance_day_night(delta)
     _camera_follow(delta)
     player.mouse_steer_axis = move_toward(player.mouse_steer_axis,0.0,delta*1.8)
     notice_timer = maxf(0.0,notice_timer-delta)

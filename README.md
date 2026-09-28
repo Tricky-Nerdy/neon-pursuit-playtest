@@ -1,55 +1,43 @@
-# NEON PURSUIT — Aurora Bay 4.0 — Broken Coast
+# Neon Pursuit: Aurora Bay
 
-Godot 4.7.2 hover racer for Android and PC. Explore 8.44 km of connected roads across the coast, harbor, canyon and airfield. Four selectable circuits, seven events, endless free roam and three original Blender-built ships.
+An open-map arcade pursuit racer for Android and PC. Cruise a connected coastal world, jump into an event instantly, and swap craft or modes without leaving the drive. The current playtest build includes seven event types, four districts, three ships, AI rivals, police pursuits, persistent medals and instant retries.
 
-## The map rebuild
+## Aurora Bay
 
-The flat oval island is gone. An irregular shoreline wraps around a 5.09 km main route with headlands, inland bends and a northern mountain section. The complete network has 8.44 km of connected roads and four event circuits.
+The map connects 8.44 km of roads through the coast, harbor, canyon and airfield. The main route is 5.09 km, with an irregular shoreline, inland reservoir, ridge tunnel, city blocks, piers and a container yard. Roads and driving physics stay level; the mountains add terrain relief rather than jump physics.
 
-Sculpted terrain rises to 196 m around the roads, with a reservoir, forest clusters and a ridge tunnel. The driving routes remain level; this release adds surrounding terrain relief, not jump or elevation physics. The shore recovery boundary follows the new land shape, so northern and eastern roads are fully playable.
+### Scene review renders
 
-The waterfront now has a market, connected piers, yachts, cranes and a ribbed container yard. The city has stepped glass buildings with floor bands, mullions and rooftop equipment. A lighthouse, radar dishes, hangar and tower distinguish the outer districts. Original Blender models for six prop types are included with their editable sources.
+These are renders of the exported game scene used to review map layout and geometry. They are not in-game gameplay screenshots.
 
-Repeated model instances are combined into 23 mesh batches; roadside boxes are also grouped by material. The environment contains 2,347 placed object/detail elements. This is a geometry improvement, not a measured claim about Android frame rate.
+| Map overview | Driving view | City district |
+| --- | --- | --- |
+| ![Aurora Bay map layout](tests/geometry_review/map.png) | ![Road and player craft scene review](tests/geometry_review/road.png) | ![City street scene review](tests/geometry_review/city.png) |
 
-## Open on Android
+## Driving and events
 
-1. Extract this ZIP into a new folder.
-2. In Godot Android, import `neon_pursuit_aurora_bay_v4/project.godot`, then Play.
-3. Hold the phone sideways; sensor landscape is enabled.
-4. Tap **≡** at the bottom center, or press **F3**, to pause and open missions, district selection, difficulty, craft swap and retry. The top information/debug bar stays hidden during play.
-5. Left stick steers; pushing up accelerates. Right-side GO, BOOST, DRIFT and BRAKE support separate fingers. Brake takes priority over acceleration. Release drift to regain grip and bank your combo.
+- **Free Roam** for uninterrupted exploration.
+- **Bay Sprint** and **Coast Circuit** against AI rivals.
+- **Checkpoint Rush** with time added at each gate.
+- **Pursuit** with road-network police and search behavior.
+- **Drift Rush** where slides build a combo that must be banked.
+- **Elimination** and **Speed Trial** for short score-chasing runs.
 
-This is a Godot project, not an APK. Models are included; no additional asset packs, Blender installation or Termux edits are needed. The internal application name remains unchanged to preserve the existing save location.
+Choose Coast, Harbor, Canyon or Airfield. Events have levels, medals and saved records. Retry resets straight to the action; there are no race intro sequences. The compact driving HUD stays clear of diagnostic text; use **F3** (or the bottom menu button on touch) for the event and craft menu.
 
-## Events
+Touch, keyboard, mouse, and gamepad input are supported. The camera follows close behind the craft. The look uses stylized 3D geometry, sky lighting, shadows, fog, emissive road markings and reflective water. Real-time global illumination is not currently implemented.
 
-Choose COAST, HARBOR, CANYON or AIRFIELD in the menu. Every district supports all events.
+## Developers
 
-- **Free Roam:** explore the connected map with roaming pilots and coastal boost pads.
-- **Bay Sprint:** a short race against two rivals.
-- **Coast Circuit:** one full lap of the selected district against four rivals.
-- **Checkpoint Rush:** every gate adds time; allowances scale with distance and difficulty.
-- **Pursuit:** clear the marked route, then stay clear of police for six seconds. Officers chase, take road-network intercept routes and search your last known location after losing sight.
-- **Drift Rush:** slide through corners for 60 seconds. Release the slide to bank points; hitting scenery loses the unbanked combo. Driving fresh distance is required.
-- **Elimination:** the last pilot is eliminated every 20 seconds. Survive all four rounds.
-- **Speed Trial:** six speed traps with increasing targets. Hit four to pass, five for silver or all six for gold.
+### Requirements and launch
 
-Medals and personal records are saved separately by event, district and level. Rank points unlock five difficulty levels; select AUTO or any earned level. Retry restores the event start instantly. Craft swaps preserve the current event. There are no race intros.
+- Godot **4.7.2** and matching export templates for official builds.
+- Open `project.godot` in Godot and press Play, or launch with `run_game_linux.sh` / `run_game_windows.cmd`.
+- All runtime models are included in `assets/`. Editable Blender sources and generation scripts are in `tools/`; no extra asset packs are required.
 
-Rivals use the same physical ship controller as the player. They brake for corners, choose passing lanes, manage boost and reverse out of trouble. Police use a connected road graph and line-of-sight checks. Neither system teleports to catch up.
+### Tests and diagnostics
 
-Keyboard: WASD/arrows, Space boost, Shift drift, E/Tab next mode, Q craft, R retry, F3/Esc menu. Opening the menu or losing app focus pauses driving and mission timers.
-
-## Camera and graphics
-
-The close 9 m chase camera and physics interpolation from 2.1 are retained. The camera anchor stays level while the hull gently bobs. Resets clear interpolation history.
-
-Mobile renderer, sky ambient light, directional shadows, fog, emissive markings and a water shader. This is stylized geometry, not real-time global illumination. Roads have continuous meshes; repeated scenery is batched by material. Rocks have collision and driving lanes are checked for obstructions.
-
-## Testing and logs
-
-See `tests/TEST_REPORT.md` and `tests/reports/`. From the project directory:
+See [`tests/TEST_REPORT.md`](tests/TEST_REPORT.md) for the latest automated results and known limits. Run the suites from the project root:
 
 ```sh
 godot --headless --editor --path . --import --quit
@@ -58,8 +46,12 @@ for suite in run_all input_devices ai_endurance mission_scenarios police_scenari
 done
 ```
 
-Tests use isolated save/log filenames. Driving scenarios operate actual ship physics, steering, brakes and boost. Runtime structured events and periodic performance samples go to `user://neon_pursuit.log`, rotated at 512 KiB. Engine logging is enabled. These diagnostics do not add an in-game top bar.
+Runtime events and periodic performance samples are written to `user://neon_pursuit.log`; the game does not add a debug bar to the driving view. `tests/render_capture.gd` captures the running game when launched with a graphical display. The images in `tests/geometry_review/` are scene geometry reviews and should not be presented as gameplay captures.
 
-Editable Blender sources and generation scripts are in `tools/`; Git history is included. Geometry review renders are labelled separately from gameplay. `tests/render_capture.gd` supports actual engine capture on a machine with a display.
+### Playtesters
 
-Build details, controller/keyboard bindings, TV setup, automated releases and Android update signing are in `PLAYTESTER_GUIDE.md`. No code or assets from G-Zero, EVE, WipEout or NFS are distributed.
+Playtest setup, controls, TV connection, release downloads and update/signing notes are in the [Playtester Guide](PLAYTESTER_GUIDE.md). Windows and Linux prereleases are built from version tags. Android release builds require the persistent tester signing key described in that guide.
+
+## Project notes
+
+This is a playable prototype and playtest project, not a finished commercial release. Android store distribution and silent updates are not configured. No code or assets from G-Zero, EVE, WipEout or NFS are distributed.

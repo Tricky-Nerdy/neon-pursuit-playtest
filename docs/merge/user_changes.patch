@@ -1,0 +1,203 @@
+--- base/scripts/game.gd
++++ user/scripts/game.gd
+@@ -14,7 +14,7 @@
+ var active_route_index := 0
+ var active_route: Curve3D
+ var route_length := 1.0
+-var gate_spacing := 100.0
++var gate_spacing := 80.0
+ var player_progress := 0.0
+ var progress_offset := 0.0
+ var progress_delta := 0.0
+@@ -69,7 +69,7 @@
+ var drift_combo := 1.0
+ var clean_time := 0.0
+ var last_result := ""
+-var race_position := 1
++var race_position := 4
+ var previous_position := Vector3.ZERO
+ var event_active := false
+ var session_crashes := 0
+@@ -91,7 +91,7 @@
+     player.hit_wall.connect(_on_hit_wall)
+     camera = Camera3D.new()
+     camera.current = true
+-    camera.fov = 68
++    camera.fov = 75
+     camera.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
+     add_child(camera)
+     _make_rivals()
+@@ -124,7 +124,7 @@
+     pad_cooldown = maxf(0.0,pad_cooldown-delta)
+     _move_traffic(delta)
+     _update_pads()
+-    var off_road := coast.road_distance(player.position) > 27.0
++    var off_road := coast.road_distance(player.position) > 78.0
+     player.surface_factor = 0.55 if off_road else 1.0
+     if pow(player.position.x/780.0,2) + pow(player.position.z/680.0,2) > 1.0:
+         var road_point := coast.closest_road_point(player.position)
+@@ -538,9 +538,9 @@
+         player.drive_axis = drive
+     )
+     ui.add_child(virtual_stick)
+-    _hold("DRIFT",Vector2(-382,-114),Vector2(98,88),"input_drift")
+-    _hold("BRAKE",Vector2(-275,-114),Vector2(98,88),"input_brake")
+-    _hold("BOOST",Vector2(-275,-211),Vector2(98,88),"input_boost")
++    #_hold("DRIFT",Vector2(-382,-114),Vector2(98,88),"input_drift")
++    #_hold("BRAKE",Vector2(-275,-114),Vector2(98,88),"input_brake")
++    #_hold("BOOST",Vector2(-275,-211),Vector2(98,88),"input_boost")
+     _hold("GO",Vector2(-165,-166),Vector2(142,140),"input_accel")
+     var menu_button := _button("≡",Vector2(-28,-66),Vector2(56,48),_toggle_hud,ui)
+     menu_button.anchor_left = 0.5
+--- base/scripts/ship.gd
++++ user/scripts/ship.gd
+@@ -4,16 +4,16 @@
+ signal hit_wall
+ 
+ const CRAFT := [
+-    {"name":"VECTOR", "color":Color(0.0, 0.95, 1.0), "speed":82.0, "turn":2.25, "accel":48.0},
+-    {"name":"RAPTOR", "color":Color(1.0, 0.25, 0.65), "speed":98.0, "turn":1.75, "accel":43.0},
+-    {"name":"COMET", "color":Color(1.0, 0.77, 0.12), "speed":73.0, "turn":2.9, "accel":58.0}
++    {"name":"VECTOR", "color":Color(0.0, 0.95, 1.0), "speed":62.0, "turn":2.25, "accel":48.0},
++    {"name":"RAPTOR", "color":Color(1.0, 0.25, 0.65), "speed":78.0, "turn":1.75, "accel":43.0},
++    {"name":"COMET", "color":Color(1.0, 0.77, 0.12), "speed":53.0, "turn":2.9, "accel":58.0}
+ ]
+ 
+ var craft_index := 0
+ var heading := 0.0
+ var forward_speed := 0.0
+ var side_speed := 0.0
+-var boost_fuel := 100.0
++var boost_fuel := 70.0
+ var input_accel := false
+ var input_brake := false
+ var input_left := false
+@@ -50,7 +50,7 @@
+ 
+ func _physics_process(delta: float) -> void:
+     var stats: Dictionary = CRAFT[craft_index]
+-    var steer := clampf(steer_axis + float(int(input_right or (human_controlled and Input.is_action_pressed("right"))) - int(input_left or (human_controlled and Input.is_action_pressed("left")))), -1.0, 1.0)
++    var steer := clampf(steer_axis + float(int(input_right or (human_controlled and Input.is_action_pressed("right"))) - int(input_left or (human_controlled and Input.is_action_pressed("left")))), -0.8, 0.8)
+     steering_actual = move_toward(steering_actual,steer,delta*6.0)
+     steer = steering_actual
+     var throttle := input_accel or drive_axis < -0.25 or (human_controlled and Input.is_action_pressed("accelerate"))
+--- base/project.godot
++++ user/project.godot
+@@ -1,37 +1,80 @@
++; Engine configuration file.
++; It's best edited using the editor UI and not directly,
++; since the parameters that go here are not all obvious.
++;
++; Format:
++;   [section] ; section goes between []
++;   param=value ; assign values to parameters
++
+ config_version=5
+ 
+ [application]
+-config/name="NEON PURSUIT: Aurora Bay 2"
++
++config/name="Neon Pursit: Aurora Bay 3.0"
+ config/version="3.0-district-rivals"
+ run/main_scene="res://scenes/main.tscn"
+-config/features=PackedStringArray("4.6", "Mobile")
++config/features=PackedStringArray("4.7", "Mobile")
++boot_splash/bg_color=Color(0.45526832, 0.45526826, 0.4552682, 1)
++boot_splash/stretch_mode=0
++boot_splash/use_filter=false
++
++[debug]
++
++file_logging/enable_file_logging=true
+ 
+ [display]
++
+ window/size/viewport_width=1280
+ window/size/viewport_height=720
+-window/handheld/orientation=4
+-window/stretch/mode="canvas_items"
++window/stretch/aspect="ignore"
++window/stretch/scale=1.5
++window/handheld/orientation=6
++window/vsync/vsync_mode=0
++
++[input]
++
++accelerate={
++"deadzone": 0.5,
++"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194320,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++]
++}
++brake={
++"deadzone": 0.5,
++"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194322,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++]
++}
++left={
++"deadzone": 0.5,
++"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194319,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++]
++}
++right={
++"deadzone": 0.5,
++"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194321,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++]
++}
++boost={
++"deadzone": 0.5,
++"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++]
++}
++drift={
++"deadzone": 0.5,
++"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
++]
++}
++
++[physics]
++
++3d/default_gravity=0.0
++common/physics_interpolation=true
+ 
+ [rendering]
+-renderer/rendering_method="mobile"
+-renderer/rendering_method.mobile="mobile"
++
++anti_aliasing/quality/msaa_3d=2
++environment/defaults/default_clear_color=Color(0.015, 0.018, 0.045, 1)
+ renderer/rendering_method.gl_compatibility="gl_compatibility"
+-anti_aliasing/quality/msaa_3d=2
+-textures/default_filters/use_nearest_mipmap_filter=false
+-environment/defaults/default_clear_color=Color(0.015, 0.018, 0.045, 1)
+-
+-[physics]
+-common/physics_interpolation=true
+-3d/default_gravity=0.0
+-
+-[debug]
+-file_logging/enable_file_logging=true
+-file_logging/max_log_files=5
+-
+-[input]
+-accelerate={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":87),Object(InputEventKey,"physical_keycode":4194320)]}
+-brake={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":83),Object(InputEventKey,"physical_keycode":4194322)]}
+-left={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":65),Object(InputEventKey,"physical_keycode":4194319)]}
+-right={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":68),Object(InputEventKey,"physical_keycode":4194321)]}
+-boost={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":32)]}
+-drift={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":4194325)]}
+--- base/scenes/main.tscn
++++ user/scenes/main.tscn
+@@ -1,4 +1,6 @@
+-[gd_scene load_steps=2 format=3]
+-[ext_resource type="Script" path="res://scripts/game.gd" id="1"]
+-[node name="NeonPursuit" type="Node3D"]
++[gd_scene format=3 uid="uid://cdcrefw2g3emc"]
++
++[ext_resource type="Script" uid="uid://r3tf1lqbwvn0" path="res://scripts/game.gd" id="1"]
++
++[node name="NeonPursuit" type="Node3D" unique_id=701572690]
+ script = ExtResource("1")

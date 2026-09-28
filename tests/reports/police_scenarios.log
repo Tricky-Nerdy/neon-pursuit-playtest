@@ -1,0 +1,30 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[NEON] {"at_unix":1790578809.14769,"data":{"build":"Aurora Bay 4.1 / user merge","godot":"4.7.2-stable (official)"},"event":"session_start","level":"INFO"}
+[NEON] {"at_unix":1790578809.56956,"data":{"checkpoints":32,"landmarks":14,"route_meters":5093.99267578125},"event":"world_ready","level":"INFO"}
+[NEON] {"at_unix":1790578809.60021,"data":{"level":1,"mode":"PURSUIT","route":"HARBOR","target":11},"event":"event_start","level":"INFO"}
+POLICE driver=0 plans=57 offroad=10.4 step=1.19 state=CHASE
+PASS officer 0 replans through road graph
+PASS officer 0 stays near roads
+PASS officer 0 never teleports to catch player
+POLICE driver=1 plans=48 offroad=10.4 step=1.49 state=CHASE
+PASS officer 1 replans through road graph
+PASS officer 1 stays near roads
+PASS officer 1 never teleports to catch player
+POLICE driver=2 plans=39 offroad=23.1 step=1.01 state=SEARCH
+PASS officer 2 replans through road graph
+PASS officer 2 stays near roads
+PASS officer 2 never teleports to catch player
+POLICE driver=3 plans=39 offroad=9.1 step=1.18 state=INTERCEPT
+PASS officer 3 replans through road graph
+PASS officer 3 stays near roads
+PASS officer 3 never teleports to catch player
+PASS officer 0 searches after losing sight
+PASS officer 0 cannot track unseen player
+PASS officer 1 searches after losing sight
+PASS officer 1 cannot track unseen player
+PASS officer 2 searches after losing sight
+PASS officer 2 cannot track unseen player
+PASS officer 3 searches after losing sight
+PASS officer 3 cannot track unseen player
+RESULT 20 checks, 0 failures

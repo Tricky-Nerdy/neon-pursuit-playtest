@@ -1,0 +1,278 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[NEON] {"at_unix":1790578751.5152,"data":{"build":"Aurora Bay 4.1 / user merge","godot":"4.7.2-stable (official)"},"event":"session_start","level":"INFO"}
+[NEON] {"at_unix":1790578751.94249,"data":{"checkpoints":32,"landmarks":14,"route_meters":5093.99267578125},"event":"world_ready","level":"INFO"}
+PASS uploaded sensor orientation retained
+PASS physics interpolation enabled
+PASS close chase camera uses a nine meter gap
+PASS render camera avoids double interpolation
+PASS continuous three kilometer coast circuit
+PASS landmarks and boost pad network
+PASS connected inland shortcut
+PASS top HUD and info are hidden at startup
+PASS F3 opens mission menu
+PASS F3 closes all menu text
+PASS touch menu can reopen without a keyboard
+PASS resume returns directly to driving
+PASS right/up stick direction
+PASS stick releases cleanly
+PASS multitouch throttle plus boost
+PASS opening menu clears held touch inputs
+PASS right controls do not overlap
+[NEON] {"at_unix":1790578751.97776,"data":{"driver":0,"from":"FOLLOW","to":"PATROL"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578751.97795,"data":{"driver":1,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578751.97813,"data":{"driver":2,"from":"FOLLOW","to":"PATROL"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578751.97831,"data":{"driver":3,"from":"FOLLOW","to":"PATROL"},"event":"ai_state","level":"INFO"}
+PASS brake overrides held throttle
+PASS hover bob does not shake camera anchor
+[NEON] {"at_unix":1790578751.99595,"data":{"level":1,"mode":"BAY SPRINT","route":"COAST","target":27},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578751.99619,"data":{"driver":0,"from":"PATROL","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578751.99636,"data":{"driver":1,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578752.00471,"data":{"driver":0,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578752.05257,"data":{"driver":1,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578752.06391,"data":{"passed":1,"time":1.48333333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.06969,"data":{"driver":0,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578752.11344,"data":{"passed":2,"time":2.58333333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.15819,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578752.16383,"data":{"passed":3,"time":3.69999999999999},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.18777,"data":{"driver":1,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578752.19492,"data":{"driver":0,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578752.21147,"data":{"passed":4,"time":4.79999999999999},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.25788,"data":{"passed":5,"time":5.91666666666665},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.25894,"data":{"driver":0,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578752.30507,"data":{"passed":6,"time":7.04999999999998},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.35239,"data":{"passed":7,"time":8.18333333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.40017,"data":{"passed":8,"time":9.31666666666671},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.41517,"data":{"fps":60,"mode":1,"position":"(-695.4774, 2.15, 70.98766)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578752.44808,"data":{"passed":9,"time":10.4500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.44905,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578752.49369,"data":{"passed":10,"time":11.5500000000002},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.55943,"data":{"passed":11,"time":13.1333333333336},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.60758,"data":{"passed":12,"time":14.316666666667},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.65531,"data":{"passed":13,"time":15.4500000000003},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.71222,"data":{"passed":14,"time":16.8333333333337},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.76111,"data":{"passed":15,"time":17.9500000000003},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.76842,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578752.80698,"data":{"passed":16,"time":19.0500000000002},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.8326,"data":{"fps":60,"mode":1,"position":"(-369.8743, 2.15, -356.5582)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578752.86467,"data":{"passed":17,"time":20.4500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.9109,"data":{"passed":18,"time":21.5500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578752.96381,"data":{"passed":19,"time":22.7166666666667},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.01779,"data":{"passed":20,"time":24.0333333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.06541,"data":{"passed":21,"time":25.1833333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.07777,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578753.11062,"data":{"passed":22,"time":26.2833333333331},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.16048,"data":{"passed":23,"time":27.3833333333331},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.21083,"data":{"passed":24,"time":28.533333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.26259,"data":{"fps":60,"mode":1,"position":"(-113.3295, 2.15, -730.7402)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578753.273,"data":{"passed":25,"time":29.8499999999996},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.3274,"data":{"passed":26,"time":30.9833333333329},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.37849,"data":{"passed":27,"time":32.1166666666661},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.37876,"data":{"code":0,"rank_points":195},"event":"progress_saved","level":"INFO"}
+[NEON] {"at_unix":1790578753.37883,"data":{"medal":3,"mode":"BAY SPRINT","route":0,"rp":195,"seconds":32.1166666666661},"event":"event_finish","level":"INFO"}
+PASS actual steering/throttle completes sprint
+PASS boost speed cannot stretch the chase distance
+PASS retry resets interpolation without trailing across map
+PASS finish awards saved medal and rank points
+PASS medals persist to disk
+[NEON] {"at_unix":1790578753.38057,"data":{"level":1,"mode":"COAST CIRCUIT","route":"COAST","target":49},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578753.38096,"data":{"driver":1,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.38114,"data":{"driver":2,"from":"PATROL","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.38131,"data":{"driver":3,"from":"PATROL","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.38789,"data":{"driver":0,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.46398,"data":{"passed":1,"time":1.48333333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.4676,"data":{"driver":2,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.47373,"data":{"driver":0,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.50196,"data":{"driver":2,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.53118,"data":{"passed":2,"time":2.58333333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.59337,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578753.59624,"data":{"driver":2,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.60024,"data":{"passed":3,"time":3.69999999999999},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.65213,"data":{"driver":1,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.65245,"data":{"driver":3,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.66604,"data":{"passed":4,"time":4.79999999999999},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.73188,"data":{"passed":5,"time":5.91666666666665},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.75303,"data":{"driver":2,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.8026,"data":{"passed":6,"time":7.04999999999998},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.83387,"data":{"fps":60,"mode":2,"position":"(-552.925, 2.15, 199.1554)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578753.8489,"data":{"driver":2,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578753.87178,"data":{"passed":7,"time":8.18333333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578753.93925,"data":{"passed":8,"time":9.31666666666671},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.0055,"data":{"passed":9,"time":10.4500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.00671,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578754.06999,"data":{"passed":10,"time":11.5500000000002},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.16834,"data":{"passed":11,"time":13.1333333333336},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.23828,"data":{"passed":12,"time":14.316666666667},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.30515,"data":{"passed":13,"time":15.4500000000003},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.38381,"data":{"passed":14,"time":16.8333333333337},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.42578,"data":{"fps":60,"mode":2,"position":"(-427.3799, 2.15, -183.9479)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578754.44742,"data":{"passed":15,"time":17.9500000000003},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.45739,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578754.50446,"data":{"driver":3,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578754.51438,"data":{"passed":16,"time":19.0500000000002},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.5977,"data":{"passed":17,"time":20.4500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.66131,"data":{"passed":18,"time":21.5500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.68359,"data":{"driver":3,"from":"PASS","to":"FOLLOW"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578754.7299,"data":{"passed":19,"time":22.7166666666667},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.80787,"data":{"passed":20,"time":24.0333333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.87765,"data":{"passed":21,"time":25.1833333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578754.89542,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578754.94503,"data":{"passed":22,"time":26.2833333333331},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.00965,"data":{"passed":23,"time":27.3833333333331},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.02026,"data":{"fps":60,"mode":2,"position":"(-276.3201, 2.15, -774.6042)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578755.07932,"data":{"passed":24,"time":28.533333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.1572,"data":{"passed":25,"time":29.8499999999996},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.22871,"data":{"passed":26,"time":30.9833333333329},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.29491,"data":{"passed":27,"time":32.1166666666661},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.32574,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578755.36586,"data":{"passed":28,"time":33.3999999999994},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.4322,"data":{"passed":29,"time":34.5833333333327},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.50631,"data":{"passed":30,"time":35.8166666666659},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.57378,"data":{"passed":31,"time":36.9333333333325},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.61166,"data":{"fps":60,"mode":2,"position":"(336.9021, 2.15, -402.1253)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578755.64135,"data":{"passed":32,"time":38.0333333333325},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.71421,"data":{"passed":33,"time":39.1666666666657},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.75113,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578755.78371,"data":{"passed":34,"time":40.2833333333323},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.84811,"data":{"passed":35,"time":41.3833333333323},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.9171,"data":{"passed":36,"time":42.5166666666655},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578755.99793,"data":{"passed":37,"time":43.7499999999988},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.06928,"data":{"passed":38,"time":44.8999999999987},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.14318,"data":{"passed":39,"time":46.033333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.19247,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578756.21809,"data":{"passed":40,"time":47.1499999999986},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.24276,"data":{"fps":60,"mode":2,"position":"(706.223, 2.15, 314.5958)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578756.29112,"data":{"passed":41,"time":48.2833333333319},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.38394,"data":{"passed":42,"time":49.6833333333318},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.45426,"data":{"passed":43,"time":50.7999999999984},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.54871,"data":{"passed":44,"time":52.2499999999983},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.61693,"data":{"passed":45,"time":53.3666666666649},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.67451,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578756.69138,"data":{"passed":46,"time":54.4833333333315},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.76309,"data":{"passed":47,"time":55.5833333333315},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.83016,"data":{"passed":48,"time":56.6999999999981},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.88122,"data":{"fps":60,"mode":2,"position":"(48.68182, 2.15, 464.9301)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578756.89816,"data":{"passed":49,"time":57.8333333333313},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.89842,"data":{"code":0,"rank_points":195},"event":"progress_saved","level":"INFO"}
+[NEON] {"at_unix":1790578756.89849,"data":{"medal":3,"mode":"COAST CIRCUIT","route":0,"rp":195,"seconds":57.8333333333313},"event":"event_finish","level":"INFO"}
+PASS actual driving completes circuit against rivals
+PASS circuit is competitively winnable
+[NEON] {"at_unix":1790578756.89978,"data":{"level":1,"mode":"CHECKPOINT RUSH","route":"COAST","target":35},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578756.93677,"data":{"passed":1,"time":1.48333333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.96585,"data":{"passed":2,"time":2.58333333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578756.98981,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578756.99287,"data":{"passed":3,"time":3.69999999999999},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.02066,"data":{"passed":4,"time":4.79999999999999},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.04866,"data":{"passed":5,"time":5.91666666666665},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.0768,"data":{"passed":6,"time":7.04999999999998},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.10436,"data":{"passed":7,"time":8.18333333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.13175,"data":{"passed":8,"time":9.31666666666671},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.14168,"data":{"fps":60,"mode":3,"position":"(-697.7258, 2.15, 66.89229)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578757.16127,"data":{"passed":9,"time":10.4500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.1619,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578757.18995,"data":{"passed":10,"time":11.5500000000002},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.22859,"data":{"passed":11,"time":13.1333333333336},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.25704,"data":{"passed":12,"time":14.316666666667},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.28544,"data":{"passed":13,"time":15.4500000000003},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.32088,"data":{"passed":14,"time":16.8333333333337},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.34737,"data":{"passed":15,"time":17.9500000000003},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.35167,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578757.37351,"data":{"passed":16,"time":19.0500000000002},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.39126,"data":{"fps":60,"mode":3,"position":"(-371.0779, 2.15, -359.4192)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578757.40939,"data":{"passed":17,"time":20.4500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.43705,"data":{"passed":18,"time":21.5500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.46586,"data":{"passed":19,"time":22.7166666666667},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.49762,"data":{"passed":20,"time":24.0333333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.52366,"data":{"passed":21,"time":25.1833333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.53178,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578757.55091,"data":{"passed":22,"time":26.2833333333331},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.57737,"data":{"passed":23,"time":27.3833333333331},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.60664,"data":{"passed":24,"time":28.533333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.63871,"data":{"fps":60,"mode":3,"position":"(-111.4728, 2.15, -727.511)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578757.64193,"data":{"passed":25,"time":29.8499999999996},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.6872,"data":{"passed":26,"time":30.9833333333329},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.71883,"data":{"passed":27,"time":32.1166666666661},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.73317,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578757.7528,"data":{"passed":28,"time":33.3999999999994},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.78367,"data":{"passed":29,"time":34.5833333333327},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.81805,"data":{"passed":30,"time":35.8166666666659},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.84813,"data":{"passed":31,"time":36.9333333333325},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.8921,"data":{"passed":32,"time":38.0333333333325},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.92411,"data":{"passed":33,"time":39.1666666666657},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578757.94745,"data":{"fps":60,"mode":3,"position":"(461.8753, 2.15, -246.5334)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578757.94846,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578757.97477,"data":{"passed":34,"time":40.2833333333323},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.00532,"data":{"passed":35,"time":41.3833333333323},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.00558,"data":{"code":0,"rank_points":195},"event":"progress_saved","level":"INFO"}
+[NEON] {"at_unix":1790578758.00568,"data":{"medal":3,"mode":"CHECKPOINT RUSH","route":0,"rp":195,"seconds":41.3833333333323},"event":"event_finish","level":"INFO"}
+PASS checkpoint rush can be completed with the countdown
+[NEON] {"at_unix":1790578758.00676,"data":{"level":1,"mode":"PURSUIT","route":"COAST","target":20},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578758.0071,"data":{"driver":0,"from":"FOLLOW","to":"CHASE"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578758.00729,"data":{"driver":1,"from":"FOLLOW","to":"CHASE"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578758.00749,"data":{"driver":2,"from":"FOLLOW","to":"CHASE"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578758.00771,"data":{"driver":3,"from":"FOLLOW","to":"INTERCEPT"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578758.07262,"data":{"driver":1,"from":"CHASE","to":"INTERCEPT"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578758.11182,"data":{"passed":1,"time":1.48333333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.19081,"data":{"passed":2,"time":2.58333333333333},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.25894,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578758.26716,"data":{"passed":3,"time":3.69999999999999},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.29795,"data":{"driver":2,"from":"CHASE","to":"SEARCH"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578758.30445,"data":{"driver":3,"from":"INTERCEPT","to":"SEARCH"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578758.34204,"data":{"passed":4,"time":4.79999999999999},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.37475,"data":{"driver":0,"from":"CHASE","to":"SEARCH"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578758.42123,"data":{"passed":5,"time":5.91666666666665},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.49726,"data":{"passed":6,"time":7.04999999999998},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.51045,"data":{"driver":1,"from":"INTERCEPT","to":"SEARCH"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578758.56951,"data":{"passed":7,"time":8.18333333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.57936,"data":{"fps":60,"mode":4,"position":"(-611.0637, 2.15, 158.3247)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578758.65234,"data":{"passed":8,"time":9.31666666666671},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.72478,"data":{"passed":9,"time":10.4500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.72598,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578758.80309,"data":{"passed":10,"time":11.5500000000002},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.90893,"data":{"passed":11,"time":13.1333333333336},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578758.99928,"data":{"passed":12,"time":14.316666666667},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578759.07411,"data":{"passed":13,"time":15.4500000000003},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578759.16585,"data":{"passed":14,"time":16.8333333333337},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578759.23779,"data":{"passed":15,"time":17.9500000000003},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578759.24992,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578759.26672,"data":{"fps":60,"mode":4,"position":"(-392.6873, 2.15, -247.1068)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578759.31518,"data":{"passed":16,"time":19.0500000000002},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578759.40612,"data":{"passed":17,"time":20.4500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578759.47393,"data":{"passed":18,"time":21.5500000000001},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578759.54712,"data":{"passed":19,"time":22.7166666666667},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578759.63951,"data":{"passed":20,"time":24.0333333333332},"event":"gate","level":"INFO"}
+[NEON] {"at_unix":1790578759.74559,"data":{},"event":"boost_pad","level":"INFO"}
+[NEON] {"at_unix":1790578759.93294,"data":{"fps":60,"mode":4,"position":"(-212.031, 2.15, -776.2791)"},"event":"performance","level":"INFO"}
+[NEON] {"at_unix":1790578760.04389,"data":{"code":0,"rank_points":195},"event":"progress_saved","level":"INFO"}
+[NEON] {"at_unix":1790578760.04399,"data":{"medal":3,"mode":"PURSUIT","route":0,"rp":195,"seconds":30.0499999999996},"event":"event_finish","level":"INFO"}
+PASS pursuit is escapable by racing the route
+[NEON] {"at_unix":1790578760.04502,"data":{"level":1,"mode":"CHECKPOINT RUSH","route":"COAST","target":35},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578760.04508,"data":{"mode":"CHECKPOINT RUSH","route":0,"seconds":0.1},"event":"event_failed","level":"WARN"}
+PASS checkpoint rush timeout fails correctly
+[NEON] {"at_unix":1790578760.04531,"data":{"level":1,"mode":"PURSUIT","route":"COAST","target":20},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578760.04569,"data":{"mode":"PURSUIT","route":0,"seconds":0.1},"event":"event_failed","level":"WARN"}
+PASS pursuit heat can cause interception
+[NEON] {"at_unix":1790578760.04593,"data":{"level":1,"mode":"DRIFT RUSH","route":"COAST","target":0},"event":"event_start","level":"INFO"}
+PASS fresh road distance builds unbanked drift combo
+[NEON] {"at_unix":1790578760.04602,"data":{"combo":1.7,"score":714.0},"event":"drift_bank","level":"INFO"}
+PASS releasing drift banks the combo
+[NEON] {"at_unix":1790578760.04608,"data":{"position":"(-106.6377, 2.15, -717.3464)","speed":55.0},"event":"wall_hit","level":"WARN"}
+PASS collision breaks drift combo
+[NEON] {"at_unix":1790578760.04626,"data":{"code":0,"rank_points":390},"event":"progress_saved","level":"INFO"}
+[NEON] {"at_unix":1790578760.04633,"data":{"medal":3,"mode":"DRIFT RUSH","route":0,"rp":195,"seconds":60.09},"event":"event_finish","level":"INFO"}
+PASS drift target awards gold medal
+[NEON] {"at_unix":1790578760.0468,"data":{"level":2,"mode":"DRIFT RUSH","route":"COAST","target":0},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578760.04686,"data":{"mode":5},"event":"event_restart","level":"INFO"}
+PASS retry restarts last event after a finish
+[NEON] {"at_unix":1790578760.04747,"data":{"craft":1},"event":"craft_swap","level":"INFO"}
+PASS craft hot swap preserves mission
+[NEON] {"at_unix":1790578760.04771,"data":{},"event":"mode_free_roam","level":"INFO"}
+PASS free roam clears mission
+[NEON] {"at_unix":1790578760.04777,"data":{},"event":"boost_pad","level":"INFO"}
+PASS road boost pads propel and recharge
+PASS structured logging records outcomes and saves
+RESULT 39 checks, 0 failures
+[NEON] {"at_unix":1790578760.04816,"data":{"driver":0,"from":"SEARCH","to":"PATROL"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578760.04842,"data":{"driver":1,"from":"SEARCH","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578760.04864,"data":{"driver":2,"from":"SEARCH","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578760.04881,"data":{"driver":3,"from":"SEARCH","to":"PASS"},"event":"ai_state","level":"INFO"}

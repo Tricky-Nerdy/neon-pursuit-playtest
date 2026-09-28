@@ -1,0 +1,43 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[NEON] {"at_unix":1790578760.30984,"data":{"build":"Aurora Bay 4.1 / user merge","godot":"4.7.2-stable (official)"},"event":"session_start","level":"INFO"}
+[NEON] {"at_unix":1790578760.72535,"data":{"checkpoints":32,"landmarks":14,"route_meters":5093.99267578125},"event":"world_ready","level":"INFO"}
+[NEON] {"at_unix":1790578760.75604,"data":{},"event":"mode_free_roam","level":"INFO"}
+PASS uploaded project settings preserved byte-for-byte
+PASS input events are not accumulated until the render frame
+PASS all three user craft speeds retained
+PASS user compact touch layout remains the default
+PASS full touch layout is available as an explicit option
+PASS ordinary PC keyboard device zero accelerates physically
+PASS keyboard use hides touch driving controls
+PASS different docked keyboard device IDs still work
+PASS mouse drag steers right while left button drives
+PASS mouse left button accelerates
+PASS small stick noise stays inside the deadzone
+PASS partial stick input remains analog
+PASS left stick direction is correct
+PASS controller trigger preserves half throttle
+PASS full trigger provides full acceleration
+PASS left trigger provides analog braking
+PASS analog steering throttle accelerates the actual ship
+PASS full analog throttle accelerates more than half throttle
+PASS left trigger brake slows the actual ship
+PASS south face button activates boost
+PASS west face button activates drift
+PASS controller Start opens menu and pauses driving
+PASS menu opens with a visible focusable Resume button
+PASS menu fits the user's scaled 720p viewport
+PASS controller Back closes menu and resumes
+[NEON] {"at_unix":1790578760.80097,"data":{"craft":1},"event":"craft_swap","level":"INFO"}
+PASS controller View/Select hot-swaps the craft
+[NEON] {"at_unix":1790578760.80218,"data":{"connected":false,"device":0},"event":"controller_connection","level":"INFO"}
+PASS controller disconnect clears throttle and pauses
+PASS menu remains usable at a small cast window size
+[NEON] {"at_unix":1790578760.80249,"data":{"level":1,"mode":"BAY SPRINT","route":"COAST","target":27},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578760.80268,"data":{"level":1,"mode":"BAY SPRINT","route":"COAST","target":27},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578760.80273,"data":{"mode":1},"event":"event_restart","level":"INFO"}
+[NEON] {"at_unix":1790578760.80296,"data":{"driver":0,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+[NEON] {"at_unix":1790578760.80313,"data":{"driver":1,"from":"FOLLOW","to":"PASS"},"event":"ai_state","level":"INFO"}
+PASS controller north button retries instantly
+PASS right shoulder provides a digital throttle fallback
+RESULT 30 checks, 0 failures

@@ -1,0 +1,53 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[NEON] {"at_unix":1790578761.25937,"data":{"build":"Aurora Bay 4.1 / user merge","godot":"4.7.2-stable (official)"},"event":"session_start","level":"INFO"}
+[NEON] {"at_unix":1790578762.05928,"data":{"checkpoints":32,"landmarks":14,"route_meters":5093.99267578125},"event":"world_ready","level":"INFO"}
+METRIC route=0 driver=0 progress=9449.2 length=5094.0 offroad=8.9 recoveries=0 overtakes=2 boosts=108
+PASS route 0 driver 0 completes multiple laps
+PASS route 0 driver 0 remains near the roads
+METRIC route=0 driver=1 progress=11914.5 length=5094.0 offroad=11.9 recoveries=0 overtakes=2 boosts=101
+PASS route 0 driver 1 completes multiple laps
+PASS route 0 driver 1 remains near the roads
+METRIC route=0 driver=2 progress=8324.9 length=5094.0 offroad=10.1 recoveries=0 overtakes=2 boosts=123
+PASS route 0 driver 2 completes multiple laps
+PASS route 0 driver 2 remains near the roads
+METRIC route=0 driver=3 progress=9519.6 length=5094.0 offroad=8.4 recoveries=0 overtakes=15 boosts=94
+PASS route 0 driver 3 completes multiple laps
+PASS route 0 driver 3 remains near the roads
+METRIC route=1 driver=0 progress=5633.2 length=2749.2 offroad=9.3 recoveries=0 overtakes=0 boosts=72
+PASS route 1 driver 0 completes multiple laps
+PASS route 1 driver 0 remains near the roads
+METRIC route=1 driver=1 progress=7078.2 length=2749.2 offroad=11.5 recoveries=0 overtakes=2 boosts=67
+PASS route 1 driver 1 completes multiple laps
+PASS route 1 driver 1 remains near the roads
+METRIC route=1 driver=2 progress=4949.2 length=2749.2 offroad=10.5 recoveries=0 overtakes=3 boosts=82
+PASS route 1 driver 2 completes multiple laps
+PASS route 1 driver 2 remains near the roads
+METRIC route=1 driver=3 progress=5577.7 length=2749.2 offroad=8.8 recoveries=0 overtakes=14 boosts=57
+PASS route 1 driver 3 completes multiple laps
+PASS route 1 driver 3 remains near the roads
+METRIC route=2 driver=0 progress=7579.1 length=3802.5 offroad=12.8 recoveries=0 overtakes=2 boosts=89
+PASS route 2 driver 0 completes multiple laps
+PASS route 2 driver 0 remains near the roads
+METRIC route=2 driver=1 progress=9238.6 length=3802.5 offroad=20.0 recoveries=0 overtakes=1 boosts=75
+PASS route 2 driver 1 completes multiple laps
+PASS route 2 driver 1 remains near the roads
+METRIC route=2 driver=2 progress=6844.5 length=3802.5 offroad=10.5 recoveries=0 overtakes=2 boosts=100
+PASS route 2 driver 2 completes multiple laps
+PASS route 2 driver 2 remains near the roads
+METRIC route=2 driver=3 progress=7831.6 length=3802.5 offroad=14.4 recoveries=0 overtakes=6 boosts=90
+PASS route 2 driver 3 completes multiple laps
+PASS route 2 driver 3 remains near the roads
+METRIC route=3 driver=0 progress=3774.0 length=1866.6 offroad=7.8 recoveries=0 overtakes=0 boosts=37
+PASS route 3 driver 0 completes multiple laps
+PASS route 3 driver 0 remains near the roads
+METRIC route=3 driver=1 progress=4602.8 length=1866.6 offroad=8.7 recoveries=0 overtakes=1 boosts=34
+PASS route 3 driver 1 completes multiple laps
+PASS route 3 driver 1 remains near the roads
+METRIC route=3 driver=2 progress=3360.3 length=1866.6 offroad=10.4 recoveries=0 overtakes=2 boosts=44
+PASS route 3 driver 2 completes multiple laps
+PASS route 3 driver 2 remains near the roads
+METRIC route=3 driver=3 progress=3814.8 length=1866.6 offroad=9.0 recoveries=0 overtakes=5 boosts=37
+PASS route 3 driver 3 completes multiple laps
+PASS route 3 driver 3 remains near the roads
+RESULT 32 checks, 0 failures

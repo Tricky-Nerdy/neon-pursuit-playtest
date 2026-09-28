@@ -1,0 +1,38 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[NEON] {"at_unix":1790578812.7404,"data":{"build":"Aurora Bay 4.1 / user merge","godot":"4.7.2-stable (official)"},"event":"session_start","level":"INFO"}
+[NEON] {"at_unix":1790578813.16615,"data":{"checkpoints":32,"landmarks":14,"route_meters":5093.99267578125},"event":"world_ready","level":"INFO"}
+WORLD road_meters=8440.1 navigation_nodes=359
+PASS more than six kilometers of connected roads
+SCENERY peak_m=196.2 props=2347 asset_batches=23
+PASS repeated scenery is batched into fewer than 35 mesh groups
+PASS sculpted terrain includes substantial mountain relief
+PASS districts contain detailed props and roadside objects
+PASS every route remains inside the new shoreline recovery boundary
+PASS reservoir is excluded from drivable land
+PASS new northern route is no longer clipped by the old oval boundary
+PASS road 0 has no scenery blocking driving lanes (0 hits)
+PASS road 1 has no scenery blocking driving lanes (0 hits)
+PASS road 2 has no scenery blocking driving lanes (0 hits)
+PASS road 3 has no scenery blocking driving lanes (0 hits)
+PASS road 4 has no scenery blocking driving lanes (0 hits)
+PASS mission route 0 stays on built roads
+PASS mission route 1 stays on built roads
+PASS mission route 2 stays on built roads
+PASS mission route 3 stays on built roads
+RIBBONS 12
+PASS road surfaces have correct Godot front-face winding
+[NEON] {"at_unix":1790578813.23318,"data":{"level":1,"mode":"BAY SPRINT","route":"CANYON","target":21},"event":"event_start","level":"INFO"}
+PASS earned rank allows choosing an easier unlocked level
+[NEON] {"at_unix":1790578813.23332,"data":{"level":5,"mode":"BAY SPRINT","route":"CANYON","target":21},"event":"event_start","level":"INFO"}
+PASS highest unlocked difficulty is selectable
+[NEON] {"at_unix":1790578813.23343,"data":{"level":1,"mode":"BAY SPRINT","route":"CANYON","target":21},"event":"event_start","level":"INFO"}
+PASS locked difficulty cannot be selected
+[NEON] {"at_unix":1790578813.23356,"data":{"level":1,"mode":"BAY SPRINT","route":"AIRFIELD","target":10},"event":"event_start","level":"INFO"}
+[NEON] {"at_unix":1790578813.23373,"data":{"code":0,"rank_points":195},"event":"progress_saved","level":"INFO"}
+[NEON] {"at_unix":1790578813.23379,"data":{"medal":3,"mode":"BAY SPRINT","route":3,"rp":195,"seconds":14.0},"event":"event_finish","level":"INFO"}
+PASS medals are saved for the specific district and level
+[NEON] {"at_unix":1790578813.23407,"data":{"level":1,"mode":"COAST CIRCUIT","route":"AIRFIELD","target":18},"event":"event_start","level":"INFO"}
+PASS losing app focus pauses driving safely
+PASS resume restores player simulation
+RESULT 23 checks, 0 failures

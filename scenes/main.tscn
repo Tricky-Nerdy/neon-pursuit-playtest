@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cdcrefw2g3emc"]
+
+[ext_resource type="Script" uid="uid://r3tf1lqbwvn0" path="res://scripts/game.gd" id="1"]
+
+[node name="NeonPursuit" type="Node3D" unique_id=701572690]
+script = ExtResource("1")

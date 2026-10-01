@@ -34,6 +34,9 @@ var save_path := "user://progress.cfg"
 var telemetry = TelemetryScript.new()
 var player: HoverShip
 var camera: Camera3D
+var rear_camera: Camera3D
+var rear_viewport: SubViewport
+var rear_mirror: TextureRect
 var coast: CoastMap
 var ui: Control
 var menu: Panel
@@ -258,6 +261,40 @@ func _camera_follow(delta: float) -> void:
 	camera.global_position = pose.origin + back*9.0 + Vector3.UP*4.2
 	camera.look_at(pose.origin + Vector3.UP*1.1 - back*8.0,Vector3.UP)
 	camera.fov = lerpf(camera.fov,68.0+clampf(player.forward_speed,0,150)*0.065,1.0-exp(-3.0*delta))
+
+	if is_instance_valid(rear_camera):
+		rear_camera.global_position = pose.origin + back*4.0 + Vector3.UP*2.0
+		rear_camera.look_at(rear_camera.global_position + back*30.0,Vector3.UP)
+
+func _make_rear_mirror() -> void:
+	rear_viewport = SubViewport.new()
+	rear_viewport.name = "RearView"
+	rear_viewport.size = Vector2i(512,128)
+	rear_viewport.world_3d = get_viewport().world_3d
+	rear_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	rear_viewport.gui_disable_input = true
+	add_child(rear_viewport)
+	rear_camera = Camera3D.new()
+	rear_camera.name = "RearCamera"
+	rear_camera.fov = 75.0
+	rear_camera.far = camera.far
+	rear_camera.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
+	rear_viewport.add_child(rear_camera)
+	rear_camera.current = true
+	rear_mirror = TextureRect.new()
+	rear_mirror.name = "RearMirror"
+	rear_mirror.texture = rear_viewport.get_texture()
+	rear_mirror.flip_h = true
+	rear_mirror.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	rear_mirror.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	ui.add_child(rear_mirror)
+	ui.resized.connect(_layout_rear_mirror)
+	_layout_rear_mirror()
+
+func _layout_rear_mirror() -> void:
+	var width := minf(512.0,ui.size.x*0.4)
+	rear_mirror.size = Vector2(width,width/4.0)
+	rear_mirror.position = Vector2((ui.size.x-width)*0.5,12.0)
 
 func _next_mode() -> void:
 	_select_mode((mode+1)%MODES.size())
@@ -580,6 +617,7 @@ func _make_ui() -> void:
 	ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	ui_layer.add_child(ui)
+	_make_rear_mirror()
 	virtual_stick = StickScript.new()
 	virtual_stick.size = Vector2(205,205)
 	virtual_stick.position = Vector2(24,-226)
@@ -740,6 +778,8 @@ func _toggle_hud() -> void:
 func _set_hud_visible(visible_now: bool) -> void:
 	hud_visible = visible_now
 	menu.visible = visible_now
+	rear_mirror.visible = not visible_now
+	rear_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED if visible_now else SubViewport.UPDATE_ALWAYS
 	_layout_menu()
 	if visible_now:
 		_show_main_menu_page()

@@ -105,3 +105,9 @@ Playtest setup, controls, TV connection, release downloads and update/signing no
 ## Project notes
 
 This is a playable prototype and playtest project, not a finished commercial release. Android store distribution and silent updates are not configured. No code or assets from G-Zero, EVE, WipEout or NFS are distributed.
+
+### Editing the map
+
+Open `scenes/main.tscn` in Godot’s 3D editor. The World now generates the same terrain, roads, and scenery in the editor, with daylight lighting, so the `World/FreeRoamSpawns` markers can be positioned against the actual map without running the game. Generated geometry is a preview and is not saved into the scene; edit the spawn markers normally. Reopen the scene after pulling this change.
+
+Editor regression check: `godot --headless --editor --path . --script tests/editor_map.gd`.

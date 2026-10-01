@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 # Authored coastline and district dressing. Terrain is baked once at world creation.
 const OUTLINE := [Vector2(-10,610),Vector2(-250,600),Vector2(-450,500),Vector2(-625,370),Vector2(-850,320),Vector2(-965,120),Vector2(-930,-160),Vector2(-805,-310),Vector2(-725,-430),Vector2(-720,-660),Vector2(-520,-890),Vector2(-210,-910),Vector2(-10,-800),Vector2(100,-690),Vector2(290,-620),Vector2(470,-590),Vector2(630,-410),Vector2(620,-240),Vector2(840,-140),Vector2(920,70),Vector2(915,340),Vector2(775,480),Vector2(645,445),Vector2(560,300),Vector2(500,330),Vector2(390,510),Vector2(250,580),Vector2(180,550),Vector2(90,600)]

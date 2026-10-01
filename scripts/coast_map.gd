@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 class_name CoastMap
 
@@ -28,11 +29,18 @@ var sun_light: DirectionalLight3D
 var street_lights: Array[OmniLight3D] = []
 var overhang_lamp_material: StandardMaterial3D
 var time_of_day := 180.0 # Start just after sunrise.
+var _world_built := false
 @export_category("Day / Night Cycle")
 @export_range(30.0, 900.0, 10.0, "suffix:s") var day_duration_seconds := 210.0
 @export_range(30.0, 900.0, 10.0, "suffix:s") var night_duration_seconds := 120.0
 
 func _ready() -> void:
+	# Generated nodes deliberately have no scene owner: preview the live map in
+	# the editor without baking thousands of duplicate nodes into main.tscn.
+	# Re-entering the tree must not append another map or duplicate curve points.
+	if _world_built:
+		return
+	_world_built = true
 	physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 	_build_curves()
 	_build_district_roads()
@@ -45,6 +53,8 @@ func _ready() -> void:
 	scenery.populate(self)
 	_batch_boxes()
 	_build_navigation()
+	if Engine.is_editor_hint():
+		time_of_day = day_duration_seconds * 0.5
 	advance_day_night(0.0)
 
 func advance_day_night(delta: float) -> void:

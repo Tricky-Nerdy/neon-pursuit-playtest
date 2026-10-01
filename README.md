@@ -33,7 +33,7 @@ These Blender renders use the exported game scene. They show the world layout an
 
 Choose Coast, Harbor, Canyon or Airfield. Events have levels, medals and saved records. Retry resets straight to the action; there are no race intro sequences. The compact driving HUD stays clear of diagnostic text; use **F3** (or the bottom menu button on touch) for the event and craft menu.
 
-Touch, keyboard, mouse, and gamepad input are supported. The camera follows close behind the craft. The look uses stylized 3D geometry, sky lighting, shadows, fog, emissive road markings and reflective water. The built-in sky environment runs a 15-minute daylight and 6-minute night cycle. Real-time global illumination is not currently implemented.
+Touch, keyboard, mouse, and gamepad input are supported. Android is a first-class playtest target; pushes to `main` run the regression suites before Android, Windows, and Linux build jobs are allowed to proceed. The camera follows close behind the craft. The look uses stylized 3D geometry, sky lighting, shadows, fog, emissive road markings and reflective water. The built-in sky environment currently runs a 7-minute daylight and 4-minute night cycle. Real-time global illumination is not currently implemented.
 
 ## Developers
 

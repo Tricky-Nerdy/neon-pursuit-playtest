@@ -83,7 +83,7 @@ jobs:
         shell: bash
         run: |
           engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
-          xvfb-run -a -s "-screen 0 1920x1080x24" "$engine" --path . --resolution 1920x1080 --script tests/render_capture.gd
+          timeout --signal=TERM --kill-after=5s 45s xvfb-run -a -s "-screen 0 1920x1080x24" "$engine" --path . --resolution 1920x1080 --script tests/render_capture.gd
           mkdir -p gameplay-renders
           cp /tmp/aurora_start.png gameplay-renders/aurora-start.png
           cp /tmp/aurora_menu.png gameplay-renders/aurora-menu.png

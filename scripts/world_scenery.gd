@@ -273,7 +273,9 @@ func _roadside() -> void:
                 var point: Vector3 = at+side*30*sign_value
                 if not _safe(point,26): continue
                 _box(Vector3(0.5,8,0.5),point+Vector3.UP*4,Color(0.19,0.28,0.3),false,yaw)
-                _box(Vector3(4,0.4,1),point-side*sign_value*1.7+Vector3.UP*8,Color(0.64,0.79,0.75),false,yaw)
+                var fixture_at: Vector3 = point-side*sign_value*1.7+Vector3.UP*8
+                _box(Vector3(4,0.4,1),fixture_at,Color(0.64,0.79,0.75),false,yaw)
+                coast.add_overhang_light(fixture_at,yaw)
             # Segmented guardrails, with breaks at road junctions.
             if int(d)%110 < 55:
                 for sign_value in [-1,1]:

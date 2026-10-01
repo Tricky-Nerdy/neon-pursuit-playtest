@@ -24,6 +24,7 @@ var world_environment: WorldEnvironment
 var sky_material: ProceduralSkyMaterial
 var sun_light: DirectionalLight3D
 var street_lights: Array[OmniLight3D] = []
+var overhang_lamp_material: StandardMaterial3D
 var time_of_day := 180.0 # Start just after sunrise.
 @export_category("Day / Night Cycle")
 @export_range(30.0, 900.0, 10.0, "suffix:s") var day_duration_seconds := 210.0
@@ -42,6 +43,7 @@ func _ready() -> void:
     scenery.populate(self)
     _batch_boxes()
     _build_navigation()
+    advance_day_night(0.0)
 
 func advance_day_night(delta: float) -> void:
     var cycle_seconds := day_duration_seconds + night_duration_seconds
@@ -60,8 +62,31 @@ func advance_day_night(delta: float) -> void:
     sky_material.ground_horizon_color = Color(0.025, 0.045, 0.09).lerp(Color(0.60, 0.72, 0.75), warm)
     sky_material.ground_bottom_color = Color(0.008, 0.012, 0.035).lerp(Color(0.17, 0.26, 0.32), warm)
     world_environment.environment.fog_light_color = Color(0.08, 0.13, 0.28).lerp(Color(0.57, 0.72, 0.8), warm)
+    var lamps_on := not daylight or warm < 0.18
     for lamp in street_lights:
-        lamp.visible = not daylight or warm < 0.18
+        lamp.visible = lamps_on
+    if overhang_lamp_material != null:
+        overhang_lamp_material.emission_enabled = lamps_on
+
+func add_overhang_light(fixture_at: Vector3, yaw: float) -> void:
+    if overhang_lamp_material == null:
+        overhang_lamp_material = StandardMaterial3D.new()
+        overhang_lamp_material.albedo_color = Color(1.0,0.89,0.68)
+        overhang_lamp_material.emission = Color(1.0,0.82,0.55)
+        overhang_lamp_material.emission_energy_multiplier = 2.0
+    # The housing is 0.4 high. Put the luminous panel and light below it.
+    var panel := box(Vector3(3.4,0.08,0.75), fixture_at + Vector3.DOWN * 0.24, Color.WHITE, yaw)
+    panel.material_override = overhang_lamp_material
+    var lamp := OmniLight3D.new()
+    lamp.name = "OverhangLight%d" % street_lights.size()
+    lamp.position = fixture_at + Vector3.DOWN * 0.35
+    lamp.light_color = Color(1.0,0.82,0.55)
+    lamp.light_energy = 4.0
+    lamp.omni_range = 30.0
+    lamp.omni_attenuation = 1.0
+    lamp.shadow_enabled = false
+    add_child(lamp)
+    street_lights.append(lamp)
 
 func _open_curve(points: Array[Vector3]) -> Curve3D:
     var path := Curve3D.new()

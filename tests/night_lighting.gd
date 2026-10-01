@@ -33,6 +33,26 @@ func _run() -> void:
     game.coast.time_of_day = game.coast.day_duration_seconds + 1.0
     game.coast.advance_day_night(0.0)
     check(game.coast.street_lights[0].visible, "streetlights on at night")
+    var overhangs: Array[Node] = game.coast.find_children("OverhangLight*", "OmniLight3D", false, false)
+    check(overhangs.size() > 0, "overhanging fixtures have light sources")
+    var cover_road := true
+    for lamp in overhangs:
+        var road_point: Vector3 = game.coast.closest_road_point(lamp.position)
+        cover_road = cover_road and lamp.position.distance_to(road_point) < lamp.omni_range and lamp.position.y < 7.8
+    check(cover_road, "overhang lights clear housing and reach road surface")
+    check(game.coast.overhang_lamp_material.emission_enabled, "overhang panels glow at night")
+    game.coast.time_of_day = game.coast.day_duration_seconds * 0.5
+    game.coast.advance_day_night(0.0)
+    var all_off := true
+    for lamp in overhangs:
+        all_off = all_off and not lamp.visible
+    check(all_off and not game.coast.overhang_lamp_material.emission_enabled, "overhang illumination and glow off at midday")
+    game.coast.time_of_day = game.coast.day_duration_seconds + 1.0
+    game.coast.advance_day_night(0.0)
+    var all_on := true
+    for lamp in overhangs:
+        all_on = all_on and lamp.visible
+    check(all_on and game.coast.overhang_lamp_material.emission_enabled, "overhang illumination and glow return at night")
     game.set_process(false)
     game.player.set_physics_process(false)
     for craft in 3:

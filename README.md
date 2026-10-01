@@ -41,6 +41,20 @@ Choose Coast, Harbor, Canyon or Airfield. Events have levels, medals and saved r
 
 Touch, keyboard, mouse, and gamepad input are supported. Android is a first-class playtest target; pushes to `main` run the regression suites before Android, Windows, and Linux build jobs are allowed to proceed. The camera follows close behind the craft. The look uses stylized 3D geometry, sky lighting, shadows, fog, emissive road markings and reflective water. The built-in sky environment currently runs a 7-minute daylight and 4-minute night cycle. Real-time global illumination is not currently implemented.
 
+## Version history
+
+The repository history predates formal semantic versioning. The milestones below preserve the development lineage recovered during the HerOS Forge cleanup and map it into the current version scheme without rewriting the original Git history.
+
+| Game version | Map version | Historical milestone |
+| --- | --- | --- |
+| **v0.6.2** | **Aurora Bay 5.0** | Current playtest line: day/night environment, vehicle headlights, illuminated street fixtures, Android/PC playtest pipeline, regression-gated builds, and current map/fixture corrections. |
+| **v0.6.1** | **Aurora Bay 5.0** | Lighting-development line: HDR/panorama sky work, environment tuning, tunable day/night cycle, and nighttime road/vehicle-lighting iteration. |
+| **v0.6.0** | **Aurora Bay 5.0** | Readable Godot-project refactor: explicit World, Vehicles, Gameplay, UI and Camera structure; free-roam boot; four curated district spawn points; hover-ship scenes bound to scene nodes. |
+| **v0.5.x** | **Aurora Bay 4.x** | Mature Aurora Bay playtest baseline: connected coast, harbor, canyon and airfield routes; events, AI rivals, police behavior, persistence, diagnostics and automated world-integrity testing. |
+| **v0.4.x and earlier** | **Aurora Bay 1.x–3.x** | Earlier map/gameplay construction preserved in Git history and HerOS Forge archival work, before the current map and project structure were formalized. |
+
+Historical labels describe development milestones; the original commits remain the source of truth for exact file-level history. Going forward, release tags and Aurora Bay map revisions should be recorded when a milestone is cut so version history remains exact.
+
 ## Developers
 
 ### Requirements and launch

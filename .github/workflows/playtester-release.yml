@@ -25,21 +25,46 @@ jobs:
           unzip -q "$RUNNER_TEMP/godot.zip" -d "$RUNNER_TEMP/godot"
           chmod +x "$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           echo "$RUNNER_TEMP/godot" >> "$GITHUB_PATH"
-      - name: Import project and run game, input and map regression suites
+      - name: Import Godot project
         shell: bash
         run: |
           engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           "$engine" --headless --editor --path . --import --quit
-          for suite in run_all input_devices ai_endurance mission_scenarios police_scenarios world_integrity night_lighting; do
-            echo "::group::Godot suite: $suite"
-            "$engine" --headless --path . --fixed-fps 60 --script "tests/$suite.gd"
-            status=$?
-            echo "::endgroup::"
-            if [ "$status" -ne 0 ]; then
-              echo "::error::Godot regression suite failed: $suite"
-              exit "$status"
-            fi
-          done
+      - name: Test run_all
+        shell: bash
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --path . --fixed-fps 60 --script "tests/run_all.gd"
+      - name: Test input_devices
+        shell: bash
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --path . --fixed-fps 60 --script "tests/input_devices.gd"
+      - name: Test ai_endurance
+        shell: bash
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --path . --fixed-fps 60 --script "tests/ai_endurance.gd"
+      - name: Test mission_scenarios
+        shell: bash
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --path . --fixed-fps 60 --script "tests/mission_scenarios.gd"
+      - name: Test police_scenarios
+        shell: bash
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --path . --fixed-fps 60 --script "tests/police_scenarios.gd"
+      - name: Test world_integrity
+        shell: bash
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --path . --fixed-fps 60 --script "tests/world_integrity.gd"
+      - name: Test night_lighting
+        shell: bash
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --path . --fixed-fps 60 --script "tests/night_lighting.gd"
 
   build-linux:
     if: startsWith(github.ref, 'refs/tags/v')

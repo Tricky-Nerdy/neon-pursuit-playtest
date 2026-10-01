@@ -59,7 +59,7 @@ var guidance: Array[Node3D] = []
 var traffic: Array[Node3D] = []
 var rival_distances: Array[float] = []
 var mode := 0
-var last_mode := 1
+var last_mode := 0
 var gate_index := 0
 var passed := 0
 var target_count := 0
@@ -266,6 +266,7 @@ func _select_mode(index: int) -> void:
     mode = clampi(index,0,MODES.size()-1)
     _set_hud_visible(false)
     if mode == 0:
+        last_mode = 0
         event_active = false
         gate_visual.visible = false
         _start_patrols()
@@ -400,7 +401,7 @@ func _finish(success: bool) -> void:
 
 func _restart() -> void:
     _set_hud_visible(false)
-    if not event_active and mode == 0:
+    if not event_active and last_mode == 0:
         if free_roam_spawn != null:
             player.reset_to(free_roam_spawn.global_position, free_roam_spawn.global_rotation.y)
         else:
@@ -716,7 +717,7 @@ func _button(caption: String, at: Vector2, dimensions: Vector2, callback: Callab
     focus_style.set_border_width_all(3)
     focus_style.set_corner_radius_all(18)
     button.add_theme_stylebox_override("focus",focus_style)
-    button.focus_mode = Control.FOCUS_ALL if parent == menu else Control.FOCUS_NONE
+    button.focus_mode = Control.FOCUS_ALL if menu != null and (parent == menu or menu.is_ancestor_of(parent)) else Control.FOCUS_NONE
     button.pressed.connect(callback)
     parent.add_child(button)
     return button

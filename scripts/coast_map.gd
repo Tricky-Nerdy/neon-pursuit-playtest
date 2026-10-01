@@ -356,8 +356,13 @@ func _road(path: Curve3D, width: float, main: bool) -> void:
             _road_marking(path, Vector3(0.35,0.035,14), at + side * (width * 0.5 - 1.0) * sign_value + Vector3.UP * 0.15, Color(0.35,0.85,0.91), yaw)
         if main and int(distance) % 90 < 18:
             for sign_value in [-1.0,1.0]:
-                box(Vector3(0.5,2.7,0.5), at + side * (width * 0.5 + 3.0) * sign_value + Vector3.UP * 1.4, Color(0.20,0.30,0.35), yaw)
-                var lamp_at : Vector3 = at + side * (width * 0.5 + 3.0) * sign_value + Vector3.UP * 2.8
+                var post_at := at + side * (width * 0.5 + 3.0) * sign_value
+                # A post beside this road can still stand inside a joining road.
+                # Include the lamp footprint and keep the junction shoulder clear.
+                if not marking_clear_of_junction(path, post_at, yaw, 0.7):
+                    continue
+                box(Vector3(0.5,2.7,0.5), post_at + Vector3.UP * 1.4, Color(0.20,0.30,0.35), yaw)
+                var lamp_at : Vector3 = post_at + Vector3.UP * 2.8
                 box(Vector3(0.7,0.3,0.7), lamp_at, Color(1.0,0.82,0.55), yaw, false, true)
                 var lamp := OmniLight3D.new()
                 lamp.name = "StreetLight%d" % street_lights.size()

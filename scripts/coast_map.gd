@@ -362,7 +362,7 @@ func _road(path: Curve3D, width: float, main: bool) -> void:
 			_road_marking(path, Vector3(0.35,0.035,14), at + side * (width * 0.5 - 1.0) * sign_value + Vector3.UP * 0.15, Color(0.35,0.85,0.91), yaw)
 		if main and int(distance) % 90 < 18:
 			for sign_value in [-1.0,1.0]:
-				var post_at := at + side * (width * 0.5 + 3.0) * sign_value
+				var post_at: Vector3 = at + side * (width * 0.5 + 3.0) * sign_value
 				# A post beside this road can still stand inside a joining road.
 				# Include the lamp footprint and keep the junction shoulder clear.
 				if not marking_clear_of_junction(path, post_at, yaw, 0.7):

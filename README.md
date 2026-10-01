@@ -1,5 +1,11 @@
 # Neon Pursuit: Aurora Bay
 
+**Current build:** Neon Pursuit **v0.6.2**  
+**Map:** Aurora Bay **5.0**  
+**Branch:** `main`  
+**Targets:** Android, Windows, Linux  
+**CI:** Godot 4.7.2 regression suite gates release builds
+
 An open-map arcade pursuit racer for Android and PC. Cruise a connected coastal world, jump into an event instantly, and swap craft or modes without leaving the drive. The current playtest build includes seven event types, four districts, three ships, AI rivals, police pursuits, persistent medals and instant retries.
 
 ## Aurora Bay

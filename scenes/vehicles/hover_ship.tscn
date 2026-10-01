@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ship.gd" id="1_ship"]
+
+[sub_resource type="BoxShape3D" id="BoxShape_ship"]
+size = Vector3(2.8, 1, 5)
+
+[node name="HoverShip" type="CharacterBody3D"]
+script = ExtResource("1_ship")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape_ship")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="EngineLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 0, 2.8)
+omni_range = 8.0
+light_energy = 0.8
+shadow_enabled = false

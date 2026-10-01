@@ -46,7 +46,7 @@ func advance_day_night(delta: float) -> void:
     var cycle_seconds := day_duration_seconds + night_duration_seconds
     time_of_day = fmod(time_of_day + delta, cycle_seconds)
     var daylight := time_of_day < day_duration_seconds
-    var sun_t := (time_of_day / day_duration_seconds) if daylight else ((time_of_day - DAY_SECONDS) / NIGHT_SECONDS)
+    var sun_t := (time_of_day / day_duration_seconds) if daylight else ((time_of_day - day_duration_seconds) / night_duration_seconds)
     # The sun completes a visible arc during day and stays below the horizon at night.
     var elevation := lerpf(-12.0, 62.0, sin(sun_t * PI)) if daylight else -16.0
     sun_light.rotation_degrees = Vector3(-elevation, lerpf(-118.0, 62.0, sun_t), 0.0)

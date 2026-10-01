@@ -17,13 +17,13 @@ night_duration_seconds = 240.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 470)
 
 [node name="Harbor" type="Marker3D" parent="World/FreeRoamSpawns" unique_id=1919782947]
-transform = Transform3D(0.3623577, 0, -0.9320391, 0, 1, 0, 0.9320391, 0, 0.3623577, -500, 2.15, 240)
+transform = Transform3D(0.7448478, 0, -0.6672344, 0, 1, 0, 0.6672344, 0, 0.7448478, -500, 2.15, 240)
 
 [node name="Canyon" type="Marker3D" parent="World/FreeRoamSpawns" unique_id=2140456618]
-transform = Transform3D(-0.50484604, 0, 0.8632094, 0, 1, 0, -0.8632094, 0, -0.50484604, -370, 2.15, -360)
+transform = Transform3D(-0.8231956, 0, 0.56775796, 0, 1, 0, -0.56775796, 0, -0.8231956, -370, 2.15, -360)
 
 [node name="Airfield" type="Marker3D" parent="World/FreeRoamSpawns" unique_id=1132657051]
-transform = Transform3D(0.62161, 0, 0.7833269, 0, 1, 0, -0.7833269, 0, 0.62161, 500, 2.15, 180)
+transform = Transform3D(0.3756021, 0, 0.92678106, 0, 1, 0, -0.92678106, 0, 0.3756021, 500, 2.15, 180)
 
 [node name="Vehicles" type="Node3D" parent="." unique_id=787465530]
 

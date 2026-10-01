@@ -395,6 +395,13 @@ func _finish(success: bool) -> void:
 
 func _restart() -> void:
     _set_hud_visible(false)
+    if not event_active and mode == 0:
+        if free_roam_spawn != null:
+            player.reset_to(free_roam_spawn.global_position, free_roam_spawn.global_rotation.y)
+        else:
+            player.reset_to(coast.sample(0), coast.heading_at(0))
+        telemetry.record("INFO","free_roam_restart",{})
+        return
     mode = last_mode
     selected_route = active_route_index
     player.reset_to(event_start if event_start != Vector3.ZERO else coast.sample(0),event_heading if event_start != Vector3.ZERO else coast.heading_at(0))

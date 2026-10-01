@@ -81,6 +81,10 @@ var event_active := false
 var session_crashes := 0
 var frame_samples := 0
 var frame_total := 0.0
+var vehicles_root: Node3D
+var gameplay_root: Node3D
+var ui_layer: CanvasLayer
+var free_roam_spawn: Marker3D
 
 func _ready() -> void:
     InputBindings.install()
@@ -90,18 +94,37 @@ func _ready() -> void:
     telemetry.start()
     telemetry.record("INFO", "session_start", {"build":"Aurora Bay 4.1 / user merge", "godot":Engine.get_version_info().string})
     _load_progress()
-    coast = MapScript.new()
-    add_child(coast)
+    coast = get_node_or_null("World") as CoastMap
+    if coast == null:
+        coast = MapScript.new()
+        coast.name = "World"
+        add_child(coast)
+    vehicles_root = get_node_or_null("Vehicles") as Node3D
+    if vehicles_root == null:
+        vehicles_root = self
+    gameplay_root = get_node_or_null("Gameplay") as Node3D
+    if gameplay_root == null:
+        gameplay_root = self
+    ui_layer = get_node_or_null("UI") as CanvasLayer
+    var spawn_root := coast.get_node_or_null("FreeRoamSpawns")
+    if spawn_root != null and spawn_root.get_child_count() > 0:
+        free_roam_spawn = spawn_root.get_child(randi() % spawn_root.get_child_count()) as Marker3D
     player = ShipScene.instantiate()
-    add_child(player)
-    player.reset_to(coast.sample(0), coast.heading_at(0))
+    vehicles_root.add_child(player)
+    if free_roam_spawn != null:
+        player.reset_to(free_roam_spawn.global_position, free_roam_spawn.global_rotation.y)
+    else:
+        player.reset_to(coast.sample(0), coast.heading_at(0))
     previous_position = player.position
     player.hit_wall.connect(_on_hit_wall)
-    camera = Camera3D.new()
-    camera.current = true
-    camera.fov = 75
-    camera.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
-    add_child(camera)
+    camera = get_node_or_null("Camera") as Camera3D
+    if camera == null:
+        camera = Camera3D.new()
+        camera.name = "Camera"
+        camera.current = true
+        camera.fov = 75
+        camera.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
+        add_child(camera)
     _make_rivals()
     _make_gate()
     _make_ui()
@@ -417,7 +440,7 @@ func _make_rivals() -> void:
         var rival := ShipScene.instantiate()
         rival.human_controlled = false
         rival.craft_index = i%3
-        add_child(rival)
+        vehicles_root.add_child(rival)
         rival.visible = false
         var strobes := Node3D.new()
         strobes.name = "PoliceLights"
@@ -478,7 +501,7 @@ func _update_pads() -> void:
 
 func _make_gate() -> void:
     gate_visual = Node3D.new()
-    add_child(gate_visual)
+    gameplay_root.add_child(gate_visual)
     for position_value in [Vector3(-22,5,0),Vector3(22,5,0),Vector3(0,12,0)]:
         var node := MeshInstance3D.new()
         var mesh := BoxMesh.new()
@@ -512,7 +535,7 @@ func _make_gate() -> void:
         marker.material_override = arrow_material
         marker.visible = false
         marker.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
-        add_child(marker)
+        gameplay_root.add_child(marker)
         guidance.append(marker)
 
 func _update_gate() -> void:
@@ -535,12 +558,15 @@ func _update_gate() -> void:
     gate_text.text = "%.0f KM/H" % Rules.speed_target(mission_level,passed) if mode == 7 else "%d / %d" % [passed+1,target_count]
 
 func _make_ui() -> void:
-    var layer := CanvasLayer.new()
-    add_child(layer)
+    if ui_layer == null:
+        ui_layer = CanvasLayer.new()
+        ui_layer.name = "UI"
+        add_child(ui_layer)
     ui = Control.new()
+    ui.name = "RuntimeUI"
     ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
-    layer.add_child(ui)
+    ui_layer.add_child(ui)
     virtual_stick = StickScript.new()
     virtual_stick.size = Vector2(205,205)
     virtual_stick.position = Vector2(24,-226)

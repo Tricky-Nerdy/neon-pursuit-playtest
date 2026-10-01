@@ -1,6 +1,6 @@
 # Neon Pursuit: Aurora Bay
 
-**Current build:** Neon Pursuit **v0.6.2**  
+**Current build:** Neon Pursuit **v0.6.3**\
 **Map:** Aurora Bay **5.0**  
 **Branch:** `main`  
 **Targets:** Android, Windows, Linux  
@@ -55,17 +55,17 @@ Touch, keyboard, mouse, and gamepad input are supported. Android is a first-clas
 
 ## Version history
 
-The repository history predates formal semantic versioning. The milestones below reconstruct the development lineage from the repository's Git history and map it into the current version scheme without rewriting the original commits.
+The current development build is **v0.6.3**, with **Aurora Bay 5.0**. Game versions track gameplay, rendering and tooling changes; map revisions track the authored world. These are development milestones: this repository currently has **no release tags**. Earlier semantic versions below are retrospective labels, not published releases.
 
-| Game version | Map version | Historical milestone |
-| --- | --- | --- |
-| **v0.6.2** | **Aurora Bay 5.0** | Current playtest line: day/night environment, vehicle headlights, illuminated street fixtures, Android/PC playtest pipeline, regression-gated builds, and current map/fixture corrections. |
-| **v0.6.1** | **Aurora Bay 5.0** | Lighting-development line: HDR/panorama sky work, environment tuning, tunable day/night cycle, and nighttime road/vehicle-lighting iteration. |
-| **v0.6.0** | **Aurora Bay 5.0** | Readable Godot-project refactor: explicit World, Vehicles, Gameplay, UI and Camera structure; free-roam boot; four curated district spawn points; hover-ship scenes bound to scene nodes. |
-| **v0.5.x** | **Aurora Bay 4.x** | Mature Aurora Bay playtest baseline: connected coast, harbor, canyon and airfield routes; events, AI rivals, police behavior, persistence, diagnostics and automated world-integrity testing. |
-| **v0.4.x and earlier** | **Aurora Bay 1.x–3.x** | Earlier map/gameplay construction preserved in Git history, before the current map and project structure were formalized. |
+| Game milestone | Map | Date | Evidence and changes |
+| --- | --- | --- | --- |
+| **v0.6.3 — current** | **5.0** | 2026-10-01 | [Rendering fixes](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/85886954e053e62bfb5b4e0dabe0d976410473c1): clear fog, stable world-space water, camera depth precision, junction-safe road stripes, readable night fill and six composed in-game screenshots. Project metadata now records this version. |
+| **v0.6.2 — documented playtest** | **5.0** | 2026-10-01 | [Version documentation](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/d2bc88d), [overhang lights](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/006e95e), and [six tested captures](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/24c38c65383229ccef387011fe16d9f5e86e0233): headlights, street fixtures, regression/build tooling and actual Godot capture support. |
+| **v0.6.1 — retrospective lighting milestone** | **5.0 label used retrospectively** | 2026-10-01 | [Tunable cycle fix](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/8b3e433) and [vehicle headlights](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/8665ef8). Lighting work overlapped the scene refactor. |
+| **v0.6.0 — retrospective scene milestone** | **5.0 label used retrospectively** | 2026-10-01 | [Scene structure](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/9b6b1e4) and [gameplay binding](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/69ca00d): explicit World, Vehicles, Gameplay, UI and Camera nodes, reusable ship scene and free-roam spawns. |
+| **Unversioned repository baseline** | **4.0 / 4.1 in source documents** | 2026-09-28 | [Initial import](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/60b14fb), [controls/build pipeline](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/69e46c2), and [day/night environment](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/3b2c934). The imported README described Aurora Bay 4.0; the test report described 4.1. |
 
-Historical labels describe development milestones; the original commits remain the source of truth for exact file-level history. Going forward, release tags and Aurora Bay map revisions should be recorded when a milestone is cut so version history remains exact.
+The available repository starts with an existing game import. It does not establish separate v0.4.x/v0.5.x releases or an Aurora Bay 1–3 development timeline. See [CHANGELOG.md](CHANGELOG.md) for version policy, detailed current changes and validation.
 
 ## Developers
 

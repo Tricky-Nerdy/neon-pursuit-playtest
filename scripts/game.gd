@@ -97,7 +97,7 @@ func _ready() -> void:
     # Update mission simulation after the ship's physics movement.
     process_physics_priority = 1
     telemetry.start()
-    telemetry.record("INFO", "session_start", {"build":"Aurora Bay 4.1 / user merge", "godot":Engine.get_version_info().string})
+    telemetry.record("INFO", "session_start", {"build":"Neon Pursuit %s / Aurora Bay %s" % [ProjectSettings.get_setting("application/config/version"), ProjectSettings.get_setting("application/config/map_version")], "godot":Engine.get_version_info().string})
     _load_progress()
     coast = get_node_or_null("World") as CoastMap
     if coast == null:
@@ -149,7 +149,7 @@ func _process(delta: float) -> void:
     notice_timer = maxf(0.0,notice_timer-delta)
     center_notice.visible = notice_timer > 0
     if hud_visible:
-        title.text = "AURORA BAY 4.1  /  %s" % _rank_name()
+        title.text = "AURORA BAY %s  /  %s" % [ProjectSettings.get_setting("application/config/map_version"), _rank_name()]
         details.text = "%s  •  %d RP  •  %s\n%s" % [MODES[mode],rank_points,HoverShip.CRAFT[player.craft_index].name,last_result if not event_active else _event_status()]
     frame_samples += 1
     frame_total += delta

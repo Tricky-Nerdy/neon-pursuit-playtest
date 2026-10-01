@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwfi6pd1m52a5"
-valid=false
+uid="uid://c7ue3h500mur6"
+path="res://.godot/imported/city-district.jpg-457bfa2fabf80e0cd701c9a292762563.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://tests/geometry_review/canyon.png"
+source_file="res://docs/screenshots/city-district.jpg"
+dest_files=["res://.godot/imported/city-district.jpg-457bfa2fabf80e0cd701c9a292762563.ctex"]
 
 [params]
 

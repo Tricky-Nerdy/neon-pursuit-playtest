@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwfi6pd1m52a5"
-valid=false
+uid="uid://bi0l1awyuemsg"
+path="res://.godot/imported/aurora-bay-map.jpg-8fbf0e921c09f7595abd3f7aff9296a4.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://tests/geometry_review/canyon.png"
+source_file="res://docs/screenshots/aurora-bay-map.jpg"
+dest_files=["res://.godot/imported/aurora-bay-map.jpg-8fbf0e921c09f7595abd3f7aff9296a4.ctex"]
 
 [params]
 

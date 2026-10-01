@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwfi6pd1m52a5"
-valid=false
+uid="uid://belbn6x11wg1"
+path="res://.godot/imported/canyon-route.jpg-46fdef0b758b87594a74930e3501e76e.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://tests/geometry_review/canyon.png"
+source_file="res://docs/screenshots/canyon-route.jpg"
+dest_files=["res://.godot/imported/canyon-route.jpg-46fdef0b758b87594a74930e3501e76e.ctex"]
 
 [params]
 

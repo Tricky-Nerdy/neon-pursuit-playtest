@@ -22,4 +22,6 @@ func _run() -> void:
     for i in 3:
         await process_frame
     root.get_texture().get_image().save_png("/tmp/aurora_map.png")
-    quit()
+    game.queue_free()
+    await process_frame
+    quit(0)

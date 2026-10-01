@@ -46,6 +46,11 @@ var touch_layout := "compact"
 var touch_active := false
 var touch_option: Button
 var resume_button: Button
+var main_menu_page: Control
+var events_page: Control
+var radio_label: Label
+var radio_index := 0
+var radio_stations := ["AURORA JAZZ","NEON FM","COASTLINE PUNK","NIGHT DRIVE"]
 var last_pad_device := -1
 var hud_visible := false
 var gate_visual: Node3D
@@ -593,13 +598,10 @@ func _make_ui() -> void:
     menu_button.anchor_right = 0.5
     menu_button.anchor_top = 1
     menu_button.anchor_bottom = 1
+
     menu = Panel.new()
+    menu.name = "EscapeMenu"
     menu.size = Vector2(860,620)
-    menu.position = Vector2(-430,-318)
-    menu.anchor_left = 0.5
-    menu.anchor_right = 0.5
-    menu.anchor_top = 0.5
-    menu.anchor_bottom = 0.5
     var panel_style := StyleBoxFlat.new()
     panel_style.bg_color = Color(0.025,0.07,0.1,0.97)
     panel_style.set_corner_radius_all(22)
@@ -607,24 +609,48 @@ func _make_ui() -> void:
     panel_style.set_border_width_all(2)
     menu.add_theme_stylebox_override("panel",panel_style)
     ui.add_child(menu)
+
     title = _label(menu,"AURORA BAY",Vector2(28,22),28)
     details = _label(menu,"",Vector2(28,65),18)
     _button("×",Vector2(780,18),Vector2(54,46),_toggle_hud,menu)
-    route_button = _button("ROUTE: COAST",Vector2(28,114),Vector2(548,40),_cycle_route,menu)
-    level_button = _button("LEVEL: AUTO",Vector2(592,114),Vector2(240,40),_cycle_level,menu)
+
+    main_menu_page = Control.new()
+    main_menu_page.name = "MainMenu"
+    main_menu_page.position = Vector2(28,120)
+    main_menu_page.size = Vector2(804,460)
+    menu.add_child(main_menu_page)
+    resume_button = _button("RESUME",Vector2(0,0),Vector2(804,52),_toggle_hud,main_menu_page)
+    _button("EVENTS",Vector2(0,64),Vector2(804,52),_show_events_page,main_menu_page)
+    _button("‹",Vector2(0,128),Vector2(80,52),func() -> void: _cycle_radio(-1),main_menu_page)
+    radio_label = _label(main_menu_page,radio_stations[radio_index],Vector2(100,139),20)
+    radio_label.size = Vector2(604,36)
+    radio_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    _button("›",Vector2(724,128),Vector2(80,52),func() -> void: _cycle_radio(1),main_menu_page)
+    _button("SETTINGS",Vector2(0,192),Vector2(804,52),_show_settings_placeholder,main_menu_page)
+    _button("RESTART",Vector2(0,256),Vector2(804,52),_restart,main_menu_page)
+    _button("EXIT",Vector2(0,320),Vector2(804,52),_exit_game,main_menu_page)
+    touch_option = _button("TOUCH: COMPACT",Vector2(0,384),Vector2(250,34),_cycle_touch_layout,main_menu_page)
+    touch_option.add_theme_font_size_override("font_size",15)
+    _label(main_menu_page,"F3 / START: MENU   •   F11: FULLSCREEN",Vector2(300,392),13)
+
+    events_page = Control.new()
+    events_page.name = "Events"
+    events_page.position = Vector2(28,112)
+    events_page.size = Vector2(804,480)
+    menu.add_child(events_page)
+    route_button = _button("ROUTE: COAST",Vector2(0,0),Vector2(520,40),_cycle_route,events_page)
+    level_button = _button("LEVEL: AUTO",Vector2(536,0),Vector2(268,40),_cycle_level,events_page)
     for index in 8:
         var row := index/2
         var column := index%2
-        var point := Vector2(28+column*412,166+row*82)
-        _button(MODES[index],point,Vector2(384,48),func() -> void: _select_mode(index),menu)
-        var info := _label(menu,DESCRIPTIONS[index],point+Vector2(2,52),13)
+        var point := Vector2(column*412,54+row*82)
+        _button(MODES[index],point,Vector2(384,48),func() -> void: _select_mode(index),events_page)
+        var info := _label(events_page,DESCRIPTIONS[index],point+Vector2(2,52),13)
         info.modulate = Color(0.65,0.8,0.84)
-    _button("SWAP CRAFT",Vector2(28,536),Vector2(230,52),_next_craft,menu)
-    _button("RETRY",Vector2(280,536),Vector2(230,52),_restart,menu)
-    resume_button = _button("RESUME",Vector2(532,536),Vector2(300,52),_toggle_hud,menu)
-    touch_option = _button("TOUCH: COMPACT",Vector2(28,593),Vector2(250,24),_cycle_touch_layout,menu)
-    touch_option.add_theme_font_size_override("font_size",15)
-    _label(menu,"F3 / START: MENU   •   F11: FULLSCREEN",Vector2(308,597),13)
+    _button("BACK",Vector2(0,390),Vector2(250,48),_show_main_menu_page,events_page)
+    _button("SWAP CRAFT",Vector2(554,390),Vector2(250,48),_next_craft,events_page)
+    events_page.visible = false
+
     center_notice = _label(ui,"",Vector2(-400,-315),25)
     center_notice.anchor_left = 0.5
     center_notice.anchor_right = 0.5
@@ -638,6 +664,26 @@ func _make_ui() -> void:
     _layout_menu()
     _refresh_touch_controls()
     _set_hud_visible(false)
+
+func _show_main_menu_page() -> void:
+    main_menu_page.visible = true
+    events_page.visible = false
+    resume_button.grab_focus()
+
+func _show_events_page() -> void:
+    main_menu_page.visible = false
+    events_page.visible = true
+    route_button.grab_focus()
+
+func _cycle_radio(direction: int) -> void:
+    radio_index = posmod(radio_index + direction, radio_stations.size())
+    radio_label.text = radio_stations[radio_index]
+
+func _show_settings_placeholder() -> void:
+    _message("SETTINGS — NEXT PLAYTEST PASS",1.5)
+
+func _exit_game() -> void:
+    get_tree().quit()
 
 func _label(parent: Node, text_value: String, at: Vector2, font_size: int) -> Label:
     var label := Label.new()
@@ -695,7 +741,7 @@ func _set_hud_visible(visible_now: bool) -> void:
     menu.visible = visible_now
     _layout_menu()
     if visible_now:
-        resume_button.grab_focus()
+        _show_main_menu_page()
     else:
         get_viewport().gui_release_focus()
     player.set_physics_process(not visible_now)

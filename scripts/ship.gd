@@ -34,19 +34,27 @@ var engine_light: OmniLight3D
 func _ready() -> void:
     collision_layer = 2 if human_controlled else 4
     collision_mask = 7
-    var shape := CollisionShape3D.new()
-    var box := BoxShape3D.new()
-    box.size = Vector3(2.8, 1.0, 5.0)
-    shape.shape = box
-    add_child(shape)
-    visuals = Node3D.new()
-    add_child(visuals)
-    engine_light = OmniLight3D.new()
-    engine_light.position = Vector3(0, 0, 2.8)
-    engine_light.omni_range = 8.0
-    engine_light.light_energy = 0.8
-    engine_light.shadow_enabled = false
-    add_child(engine_light)
+    visuals = get_node_or_null("Visuals") as Node3D
+    engine_light = get_node_or_null("EngineLight") as OmniLight3D
+    if get_node_or_null("CollisionShape3D") == null:
+        var shape := CollisionShape3D.new()
+        shape.name = "CollisionShape3D"
+        var box := BoxShape3D.new()
+        box.size = Vector3(2.8, 1.0, 5.0)
+        shape.shape = box
+        add_child(shape)
+    if visuals == null:
+        visuals = Node3D.new()
+        visuals.name = "Visuals"
+        add_child(visuals)
+    if engine_light == null:
+        engine_light = OmniLight3D.new()
+        engine_light.name = "EngineLight"
+        engine_light.position = Vector3(0, 0, 2.8)
+        engine_light.omni_range = 8.0
+        engine_light.light_energy = 0.8
+        engine_light.shadow_enabled = false
+        add_child(engine_light)
     _rebuild_visuals()
 
 func _physics_process(delta: float) -> void:

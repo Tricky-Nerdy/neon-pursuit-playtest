@@ -30,6 +30,7 @@ var mouse_steer_axis := 0.0
 var visuals: Node3D
 var engine_glow: MeshInstance3D
 var engine_light: OmniLight3D
+var headlights: Array[SpotLight3D] = []
 
 func _ready() -> void:
     collision_layer = 2 if human_controlled else 4
@@ -55,7 +56,25 @@ func _ready() -> void:
         engine_light.light_energy = 0.8
         engine_light.shadow_enabled = false
         add_child(engine_light)
+    _ensure_headlights()
     _rebuild_visuals()
+
+func _ensure_headlights() -> void:
+    if not headlights.is_empty():
+        return
+    for x in [-0.72, 0.72]:
+        var lamp := SpotLight3D.new()
+        lamp.name = "HeadlightLeft" if x < 0.0 else "HeadlightRight"
+        lamp.position = Vector3(x, 0.18, -2.15)
+        lamp.rotation_degrees.x = -7.0
+        lamp.light_color = Color(1.0, 0.93, 0.78)
+        lamp.light_energy = 5.0
+        lamp.spot_range = 52.0
+        lamp.spot_angle = 30.0
+        lamp.spot_attenuation = 0.75
+        lamp.shadow_enabled = human_controlled
+        add_child(lamp)
+        headlights.append(lamp)
 
 func _physics_process(delta: float) -> void:
     var stats: Dictionary = CRAFT[craft_index]

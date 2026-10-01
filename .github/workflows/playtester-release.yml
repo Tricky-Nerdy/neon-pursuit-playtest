@@ -66,7 +66,6 @@ jobs:
           engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           "$engine" --headless --path . --fixed-fps 60 --script "tests/night_lighting.gd"
 
-
   gameplay-renders:
     runs-on: ubuntu-latest
     steps:
@@ -79,6 +78,11 @@ jobs:
           curl -fsSL "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip" -o "$RUNNER_TEMP/godot.zip"
           unzip -q "$RUNNER_TEMP/godot.zip" -d "$RUNNER_TEMP/godot"
           chmod +x "$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+      - name: Import Godot project for gameplay capture
+        shell: bash
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --editor --path . --import --quit
       - name: Capture real Godot gameplay renders
         shell: bash
         run: |

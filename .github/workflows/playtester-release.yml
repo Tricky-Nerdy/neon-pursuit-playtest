@@ -68,7 +68,6 @@ jobs:
 
 
   gameplay-renders:
-    needs: tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

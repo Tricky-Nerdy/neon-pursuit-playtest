@@ -30,24 +30,59 @@ var mouse_steer_axis := 0.0
 var visuals: Node3D
 var engine_glow: MeshInstance3D
 var engine_light: OmniLight3D
+var headlights: Array[SpotLight3D] = []
+var headlights_on := false
 
 func _ready() -> void:
     collision_layer = 2 if human_controlled else 4
     collision_mask = 7
-    var shape := CollisionShape3D.new()
-    var box := BoxShape3D.new()
-    box.size = Vector3(2.8, 1.0, 5.0)
-    shape.shape = box
-    add_child(shape)
-    visuals = Node3D.new()
-    add_child(visuals)
-    engine_light = OmniLight3D.new()
-    engine_light.position = Vector3(0, 0, 2.8)
-    engine_light.omni_range = 8.0
-    engine_light.light_energy = 0.8
-    engine_light.shadow_enabled = false
-    add_child(engine_light)
+    visuals = get_node_or_null("Visuals") as Node3D
+    engine_light = get_node_or_null("EngineLight") as OmniLight3D
+    if get_node_or_null("CollisionShape3D") == null:
+        var shape := CollisionShape3D.new()
+        shape.name = "CollisionShape3D"
+        var box := BoxShape3D.new()
+        box.size = Vector3(2.8, 1.0, 5.0)
+        shape.shape = box
+        add_child(shape)
+    if visuals == null:
+        visuals = Node3D.new()
+        visuals.name = "Visuals"
+        add_child(visuals)
+    if engine_light == null:
+        engine_light = OmniLight3D.new()
+        engine_light.name = "EngineLight"
+        engine_light.position = Vector3(0, 0, 2.8)
+        engine_light.omni_range = 8.0
+        engine_light.light_energy = 0.8
+        engine_light.shadow_enabled = false
+        add_child(engine_light)
+    _ensure_headlights()
     _rebuild_visuals()
+
+func _ensure_headlights() -> void:
+    if not headlights.is_empty():
+        return
+    for x in [-0.72, 0.72]:
+        var lamp := SpotLight3D.new()
+        lamp.name = "HeadlightLeft" if x < 0.0 else "HeadlightRight"
+        lamp.position = Vector3(x, 0.18, -2.15)
+        lamp.rotation_degrees.x = -7.0
+        lamp.light_color = Color(1.0, 0.93, 0.78)
+        lamp.light_energy = 5.0
+        lamp.spot_range = 52.0
+        lamp.spot_angle = 30.0
+        lamp.spot_attenuation = 0.75
+        lamp.shadow_enabled = human_controlled
+        lamp.visible = headlights_on
+        add_child(lamp)
+        headlights.append(lamp)
+
+func _unhandled_key_input(event: InputEvent) -> void:
+    if human_controlled and event.pressed and not event.echo and event.keycode == KEY_H:
+        headlights_on = not headlights_on
+        for lamp in headlights:
+            lamp.visible = headlights_on
 
 func _physics_process(delta: float) -> void:
     var stats: Dictionary = CRAFT[craft_index]

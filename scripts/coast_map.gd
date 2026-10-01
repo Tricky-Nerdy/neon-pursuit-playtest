@@ -23,10 +23,11 @@ var event_sites: Array[Vector3] = []
 var world_environment: WorldEnvironment
 var sky_material: ProceduralSkyMaterial
 var sun_light: DirectionalLight3D
+var street_lights: Array[OmniLight3D] = []
 var time_of_day := 180.0 # Start just after sunrise.
-const DAY_SECONDS := 15.0 * 60.0
-const NIGHT_SECONDS := 6.0 * 60.0
-const CYCLE_SECONDS := DAY_SECONDS + NIGHT_SECONDS
+@export_category("Day / Night Cycle")
+@export_range(30.0, 900.0, 10.0, "suffix:s") var day_duration_seconds := 210.0
+@export_range(30.0, 900.0, 10.0, "suffix:s") var night_duration_seconds := 120.0
 
 func _ready() -> void:
     physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
@@ -43,9 +44,10 @@ func _ready() -> void:
     _build_navigation()
 
 func advance_day_night(delta: float) -> void:
-    time_of_day = fmod(time_of_day + delta, CYCLE_SECONDS)
-    var daylight := time_of_day < DAY_SECONDS
-    var sun_t := (time_of_day / DAY_SECONDS) if daylight else ((time_of_day - DAY_SECONDS) / NIGHT_SECONDS)
+    var cycle_seconds := day_duration_seconds + night_duration_seconds
+    time_of_day = fmod(time_of_day + delta, cycle_seconds)
+    var daylight := time_of_day < day_duration_seconds
+    var sun_t := (time_of_day / day_duration_seconds) if daylight else ((time_of_day - day_duration_seconds) / night_duration_seconds)
     # The sun completes a visible arc during day and stays below the horizon at night.
     var elevation := lerpf(-12.0, 62.0, sin(sun_t * PI)) if daylight else -16.0
     sun_light.rotation_degrees = Vector3(-elevation, lerpf(-118.0, 62.0, sun_t), 0.0)
@@ -58,6 +60,8 @@ func advance_day_night(delta: float) -> void:
     sky_material.ground_horizon_color = Color(0.025, 0.045, 0.09).lerp(Color(0.60, 0.72, 0.75), warm)
     sky_material.ground_bottom_color = Color(0.008, 0.012, 0.035).lerp(Color(0.17, 0.26, 0.32), warm)
     world_environment.environment.fog_light_color = Color(0.08, 0.13, 0.28).lerp(Color(0.57, 0.72, 0.8), warm)
+    for lamp in street_lights:
+        lamp.visible = not daylight or warm < 0.18
 
 func _open_curve(points: Array[Vector3]) -> Curve3D:
     var path := Curve3D.new()
@@ -307,7 +311,18 @@ func _road(path: Curve3D, width: float, main: bool) -> void:
         if main and int(distance) % 90 < 18:
             for sign_value in [-1.0,1.0]:
                 box(Vector3(0.5,2.7,0.5), at + side * (width * 0.5 + 3.0) * sign_value + Vector3.UP * 1.4, Color(0.20,0.30,0.35), yaw)
-                box(Vector3(0.7,0.3,0.7), at + side * (width * 0.5 + 3.0) * sign_value + Vector3.UP * 2.8, Color(0.05,0.9,1), yaw, false, true)
+                var lamp_at : Vector3 = at + side * (width * 0.5 + 3.0) * sign_value + Vector3.UP * 2.8
+                box(Vector3(0.7,0.3,0.7), lamp_at, Color(1.0,0.82,0.55), yaw, false, true)
+                var lamp := OmniLight3D.new()
+                lamp.name = "StreetLight%d" % street_lights.size()
+                lamp.position = lamp_at + Vector3.DOWN * 0.15
+                lamp.light_color = Color(1.0,0.78,0.50)
+                lamp.light_energy = 3.2
+                lamp.omni_range = 24.0
+                lamp.omni_attenuation = 1.25
+                lamp.shadow_enabled = false
+                add_child(lamp)
+                street_lights.append(lamp)
         distance += 18.0
     if main:
         for i in 8:

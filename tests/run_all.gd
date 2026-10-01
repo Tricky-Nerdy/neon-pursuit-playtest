@@ -67,7 +67,9 @@ func _run() -> void:
     key.keycode = KEY_F3
     key.pressed = true
     game._unhandled_key_input(key)
-    check(game.hud_visible and control("BAY SPRINT").is_visible_in_tree(),"F3 opens mission menu")
+    check(game.hud_visible and control("EVENTS").is_visible_in_tree(),"F3 opens main menu")
+    control("EVENTS").pressed.emit()
+    check(control("BAY SPRINT").is_visible_in_tree(),"events page exposes mission buttons")
     game._unhandled_key_input(key)
     check(not game.menu.visible,"F3 closes all menu text")
     control("≡").pressed.emit()
@@ -160,6 +162,8 @@ func _run() -> void:
     check(game.player.craft_index != before and game.event_active,"craft hot swap preserves mission")
     game._select_mode(0)
     check(not game.event_active and not game.gate_visual.visible,"free roam clears mission")
+    game._restart()
+    check(game.mode == 0 and not game.event_active,"explicit free roam restart does not retry the previous event")
     game.player.position = game.coast.boost_pads[0]+Vector3.UP*2
     game.player.boost_fuel = 0
     game.pad_cooldown = 0

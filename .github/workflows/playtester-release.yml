@@ -60,6 +60,8 @@ jobs:
         run: |
           engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           "$engine" --headless --path . --fixed-fps 60 --script "tests/world_integrity.gd"
+      - name: Test world rendering
+        run: '"$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64" --headless --path . --script tests/world_rendering.gd'
       - name: Test night_lighting
         shell: bash
         run: |

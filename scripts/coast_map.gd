@@ -9,6 +9,7 @@ var curve := Curve3D.new()
 var shortcut := Curve3D.new()
 var route := PackedVector3Array()
 var road_samples := PackedVector3Array()
+var road_markings: Array[Dictionary] = []
 var boost_pads: Array[Vector3] = []
 var length := 0.0
 var materials: Dictionary = {}
@@ -56,7 +57,8 @@ func advance_day_night(delta: float) -> void:
     var warm := clampf(sin(sun_t * PI), 0.0, 1.0) if daylight else 0.0
     sun_light.light_energy = lerpf(0.04, 1.35, warm)
     sun_light.light_color = Color(0.30, 0.42, 0.72).lerp(Color(1.0, 0.91, 0.76), warm)
-    world_environment.environment.ambient_light_energy = lerpf(0.22, 0.85, warm)
+    world_environment.environment.ambient_light_energy = lerpf(0.45, 0.70, warm)
+    world_environment.environment.ambient_light_color = Color(0.30, 0.38, 0.58).lerp(Color(0.65, 0.72, 0.80), warm)
     sky_material.sky_top_color = Color(0.008, 0.018, 0.065).lerp(Color(0.12, 0.32, 0.55), warm)
     sky_material.sky_horizon_color = Color(0.035, 0.06, 0.16).lerp(Color(0.75, 0.84, 0.88), warm)
     sky_material.ground_horizon_color = Color(0.025, 0.045, 0.09).lerp(Color(0.60, 0.72, 0.75), warm)
@@ -320,6 +322,25 @@ func _ribbon(path: Curve3D, width: float, height: float, color: Color) -> void:
     instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
     add_child(instance)
 
+func marking_clear_of_junction(path: Curve3D, at: Vector3, yaw: float, marking_length: float) -> bool:
+    var axis := Vector3(sin(yaw), 0, cos(yaw))
+    # Check the whole stripe, not just its center, against every joining road.
+    for index in roads.size():
+        if roads[index] == path:
+            continue
+        for offset in [-marking_length * 0.5, 0.0, marking_length * 0.5]:
+            var point: Vector3 = at + axis * offset
+            point.y = 0.0
+            if point.distance_to(roads[index].get_closest_point(point)) < road_widths[index] * 0.5 + 1.0:
+                return false
+    return true
+
+func _road_marking(path: Curve3D, size: Vector3, at: Vector3, color: Color, yaw: float) -> void:
+    if not marking_clear_of_junction(path, at, yaw, size.z):
+        return
+    box(size, at, color, yaw)
+    road_markings.append({"path":path, "at":at, "yaw":yaw, "length":size.z})
+
 func _road(path: Curve3D, width: float, main: bool) -> void:
     _ribbon(path, width + 8.0, 0.05, Color(0.47,0.55,0.57))
     _ribbon(path, width, 0.10, Color(0.075,0.11,0.15))
@@ -330,9 +351,9 @@ func _road(path: Curve3D, width: float, main: bool) -> void:
         var yaw := atan2(-direction.x, -direction.z)
         var side := Vector3(direction.z,0,-direction.x)
         road_samples.append(at)
-        box(Vector3(0.24,0.025,6), at + Vector3.UP * 0.14, Color(0.9,0.83,0.63), yaw)
+        _road_marking(path, Vector3(0.24,0.025,6), at + Vector3.UP * 0.14, Color(0.9,0.83,0.63), yaw)
         for sign_value in [-1.0,1.0]:
-            box(Vector3(0.35,0.035,14), at + side * (width * 0.5 - 1.0) * sign_value + Vector3.UP * 0.15, Color(0.35,0.85,0.91), yaw)
+            _road_marking(path, Vector3(0.35,0.035,14), at + side * (width * 0.5 - 1.0) * sign_value + Vector3.UP * 0.15, Color(0.35,0.85,0.91), yaw)
         if main and int(distance) % 90 < 18:
             for sign_value in [-1.0,1.0]:
                 box(Vector3(0.5,2.7,0.5), at + side * (width * 0.5 + 3.0) * sign_value + Vector3.UP * 1.4, Color(0.20,0.30,0.35), yaw)
@@ -373,14 +394,14 @@ func _environment() -> void:
     sky.sky_material = sky_mat
     env.sky = sky
     env.background_mode = Environment.BG_SKY
-    env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+    env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
     env.ambient_light_energy = 0.85
     env.reflected_light_source = Environment.REFLECTION_SOURCE_BG
     env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
     env.glow_enabled = true
     env.glow_intensity = 0.35
-    env.fog_enabled = true
-    env.fog_density = 0.00048
+    env.fog_enabled = false
+    env.fog_density = 0.0
     env.fog_light_color = Color(0.57,0.72,0.8)
     world.environment = env
     world_environment = world
@@ -399,7 +420,20 @@ func _island() -> void:
     box(Vector3(12000,0.2,12000), Vector3(0,-2.5,0), Color(0.04,0.34,0.43))
     var water := ShaderMaterial.new()
     var shader := Shader.new()
-    shader.code = "shader_type spatial; render_mode cull_disabled; void fragment(){ float w=sin(VERTEX.x*0.07+TIME)*sin(VERTEX.z*0.04+TIME*0.6); ALBEDO=mix(vec3(0.015,0.19,0.25),vec3(0.1,0.42,0.49),0.5+w*0.15); ROUGHNESS=0.26; METALLIC=0.25; }"
+    shader.code = """shader_type spatial;
+render_mode cull_disabled;
+varying vec2 water_world_xz;
+void vertex() {
+    water_world_xz = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
+}
+void fragment() {
+    // Broad, low-contrast swells anchored to the world, without a camera-space grid.
+    float swell = sin(dot(water_world_xz, vec2(0.006, 0.003)) + TIME * 0.12);
+    ALBEDO = vec3(0.025, 0.24, 0.30) + vec3(0.008, 0.018, 0.018) * swell;
+    ROUGHNESS = 0.65;
+    METALLIC = 0.05;
+}
+"""
     water.shader = shader
     get_child(get_child_count()-1).material_override = water
     scenery = Scenery.new()

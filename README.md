@@ -14,23 +14,23 @@ The map connects 8.44 km of roads through the coast, harbor, canyon and airfield
 
 ### Aurora Bay 5.0
 
-Six new **1920 × 1080 screenshots captured from the running Godot game**, with runtime world geometry, lighting and UI. Four district driving views, a nighttime driving view and an overhead view use deterministic positions and time of day.
+Six new **1920 × 1080 screenshots captured from the running Godot game**, with runtime world geometry, lighting and UI. The coastal drive, harbor piers, canyon road, airfield, nighttime drive and overhead map use authored landmark views, road-aligned ship headings and fixed times of day.
 
 **Coast — daytime driving**
 
 ![Coast — daytime driving](docs/screenshots/gameplay/coast-day.png)
 
-**Harbor — daytime driving**
+**Harbor — piers and waterfront**
 
-![Harbor — daytime driving](docs/screenshots/gameplay/harbor-day.png)
+![Harbor — piers and waterfront](docs/screenshots/gameplay/harbor-day.png)
 
 **Canyon — daytime driving**
 
 ![Canyon — daytime driving](docs/screenshots/gameplay/canyon-day.png)
 
-**Airfield — daytime driving**
+**Airfield — hangar and control tower**
 
-![Airfield — daytime driving](docs/screenshots/gameplay/airfield-day.png)
+![Airfield — hangar and control tower](docs/screenshots/gameplay/airfield-day.png)
 
 **Coast — nighttime headlights and streetlights**
 
@@ -51,7 +51,7 @@ Six new **1920 × 1080 screenshots captured from the running Godot game**, with 
 
 Choose Coast, Harbor, Canyon or Airfield. Events have levels, medals and saved records. Retry resets straight to the action; there are no race intro sequences. The compact driving HUD stays clear of diagnostic text; use **F3** (or the bottom menu button on touch) for the event and craft menu.
 
-Touch, keyboard, mouse, and gamepad input are supported. Android is a first-class playtest target; pushes to `main` run the regression suites before Android, Windows, and Linux build jobs are allowed to proceed. The camera follows close behind the craft. The look uses stylized 3D geometry, sky lighting, shadows, fog, emissive road markings and reflective water. The built-in sky environment currently runs a 7-minute daylight and 4-minute night cycle. Real-time global illumination is not currently implemented.
+Touch, keyboard, mouse, and gamepad input are supported. Android is a first-class playtest target; pushes to `main` run the regression suites before Android, Windows, and Linux build jobs are allowed to proceed. The camera follows close behind the craft. The look uses stylized 3D geometry, sky lighting, shadows, emissive road markings and reflective water. The built-in sky environment currently runs a 7-minute daylight and 4-minute night cycle. Real-time global illumination is not currently implemented.
 
 ## Version history
 
@@ -91,11 +91,12 @@ Runtime events and periodic performance samples are written to `user://neon_purs
 ```sh
 godot --headless --editor --path . --import --quit
 godot --headless --path . --script tests/render_capture_test.gd
+godot --headless --path . --script tests/world_rendering.gd
 xvfb-run -a -s "-screen 0 1920x1080x24" godot --path . --resolution 1920x1080 --rendering-method gl_compatibility --script tests/render_capture.gd
 python3 tests/verify_render_captures.py
 ```
 
-The capture regression test checks scene loading, all four district positions, the exact camera pose after teleporting, and day/night lighting. Image validation rejects missing, damaged, flat or duplicate captures. CI runs capture independently of the gameplay suites and uploads all six PNGs. The images in `tests/geometry_review/` are scene geometry reviews and should not be presented as gameplay captures.
+The capture regression test checks scene loading, road-centered positions and headings, exact camera poses after teleporting, landmark framing and day/night lighting. `tests/world_rendering.gd` checks clear visibility and prevents road stripes crossing junctions. The world uses fog-free lighting, explicit night ambient fill and world-space water shading. Image validation rejects missing, damaged, flat or duplicate captures. CI runs capture independently of the gameplay suites and uploads all six PNGs. The images in `tests/geometry_review/` are scene geometry reviews and should not be presented as gameplay captures.
 
 ### Playtesters
 

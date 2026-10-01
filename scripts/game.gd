@@ -130,6 +130,8 @@ func _ready() -> void:
         camera.fov = 75
         camera.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
         add_child(camera)
+    # A tiny near plane wastes depth precision across the kilometer-scale world.
+    camera.near = 0.5
     _make_rivals()
     _make_gate()
     _make_ui()

@@ -1,6 +1,7 @@
 extends SceneTree
 
 const OUTPUT_DIR := "res://docs/screenshots/gameplay"
+const Views = preload("res://tests/capture_views.gd")
 const SHOTS := ["coast-day", "harbor-day", "canyon-day", "airfield-day", "coast-night", "world-map"]
 var failures := 0
 
@@ -49,35 +50,37 @@ func _run() -> void:
     for ship in game.vehicles_root.get_children():
         ship.set_physics_process(false)
     DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUTPUT_DIR))
-    game.coast.time_of_day = game.coast.day_duration_seconds * 0.5
-    game.coast.advance_day_night(0.0)
-    var spawns = game.coast.get_node("FreeRoamSpawns")
-    for index in 4:
-        var spawn = spawns.get_child(index)
-        game.player.reset_to(spawn.global_position, spawn.global_rotation.y)
+    var requested := ""
+    for argument in OS.get_cmdline_user_args():
+        if argument.begins_with("--capture="):
+            requested = argument.trim_prefix("--capture=")
+    if not requested.is_empty() and requested not in SHOTS:
+        push_error("Unknown capture view: " + requested)
+        quit(1)
+        return
+    for view in Views.VIEWS:
+        if not requested.is_empty() and view.name != requested:
+            continue
+        var pose := Views.road_pose(game.coast, view)
+        game.player.reset_to(pose.origin, pose.basis.get_euler().y)
         game.player.reset_physics_interpolation()
+        var night: bool = view.get("night", false)
+        game.coast.time_of_day = game.coast.day_duration_seconds + game.coast.night_duration_seconds * 0.5 if night else game.coast.day_duration_seconds * 0.5
+        game.coast.advance_day_night(0.0)
+        game.player.headlights_on = night
+        for lamp in game.player.headlights:
+            lamp.visible = night
         await physics_frame
         await process_frame
+        game.camera.near = 0.5
         game._camera_follow(1.0)
-        await _capture(SHOTS[index])
-    var coast_spawn = spawns.get_node("Coast")
-    game.player.reset_to(coast_spawn.global_position, coast_spawn.global_rotation.y)
-    game.player.reset_physics_interpolation()
-    game.coast.time_of_day = game.coast.day_duration_seconds + game.coast.night_duration_seconds * 0.5
-    game.coast.advance_day_night(0.0)
-    game.player.headlights_on = true
-    for lamp in game.player.headlights:
-        lamp.visible = true
-    await physics_frame
-    await process_frame
-    game._camera_follow(1.0)
-    await _capture(SHOTS[4])
-    game.coast.time_of_day = game.coast.day_duration_seconds * 0.5
-    game.coast.advance_day_night(0.0)
-    game.camera.position = Vector3(0, 1600, 1050)
-    game.camera.look_at(Vector3.ZERO)
-    game.camera.fov = 70
-    await _capture(SHOTS[5])
+        if view.has("camera"):
+            game.camera.global_position = view.camera
+            game.camera.look_at(view.target)
+            game.camera.fov = 65.0
+            game.camera.near = 10.0 if view.name == "world-map" else 1.0
+        game.ui_layer.visible = not view.has("camera")
+        await _capture(view.name)
     game.queue_free()
     await process_frame
     quit(failures)

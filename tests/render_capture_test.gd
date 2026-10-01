@@ -7,6 +7,7 @@ func check(ok: bool, label: String) -> void:
         failures += 1
 
 func _initialize() -> void:
+    create_timer(20.0).timeout.connect(func(): quit(1))
     call_deferred("_run")
 
 func _run() -> void:
@@ -23,21 +24,33 @@ func _run() -> void:
     game.telemetry.path = "user://capture_test.log"
     root.add_child(game)
     await process_frame
-    var spawns = game.coast.get_node("FreeRoamSpawns")
-    check(spawns.get_child_count() == 4, "four district capture positions exist")
+    check(game.camera.near >= 0.5, "world camera preserves depth precision")
+    var views = load("res://tests/capture_views.gd")
+    check(views.VIEWS.size() == 6, "six authored landmark views")
     game.player.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
     game.set_process(false)
     game.set_physics_process(false)
     game._set_hud_visible(false)
     game.player.set_physics_process(false)
-    for spawn in spawns.get_children():
-        game.player.reset_to(spawn.global_position, spawn.global_rotation.y)
+    for view in views.VIEWS:
+        var pose: Transform3D = views.road_pose(game.coast, view)
+        game.player.reset_to(pose.origin, pose.basis.get_euler().y)
         await physics_frame
         await process_frame
         game._camera_follow(1.0)
-        check(game.player.global_position.distance_to(spawn.global_position) < 0.01, "capture reaches " + spawn.name)
+        check(game.coast.road_distance(game.player.global_position) < 0.1, "ship centered on road for " + view.name)
         var expected = game.player.global_position + game.player.global_basis.z.normalized() * 9.0 + Vector3.UP * 4.2
-        check(game.camera.global_position.distance_to(expected) < 0.01, "camera uses current capture pose at " + spawn.name)
+        check(game.camera.global_position.distance_to(expected) < 0.01, "camera uses current pose for " + view.name)
+        var road: Curve3D = game.coast.roads[view.road]
+        var offset := road.get_closest_offset(view.near)
+        var tangent := (road.sample_baked(offset + 5.0,true) - road.sample_baked(offset,true)).normalized()
+        if view.get("reverse", false):
+            tangent = -tangent
+        check((-game.player.global_basis.z).dot(tangent) > 0.99, "ship follows road heading for " + view.name)
+        if view.has("camera"):
+            game.camera.global_position = view.camera
+            game.camera.look_at(view.target)
+            check(game.camera.is_position_in_frustum(view.target), "landmark inside frame for " + view.name)
     game.coast.time_of_day = game.coast.day_duration_seconds * 0.5
     game.coast.advance_day_night(0.0)
     check(not game.coast.street_lights[0].visible, "day capture applies daylight")

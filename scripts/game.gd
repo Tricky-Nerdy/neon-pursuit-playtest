@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 const InputBindings = preload("res://scripts/input_bindings.gd")
 
@@ -31,7 +32,7 @@ var route_button: Button
 var level_button: Button
 var selected_level := 0
 var save_path := "user://progress.cfg"
-var telemetry = TelemetryScript.new()
+var telemetry = null if Engine.is_editor_hint() else TelemetryScript.new()
 var player: HoverShip
 var camera: Camera3D
 var rear_camera: Camera3D
@@ -94,7 +95,46 @@ var gameplay_root: Node3D
 var ui_layer: CanvasLayer
 var free_roam_spawn: Marker3D
 
+# Editor animation uses the real craft visuals and map curves. Runtime physics,
+# player input, UI, telemetry, and progress saves only run when playing the game.
+var _editor_racers: Array[HoverShip] = []
+var _editor_offsets: Array[float] = []
+
+func _ready_editor_simulation() -> void:
+	coast = get_node_or_null("World") as CoastMap
+	vehicles_root = get_node_or_null("Vehicles") as Node3D
+	if coast == null or vehicles_root == null or not _editor_racers.is_empty():
+		return
+	for i in 4:
+		var racer := ShipScene.instantiate() as HoverShip
+		racer.name = "EditorRacer%d" % (i + 1)
+		racer.human_controlled = false
+		racer.craft_index = i % HoverShip.CRAFT.size()
+		vehicles_root.add_child(racer)
+		racer.set_physics_process(false)
+		racer.collision_layer = 0
+		racer.collision_mask = 0
+		_editor_racers.append(racer)
+		_editor_offsets.append(coast.length * i / 4.0)
+	_process_editor_simulation(0.0)
+
+func _process_editor_simulation(delta: float) -> void:
+	if not is_instance_valid(coast) or coast.sun_light == null:
+		return
+	coast.advance_day_night(delta)
+	for i in _editor_racers.size():
+		var racer := _editor_racers[i]
+		if not is_instance_valid(racer):
+			continue
+		_editor_offsets[i] = fposmod(_editor_offsets[i] + delta * (55.0 + i * 5.0), coast.length)
+		racer.position = coast.sample(_editor_offsets[i])
+		racer.heading = coast.heading_at(_editor_offsets[i])
+		racer.rotation.y = racer.heading
+
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		_ready_editor_simulation()
+		return
 	InputBindings.install()
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	# Update mission simulation after the ship's physics movement.
@@ -143,6 +183,9 @@ func _ready() -> void:
 	telemetry.record("INFO", "world_ready", {"route_meters":coast.length,"checkpoints":coast.route.size(),"landmarks":coast.landmark_count})
 
 func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		_process_editor_simulation(delta)
+		return
 	if coast:
 		coast.advance_day_night(delta)
 	_camera_follow(delta)
@@ -160,6 +203,8 @@ func _process(delta: float) -> void:
 		frame_samples = 0
 
 func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	if hud_visible:
 		return
 	crash_cooldown = maxf(0.0,crash_cooldown-delta)
@@ -239,6 +284,8 @@ func _update_event(delta: float) -> void:
 			_finish(false)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if Engine.is_editor_hint():
+		return
 	if not event.pressed or event.echo:
 		return
 	match event.keycode:
@@ -815,6 +862,8 @@ func _cycle_level() -> void:
 	level_button.text = "LEVEL: AUTO" if selected_level == 0 else "LEVEL: %d" % selected_level
 
 func _notification(what: int) -> void:
+	if Engine.is_editor_hint():
+		return
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and is_instance_valid(menu):
 		_set_hud_visible(true)
 
@@ -917,6 +966,8 @@ func _start_patrols(initial := false) -> void:
 		brains[i].begin(route_path,offset,"patrol",1)
 
 func _input(event: InputEvent) -> void:
+	if Engine.is_editor_hint():
+		return
 	if event is InputEventScreenTouch and event.pressed:
 		touch_active = true
 		_refresh_touch_controls()

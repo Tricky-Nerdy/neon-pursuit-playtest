@@ -26,8 +26,26 @@ func _run() -> void:
 	check(world.scenery.prop_count > 500, "scenery generated in the editor")
 	check(world.get_node("FreeRoamSpawns").get_child_count() == 4,
 		"authored spawn markers remain available")
-	check(game.get_node("Vehicles").get_child_count() == 0,
-		"editor preview does not start gameplay or spawn vehicles")
+	check(game.get_node("Vehicles").get_child_count() == 4,
+		"four racers appear in the editor")
+	check(game.player == null and game.telemetry == null and game.ui == null,
+		"editor simulation leaves player, telemetry, and gameplay UI inactive")
+	var racer: HoverShip = game._editor_racers[0]
+	var before := racer.position
+	var before_time: float = world.time_of_day
+	game._process(1.0)
+	check(racer.position.distance_to(before) > 40.0, "racers move along the map in editor mode")
+	check(world.time_of_day > before_time, "day/night clock advances in editor mode")
+	check(world.road_distance(racer.position) < 0.5, "editor racer stays on the road")
+	check(not racer.is_physics_processing() and racer.collision_layer == 0,
+		"editor racers do not run runtime driving physics")
+	world.time_of_day = world.day_duration_seconds + 1.0
+	game._process(0.0)
+	check(world.street_lights[0].visible, "editor night cycle switches street lights on")
+	var racers_count := game.get_node("Vehicles").get_child_count()
+	game._ready_editor_simulation()
+	check(game.get_node("Vehicles").get_child_count() == racers_count,
+		"reinitializing does not duplicate editor racers")
 	# Editor-generated geometry must not become saved scene content.
 	var packed := PackedScene.new()
 	check(packed.pack(game) == OK, "preview scene can be saved")

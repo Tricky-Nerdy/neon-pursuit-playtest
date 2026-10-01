@@ -1,3 +1,4 @@
+@tool
 extends CharacterBody3D
 class_name HoverShip
 
@@ -81,12 +82,16 @@ func _ensure_headlights() -> void:
         headlights.append(lamp)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+    if Engine.is_editor_hint():
+        return
     if human_controlled and event.pressed and not event.echo and event.keycode == KEY_H:
         headlights_on = not headlights_on
         for lamp in headlights:
             lamp.visible = headlights_on
 
 func _physics_process(delta: float) -> void:
+    if Engine.is_editor_hint():
+        return
     var stats: Dictionary = CRAFT[craft_index]
     var pad_steer := Input.get_axis("pad_left","pad_right") if human_controlled else 0.0
     var steer := clampf(steer_axis + mouse_steer_axis + pad_steer + float(int(input_right or (human_controlled and Input.is_action_pressed("right"))) - int(input_left or (human_controlled and Input.is_action_pressed("left")))), -0.8, 0.8)

@@ -23,6 +23,7 @@ var district_roads: Array[Curve3D] = []
 var event_sites: Array[Vector3] = []
 var world_environment: WorldEnvironment
 var sky_material: ProceduralSkyMaterial
+var textured_sky: ShaderMaterial
 var sun_light: DirectionalLight3D
 var street_lights: Array[OmniLight3D] = []
 var overhang_lamp_material: StandardMaterial3D
@@ -64,6 +65,11 @@ func advance_day_night(delta: float) -> void:
     sky_material.ground_horizon_color = Color(0.025, 0.045, 0.09).lerp(Color(0.60, 0.72, 0.75), warm)
     sky_material.ground_bottom_color = Color(0.008, 0.012, 0.035).lerp(Color(0.17, 0.26, 0.32), warm)
     world_environment.environment.fog_light_color = Color(0.08, 0.13, 0.28).lerp(Color(0.57, 0.72, 0.8), warm)
+    if textured_sky != null:
+        textured_sky.set_shader_parameter("zenith", sky_material.sky_top_color)
+        textured_sky.set_shader_parameter("horizon", sky_material.sky_horizon_color)
+        textured_sky.set_shader_parameter("ground", sky_material.ground_bottom_color)
+        textured_sky.set_shader_parameter("cloud_color", Color(0.09,0.12,0.22).lerp(Color(0.96,0.94,0.88), warm))
     var lamps_on := not daylight or warm < 0.18
     for lamp in street_lights:
         lamp.visible = lamps_on
@@ -396,7 +402,38 @@ func _environment() -> void:
     sky_mat.sky_horizon_color = Color(0.75,0.84,0.88)
     sky_mat.ground_horizon_color = Color(0.60,0.72,0.75)
     sky_mat.ground_bottom_color = Color(0.17,0.26,0.32)
-    sky.sky_material = sky_mat
+    # A seamless noise texture gives the coastal sky soft cloud detail.
+    var noise := FastNoiseLite.new()
+    noise.seed = 7319
+    noise.frequency = 0.009
+    noise.fractal_octaves = 5
+    var clouds := NoiseTexture2D.new()
+    clouds.width = 1024
+    clouds.height = 1024
+    clouds.seamless = true
+    clouds.noise = noise
+    var sky_shader := Shader.new()
+    sky_shader.code = """shader_type sky;
+uniform sampler2D clouds : repeat_enable, filter_linear_mipmap;
+uniform vec4 zenith : source_color;
+uniform vec4 horizon : source_color;
+uniform vec4 ground : source_color;
+uniform vec4 cloud_color : source_color;
+void sky() {
+    float altitude = max(EYEDIR.y, 0.0);
+    vec3 base = mix(horizon.rgb, zenith.rgb, pow(altitude, 0.45));
+    // Project onto a cloud layer above the viewer: no longitude seam or pole pinch.
+    vec2 uv = EYEDIR.xz / (altitude + 0.18) * 0.14;
+    float detail = texture(clouds, uv).r;
+    float cover = smoothstep(0.49, 0.69, detail);
+    cover *= smoothstep(0.01, 0.16, EYEDIR.y) * 0.78;
+    COLOR = EYEDIR.y >= 0.0 ? mix(base, cloud_color.rgb, cover) : ground.rgb;
+}
+"""
+    textured_sky = ShaderMaterial.new()
+    textured_sky.shader = sky_shader
+    textured_sky.set_shader_parameter("clouds", clouds)
+    sky.sky_material = textured_sky
     env.sky = sky
     env.background_mode = Environment.BG_SKY
     env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR

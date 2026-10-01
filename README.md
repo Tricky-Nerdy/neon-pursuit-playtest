@@ -43,7 +43,7 @@ Touch, keyboard, mouse, and gamepad input are supported. Android is a first-clas
 
 ## Version history
 
-The repository history predates formal semantic versioning. The milestones below preserve the development lineage recovered during the HerOS Forge cleanup and map it into the current version scheme without rewriting the original Git history.
+The repository history predates formal semantic versioning. The milestones below reconstruct the development lineage from the repository's Git history and map it into the current version scheme without rewriting the original commits.
 
 | Game version | Map version | Historical milestone |
 | --- | --- | --- |
@@ -51,7 +51,7 @@ The repository history predates formal semantic versioning. The milestones below
 | **v0.6.1** | **Aurora Bay 5.0** | Lighting-development line: HDR/panorama sky work, environment tuning, tunable day/night cycle, and nighttime road/vehicle-lighting iteration. |
 | **v0.6.0** | **Aurora Bay 5.0** | Readable Godot-project refactor: explicit World, Vehicles, Gameplay, UI and Camera structure; free-roam boot; four curated district spawn points; hover-ship scenes bound to scene nodes. |
 | **v0.5.x** | **Aurora Bay 4.x** | Mature Aurora Bay playtest baseline: connected coast, harbor, canyon and airfield routes; events, AI rivals, police behavior, persistence, diagnostics and automated world-integrity testing. |
-| **v0.4.x and earlier** | **Aurora Bay 1.x–3.x** | Earlier map/gameplay construction preserved in Git history and HerOS Forge archival work, before the current map and project structure were formalized. |
+| **v0.4.x and earlier** | **Aurora Bay 1.x–3.x** | Earlier map/gameplay construction preserved in Git history, before the current map and project structure were formalized. |
 
 Historical labels describe development milestones; the original commits remain the source of truth for exact file-level history. Going forward, release tags and Aurora Bay map revisions should be recorded when a milestone is cut so version history remains exact.
 

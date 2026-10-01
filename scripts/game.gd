@@ -1,7 +1,7 @@
 extends Node3D
 const InputBindings = preload("res://scripts/input_bindings.gd")
 
-const ShipScript = preload("res://scripts/ship.gd")
+const ShipScene = preload("res://scenes/vehicles/hover_ship.tscn")
 const TelemetryScript = preload("res://scripts/telemetry.gd")
 const StickScript = preload("res://scripts/virtual_stick.gd")
 const HoldScript = preload("res://scripts/touch_hold_button.gd")
@@ -92,7 +92,7 @@ func _ready() -> void:
     _load_progress()
     coast = MapScript.new()
     add_child(coast)
-    player = ShipScript.new()
+    player = ShipScene.instantiate()
     add_child(player)
     player.reset_to(coast.sample(0), coast.heading_at(0))
     previous_position = player.position
@@ -414,7 +414,7 @@ func _load_progress() -> void:
 
 func _make_rivals() -> void:
     for i in 4:
-        var rival := ShipScript.new()
+        var rival := ShipScene.instantiate()
         rival.human_controlled = false
         rival.craft_index = i%3
         add_child(rival)

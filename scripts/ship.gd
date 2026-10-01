@@ -66,7 +66,9 @@ func _ensure_headlights() -> void:
     for x in [-0.72, 0.72]:
         var lamp := SpotLight3D.new()
         lamp.name = "HeadlightLeft" if x < 0.0 else "HeadlightRight"
-        lamp.position = Vector3(x, 0.18, -2.15)
+        # All three imported hulls extend to z = -2.2; keep the shadow-casting
+        # light ahead of the nose so the hull cannot occlude its forward cone.
+        lamp.position = Vector3(x, 0.18, -2.55)
         lamp.rotation_degrees.x = -7.0
         lamp.light_color = Color(1.0, 0.93, 0.78)
         lamp.light_energy = 5.0

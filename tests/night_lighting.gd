@@ -33,6 +33,26 @@ func _run() -> void:
     game.coast.time_of_day = game.coast.day_duration_seconds + 1.0
     game.coast.advance_day_night(0.0)
     check(game.coast.street_lights[0].visible, "streetlights on at night")
+    game.set_process(false)
+    game.player.set_physics_process(false)
+    for craft in 3:
+        game.player.select_craft(craft)
+        await process_frame
+        var front := INF
+        for mesh in game.player.visuals.find_children("*", "MeshInstance3D", true, false):
+            if mesh.is_visible_in_tree():
+                var bounds: AABB = game.player.global_transform.affine_inverse() * mesh.global_transform * mesh.get_aabb()
+                front = minf(front, bounds.position.z)
+        for lamp in game.player.headlights:
+            check(front < INF and lamp.position.z < front - 0.1, "headlight clears craft %d hull" % craft)
+    game.coast.time_of_day = game.coast.day_duration_seconds * 0.5
+    game.coast.advance_day_night(0.0)
+    root.push_input(key)
+    await process_frame
+    check(game.player.headlights_on and game.player.headlights[0].visible, "manual headlights remain on in daylight")
+    game.coast.time_of_day = game.coast.day_duration_seconds + 1.0
+    game.coast.advance_day_night(0.0)
+    check(game.player.headlights_on and game.player.headlights[0].visible, "sun cycle does not turn headlights off")
     game.queue_free()
     await process_frame
     quit(failures)

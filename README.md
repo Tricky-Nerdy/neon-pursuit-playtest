@@ -12,21 +12,21 @@ An open-map arcade pursuit racer for Android and PC. Cruise a connected coastal 
 
 The map connects 8.44 km of roads through the coast, harbor, canyon and airfield. The main route is 5.09 km, with an irregular shoreline, inland reservoir, ridge tunnel, city blocks, piers and a container yard. Roads and driving physics stay level; the mountains add terrain relief rather than jump physics.
 
-### Aurora Bay 5.0 visual reference
+### Aurora Bay 5.0
 
-These repository renders document the current Aurora Bay 5.0 world layout and representative driving areas. They are geometry/reference renders rather than direct captures from the running Godot game; lighting, HUD, headlights, streetlights, fog, and other runtime effects may differ.
+These Aurora Bay 5.0 presentation renders show the current world layout and representative driving areas. They are rendered from the project scene assets for a clean overview; in-game lighting, HUD, headlights, streetlights, fog, and other runtime effects may vary.
 
 **Aurora Bay 5.0 — world map**
 
-![Aurora Bay 5.0 world-layout reference render](docs/screenshots/aurora-bay-map.jpg)
+![Aurora Bay 5.0 world map render](docs/screenshots/aurora-bay-map.jpg)
 
 **Aurora Bay 5.0 — canyon route**
 
-![Aurora Bay 5.0 canyon-route reference render](docs/screenshots/canyon-route.jpg)
+![Aurora Bay 5.0 canyon route render](docs/screenshots/canyon-route.jpg)
 
 **Aurora Bay 5.0 — city district**
 
-![Aurora Bay 5.0 city-district reference render](docs/screenshots/city-district.jpg)
+![Aurora Bay 5.0 city district render](docs/screenshots/city-district.jpg)
 
 ## Driving and events
 

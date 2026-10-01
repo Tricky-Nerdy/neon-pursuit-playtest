@@ -1,6 +1,39 @@
-[gd_scene format=3 uid="uid://cdcrefw2g3emc"]
+[gd_scene load_steps=3 format=3 uid="uid://cdcrefw2g3emc"]
 
-[ext_resource type="Script" uid="uid://r3tf1lqbwvn0" path="res://scripts/game.gd" id="1"]
+[ext_resource type="Script" uid="uid://r3tf1lqbwvn0" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/coast_map.gd" id="2_world"]
 
 [node name="NeonPursuit" type="Node3D" unique_id=701572690]
-script = ExtResource("1")
+script = ExtResource("1_game")
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("2_world")
+
+[node name="FreeRoamSpawns" type="Node3D" parent="World"]
+
+[node name="Coast" type="Marker3D" parent="World/FreeRoamSpawns"]
+position = Vector3(0, 2.15, 470)
+rotation = Vector3(0, 0, 0)
+
+[node name="Harbor" type="Marker3D" parent="World/FreeRoamSpawns"]
+position = Vector3(-500, 2.15, 240)
+rotation = Vector3(0, -1.2, 0)
+
+[node name="Canyon" type="Marker3D" parent="World/FreeRoamSpawns"]
+position = Vector3(-370, 2.15, -360)
+rotation = Vector3(0, 2.1, 0)
+
+[node name="Airfield" type="Marker3D" parent="World/FreeRoamSpawns"]
+position = Vector3(500, 2.15, 180)
+rotation = Vector3(0, 0.9, 0)
+
+[node name="Vehicles" type="Node3D" parent="."]
+
+[node name="Gameplay" type="Node3D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Camera" type="Camera3D" parent="."]
+current = true
+fov = 75.0
+physics_interpolation_mode = 2

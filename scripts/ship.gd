@@ -31,6 +31,7 @@ var visuals: Node3D
 var engine_glow: MeshInstance3D
 var engine_light: OmniLight3D
 var headlights: Array[SpotLight3D] = []
+var headlights_on := false
 
 func _ready() -> void:
     collision_layer = 2 if human_controlled else 4
@@ -73,8 +74,15 @@ func _ensure_headlights() -> void:
         lamp.spot_angle = 30.0
         lamp.spot_attenuation = 0.75
         lamp.shadow_enabled = human_controlled
+        lamp.visible = headlights_on
         add_child(lamp)
         headlights.append(lamp)
+
+func _unhandled_key_input(event: InputEvent) -> void:
+    if human_controlled and event.pressed and not event.echo and event.keycode == KEY_H:
+        headlights_on = not headlights_on
+        for lamp in headlights:
+            lamp.visible = headlights_on
 
 func _physics_process(delta: float) -> void:
     var stats: Dictionary = CRAFT[craft_index]

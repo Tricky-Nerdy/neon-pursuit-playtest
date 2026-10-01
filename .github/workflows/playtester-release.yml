@@ -30,8 +30,15 @@ jobs:
         run: |
           engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           "$engine" --headless --editor --path . --import --quit
-          for suite in run_all input_devices ai_endurance mission_scenarios police_scenarios world_integrity; do
+          for suite in run_all input_devices ai_endurance mission_scenarios police_scenarios world_integrity night_lighting; do
+            echo "::group::Godot suite: $suite"
             "$engine" --headless --path . --fixed-fps 60 --script "tests/$suite.gd"
+            status=$?
+            echo "::endgroup::"
+            if [ "$status" -ne 0 ]; then
+              echo "::error::Godot regression suite failed: $suite"
+              exit "$status"
+            fi
           done
 
   build-linux:

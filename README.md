@@ -14,19 +14,31 @@ The map connects 8.44 km of roads through the coast, harbor, canyon and airfield
 
 ### Aurora Bay 5.0
 
-These Aurora Bay 5.0 presentation renders show the current world layout and representative driving areas. They are rendered from the project scene assets for a clean overview; in-game lighting, HUD, headlights, streetlights, fog, and other runtime effects may vary.
+Six new **1920 × 1080 screenshots captured from the running Godot game**, with runtime world geometry, lighting and UI. Four district driving views, a nighttime driving view and an overhead view use deterministic positions and time of day.
 
-**Aurora Bay 5.0 — world map**
+**Coast — daytime driving**
 
-![Aurora Bay 5.0 world map render](docs/screenshots/aurora-bay-map.jpg)
+![Coast — daytime driving](docs/screenshots/gameplay/coast-day.png)
 
-**Aurora Bay 5.0 — canyon route**
+**Harbor — daytime driving**
 
-![Aurora Bay 5.0 canyon route render](docs/screenshots/canyon-route.jpg)
+![Harbor — daytime driving](docs/screenshots/gameplay/harbor-day.png)
 
-**Aurora Bay 5.0 — city district**
+**Canyon — daytime driving**
 
-![Aurora Bay 5.0 city district render](docs/screenshots/city-district.jpg)
+![Canyon — daytime driving](docs/screenshots/gameplay/canyon-day.png)
+
+**Airfield — daytime driving**
+
+![Airfield — daytime driving](docs/screenshots/gameplay/airfield-day.png)
+
+**Coast — nighttime headlights and streetlights**
+
+![Coast — nighttime headlights and streetlights](docs/screenshots/gameplay/coast-night.png)
+
+**Aurora Bay — overhead world view**
+
+![Aurora Bay — overhead world view](docs/screenshots/gameplay/world-map.png)
 
 ## Driving and events
 
@@ -74,7 +86,16 @@ for suite in run_all input_devices ai_endurance mission_scenarios police_scenari
 done
 ```
 
-Runtime events and periodic performance samples are written to `user://neon_pursuit.log`; the game does not add a debug bar to the driving view. `tests/render_capture.gd` captures the running game when launched with a graphical display. The images in `tests/geometry_review/` are scene geometry reviews and should not be presented as gameplay captures.
+Runtime events and periodic performance samples are written to `user://neon_pursuit.log`; the game does not add a debug bar to the driving view. `tests/render_capture.gd` captures six views from the running game when launched with a graphical display. Reproduce and validate them with:
+
+```sh
+godot --headless --editor --path . --import --quit
+godot --headless --path . --script tests/render_capture_test.gd
+xvfb-run -a -s "-screen 0 1920x1080x24" godot --path . --resolution 1920x1080 --rendering-method gl_compatibility --script tests/render_capture.gd
+python3 tests/verify_render_captures.py
+```
+
+The capture regression test checks scene loading, all four district positions, the exact camera pose after teleporting, and day/night lighting. Image validation rejects missing, damaged, flat or duplicate captures. CI runs capture independently of the gameplay suites and uploads all six PNGs. The images in `tests/geometry_review/` are scene geometry reviews and should not be presented as gameplay captures.
 
 ### Playtesters
 

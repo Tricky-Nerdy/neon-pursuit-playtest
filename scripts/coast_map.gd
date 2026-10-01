@@ -24,9 +24,9 @@ var world_environment: WorldEnvironment
 var sky_material: ProceduralSkyMaterial
 var sun_light: DirectionalLight3D
 var time_of_day := 180.0 # Start just after sunrise.
-const DAY_SECONDS := 15.0 * 60.0
-const NIGHT_SECONDS := 6.0 * 60.0
-const CYCLE_SECONDS := DAY_SECONDS + NIGHT_SECONDS
+@export_category("Day / Night Cycle")
+@export_range(30.0, 900.0, 10.0, "suffix:s") var day_duration_seconds := 210.0
+@export_range(30.0, 900.0, 10.0, "suffix:s") var night_duration_seconds := 120.0
 
 func _ready() -> void:
     physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
@@ -43,9 +43,10 @@ func _ready() -> void:
     _build_navigation()
 
 func advance_day_night(delta: float) -> void:
-    time_of_day = fmod(time_of_day + delta, CYCLE_SECONDS)
-    var daylight := time_of_day < DAY_SECONDS
-    var sun_t := (time_of_day / DAY_SECONDS) if daylight else ((time_of_day - DAY_SECONDS) / NIGHT_SECONDS)
+    var cycle_seconds := day_duration_seconds + night_duration_seconds
+    time_of_day = fmod(time_of_day + delta, cycle_seconds)
+    var daylight := time_of_day < day_duration_seconds
+    var sun_t := (time_of_day / day_duration_seconds) if daylight else ((time_of_day - DAY_SECONDS) / NIGHT_SECONDS)
     # The sun completes a visible arc during day and stays below the horizon at night.
     var elevation := lerpf(-12.0, 62.0, sin(sun_t * PI)) if daylight else -16.0
     sun_light.rotation_degrees = Vector3(-elevation, lerpf(-118.0, 62.0, sun_t), 0.0)

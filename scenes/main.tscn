@@ -1,39 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdcrefw2g3emc"]
+[gd_scene format=3 uid="uid://cdcrefw2g3emc"]
 
 [ext_resource type="Script" uid="uid://r3tf1lqbwvn0" path="res://scripts/game.gd" id="1_game"]
-[ext_resource type="Script" path="res://scripts/coast_map.gd" id="2_world"]
+[ext_resource type="Script" uid="uid://ddi47cbcq1acq" path="res://scripts/coast_map.gd" id="2_world"]
 
 [node name="NeonPursuit" type="Node3D" unique_id=701572690]
 script = ExtResource("1_game")
 
-[node name="World" type="Node3D" parent="."]
+[node name="World" type="Node3D" parent="." unique_id=54322848]
 script = ExtResource("2_world")
+day_duration_seconds = 420.0
+night_duration_seconds = 240.0
 
-[node name="FreeRoamSpawns" type="Node3D" parent="World"]
+[node name="FreeRoamSpawns" type="Node3D" parent="World" unique_id=125677683]
 
-[node name="Coast" type="Marker3D" parent="World/FreeRoamSpawns"]
-position = Vector3(0, 2.15, 470)
-rotation = Vector3(0, 0, 0)
+[node name="Coast" type="Marker3D" parent="World/FreeRoamSpawns" unique_id=2017185499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 470)
 
-[node name="Harbor" type="Marker3D" parent="World/FreeRoamSpawns"]
-position = Vector3(-500, 2.15, 240)
-rotation = Vector3(0, -1.2, 0)
+[node name="Harbor" type="Marker3D" parent="World/FreeRoamSpawns" unique_id=437416189]
+transform = Transform3D(0.3623577, 0, -0.9320391, 0, 1, 0, 0.9320391, 0, 0.3623577, -500, 2.15, 240)
 
-[node name="Canyon" type="Marker3D" parent="World/FreeRoamSpawns"]
-position = Vector3(-370, 2.15, -360)
-rotation = Vector3(0, 2.1, 0)
+[node name="Canyon" type="Marker3D" parent="World/FreeRoamSpawns" unique_id=1331488150]
+transform = Transform3D(-0.50484604, 0, 0.8632094, 0, 1, 0, -0.8632094, 0, -0.50484604, -370, 2.15, -360)
 
-[node name="Airfield" type="Marker3D" parent="World/FreeRoamSpawns"]
-position = Vector3(500, 2.15, 180)
-rotation = Vector3(0, 0.9, 0)
+[node name="Airfield" type="Marker3D" parent="World/FreeRoamSpawns" unique_id=1719325513]
+transform = Transform3D(0.62161, 0, 0.7833269, 0, 1, 0, -0.7833269, 0, 0.62161, 500, 2.15, 180)
 
-[node name="Vehicles" type="Node3D" parent="."]
+[node name="Vehicles" type="Node3D" parent="." unique_id=1710597612]
 
-[node name="Gameplay" type="Node3D" parent="."]
+[node name="Gameplay" type="Node3D" parent="." unique_id=1716977558]
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=2080806890]
 
-[node name="Camera" type="Camera3D" parent="."]
-current = true
-fov = 75.0
+[node name="Camera" type="Camera3D" parent="." unique_id=456081655]
 physics_interpolation_mode = 2
+current = true

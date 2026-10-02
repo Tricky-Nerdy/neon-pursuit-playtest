@@ -30,6 +30,12 @@ jobs:
         run: |
           engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           "$engine" --headless --editor --path . --import --quit
+      - name: Test live editor camera and simulation
+        shell: bash
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --path . --script tests/editor_fly_camera.gd
+          timeout 60s "$engine" --headless --editor --path . --script tests/editor_map.gd
       - name: Test run_all
         shell: bash
         run: |

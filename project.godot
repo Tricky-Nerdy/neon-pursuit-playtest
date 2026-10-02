@@ -32,6 +32,10 @@ window/stretch/scale=1.5
 window/handheld/orientation=6
 window/vsync/vsync_mode=0
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/live_editor_camera/plugin.cfg")
+
 [input]
 
 accelerate={

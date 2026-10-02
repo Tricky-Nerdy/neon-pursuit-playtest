@@ -115,3 +115,11 @@ This is a playable prototype and playtest project, not a finished commercial rel
 Open `scenes/main.tscn` in Godot’s 3D editor. The World now generates the same terrain, roads, and scenery in the editor, with an animated day/night cycle and four racers running the same AI and craft driving model as gameplay, so the `World/FreeRoamSpawns` markers can be positioned against the actual map without running the game. Generated geometry and editor simulation racers are transient and are not saved into the scene; edit the spawn markers normally. Reopen the scene after pulling this change.
 
 Editor regression check: `godot --headless --editor --path . --script tests/editor_map.gd`.
+
+### Live editor camera
+
+After pulling, reopen the project and open `scenes/main.tscn` in the **3D** workspace. The enabled **Neon Pursuit Live Camera** plugin adds **Live fly camera**, **View racers**, and **Follow racer** to the 3D toolbar. **View racers** starts the camera beside the first simulated racer. **Follow racer** tracks that racer until you press RMB to navigate.
+
+With **Live fly camera** enabled, hold **RMB** and use **WASD** to fly, **Q/E** down/up, **Shift** for faster movement, and the mouse wheel to adjust speed. **Escape** or toggling the button off restores the native editor view. This controls the main editor viewport while the tool simulation runs; no Play window is needed. The temporary render camera is owned by the plugin and never saved into the scene. Other split viewports keep their native views. Node selection is paused in the controlled viewport until you exit the live camera.
+
+Camera movement regression: `godot --headless --path . --script tests/editor_fly_camera.gd`. Also run the existing `tests/editor_map.gd` editor regression. The movement test covers camera-relative travel, diagonal normalization, fast vertical movement, pitch limits, and racer framing/follow poses; graphical viewport attachment and input forwarding still need an actual editor smoke test.

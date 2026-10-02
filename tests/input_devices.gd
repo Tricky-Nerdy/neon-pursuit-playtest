@@ -46,7 +46,9 @@ func _run() -> void:
     version_lines.compile("(?m)^config/(version|map_version)=.*\\n")
     current_settings = version_lines.sub(current_settings, "", true)
     uploaded_settings = version_lines.sub(uploaded_settings, "", true)
-    current_settings = current_settings.replace('[editor_plugins]\\n\\nenabled=PackedStringArray("res://addons/live_editor_camera/plugin.cfg")\\n\\n', "")
+    var editor_section := RegEx.new()
+    editor_section.compile("(?ms)^\\[editor_plugins\\]\\n.*?(?=^\\[|\\z)")
+    current_settings = editor_section.sub(current_settings, "", true)
     if current_settings != uploaded_settings:
         var actual_lines := current_settings.split("\n")
         var expected_lines := uploaded_settings.split("\n")

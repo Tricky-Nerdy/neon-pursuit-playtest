@@ -35,6 +35,11 @@ jobs:
         run: |
           engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           "$engine" --headless --path . --fixed-fps 60 --script "tests/run_all.gd"
+      - name: Test settings, radio and rearview
+        run: |
+          engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$engine" --headless --path . --script tests/settings_radio.gd
+          "$engine" --headless --path . --script tests/rear_mirror.gd
       - name: Test input_devices
         shell: bash
         run: |

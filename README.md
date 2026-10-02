@@ -53,6 +53,10 @@ Choose Coast, Harbor, Canyon or Airfield. Events have levels, medals and saved r
 
 Touch, keyboard, mouse, and gamepad input are supported. Android is a first-class playtest target; pushes to `main` run the regression suites before Android, Windows, and Linux build jobs are allowed to proceed. The camera follows close behind the craft. The look uses stylized 3D geometry, sky lighting, shadows, emissive road markings and reflective water. The built-in sky environment currently runs a 7-minute daylight and 4-minute night cycle. Real-time global illumination is not currently implemented.
 
+## Settings and radio
+
+The menu’s Settings page saves music volume, VSync, fullscreen, rearview visibility, and touch layout between sessions. F11 and the fullscreen setting stay synchronized. The borderless rearview pauses rendering while hidden. Four radio stations play original locally synthesized looping music; use the menu arrows to switch stations and set music volume to zero to mute. These are instrumental loops, not streamed broadcasts.
+
 ## Version history
 
 The current development build is **v0.6.3**, with **Aurora Bay 5.0**. Game versions track gameplay, rendering and tooling changes; map revisions track the authored world. These are development milestones: this repository currently has **no release tags**. Earlier semantic versions below are retrospective labels, not published releases.

@@ -1,5 +1,6 @@
 @tool
 extends Node3D
+const RadioScript = preload("res://scripts/radio.gd")
 const InputBindings = preload("res://scripts/input_bindings.gd")
 
 const ShipScene = preload("res://scenes/vehicles/hover_ship.tscn")
@@ -52,6 +53,16 @@ var touch_option: Button
 var resume_button: Button
 var main_menu_page: Control
 var events_page: Control
+var settings_page: Control
+var radio_player: AudioStreamPlayer
+var settings_path := "user://settings.cfg"
+var music_volume := 0.5
+var mirror_enabled := true
+var vsync_enabled := true
+var fullscreen_enabled := false
+var mirror_option: Button
+var fullscreen_option: Button
+var vsync_option: Button
 var radio_label: Label
 var radio_index := 0
 var radio_stations := ["AURORA JAZZ","NEON FM","COASTLINE PUNK","NIGHT DRIVE"]
@@ -176,6 +187,11 @@ func _ready() -> void:
 	_make_rivals()
 	_make_gate()
 	_make_ui()
+	radio_player = RadioScript.new()
+	radio_player.name = "Radio"
+	add_child(radio_player)
+	_load_settings()
+	radio_player.tune(radio_index)
 	active_route = coast.curve
 	route_length = coast.length
 	_start_patrols(true)
@@ -712,7 +728,7 @@ func _make_ui() -> void:
 	radio_label.size = Vector2(604,36)
 	radio_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_button("›",Vector2(724,128),Vector2(80,52),func() -> void: _cycle_radio(1),main_menu_page)
-	_button("SETTINGS",Vector2(0,192),Vector2(804,52),_show_settings_placeholder,main_menu_page)
+	_button("SETTINGS",Vector2(0,192),Vector2(804,52),_show_settings,main_menu_page)
 	_button("RESTART",Vector2(0,256),Vector2(804,52),_restart,main_menu_page)
 	_button("EXIT",Vector2(0,320),Vector2(804,52),_exit_game,main_menu_page)
 	touch_option = _button("TOUCH: COMPACT",Vector2(0,384),Vector2(250,34),_cycle_touch_layout,main_menu_page)
@@ -736,6 +752,7 @@ func _make_ui() -> void:
 	_button("BACK",Vector2(0,390),Vector2(250,48),_show_main_menu_page,events_page)
 	_button("SWAP CRAFT",Vector2(554,390),Vector2(250,48),_next_craft,events_page)
 	events_page.visible = false
+	_make_settings_page()
 
 	center_notice = _label(ui,"",Vector2(-400,-315),25)
 	center_notice.anchor_left = 0.5
@@ -754,19 +771,109 @@ func _make_ui() -> void:
 func _show_main_menu_page() -> void:
 	main_menu_page.visible = true
 	events_page.visible = false
+	settings_page.visible = false
 	resume_button.grab_focus()
 
 func _show_events_page() -> void:
 	main_menu_page.visible = false
 	events_page.visible = true
+	settings_page.visible = false
 	route_button.grab_focus()
 
 func _cycle_radio(direction: int) -> void:
 	radio_index = posmod(radio_index + direction, radio_stations.size())
 	radio_label.text = radio_stations[radio_index]
+	radio_player.tune(radio_index)
+	_save_settings()
 
-func _show_settings_placeholder() -> void:
-	_message("SETTINGS — NEXT PLAYTEST PASS",1.5)
+func _make_settings_page() -> void:
+	settings_page = Control.new()
+	settings_page.name = "Settings"
+	settings_page.position = Vector2(28,120)
+	settings_page.size = Vector2(804,460)
+	menu.add_child(settings_page)
+	_label(settings_page,"MUSIC VOLUME",Vector2(0,0),20)
+	var volume := HSlider.new()
+	volume.name = "MusicVolume"
+	volume.position = Vector2(0,42)
+	volume.size = Vector2(804,36)
+	volume.min_value = 0
+	volume.max_value = 1
+	volume.step = 0.05
+	volume.value = music_volume
+	volume.value_changed.connect(_set_music_volume)
+	settings_page.add_child(volume)
+	mirror_option = _button("REARVIEW: ON",Vector2(0,96),Vector2(804,48),_toggle_mirror,settings_page)
+	vsync_option = _button("VSYNC: ON",Vector2(0,156),Vector2(804,48),_toggle_vsync,settings_page)
+	fullscreen_option = _button("FULLSCREEN: OFF",Vector2(0,216),Vector2(804,48),_toggle_fullscreen,settings_page)
+	fullscreen_option.disabled = OS.has_feature("android")
+	_button("TOUCH LAYOUT",Vector2(0,276),Vector2(804,48),_cycle_touch_layout,settings_page)
+	_button("BACK",Vector2(0,348),Vector2(804,48),_show_main_menu_page,settings_page)
+	settings_page.visible = false
+
+func _show_settings() -> void:
+	main_menu_page.visible = false
+	events_page.visible = false
+	settings_page.visible = true
+	settings_page.get_node("MusicVolume").grab_focus()
+
+func _set_music_volume(value: float) -> void:
+	music_volume = value
+	if is_instance_valid(radio_player):
+		radio_player.volume_db = linear_to_db(maxf(value,0.0001))
+		radio_player.stream_paused = value <= 0.0
+	_save_settings()
+
+func _toggle_mirror() -> void:
+	mirror_enabled = not mirror_enabled
+	_apply_settings()
+	_save_settings()
+
+func _toggle_vsync() -> void:
+	vsync_enabled = not vsync_enabled
+	_apply_settings()
+	_save_settings()
+
+func _apply_settings() -> void:
+	rear_mirror.visible = mirror_enabled and not hud_visible
+	rear_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS if rear_mirror.visible else SubViewport.UPDATE_DISABLED
+	mirror_option.text = "REARVIEW: "+("ON" if mirror_enabled else "OFF")
+	vsync_option.text = "VSYNC: "+("ON" if vsync_enabled else "OFF")
+	fullscreen_option.text = "FULLSCREEN: "+("ON" if fullscreen_enabled else "OFF")
+	touch_option.text = "TOUCH: "+touch_layout.to_upper()
+	radio_label.text = radio_stations[radio_index]
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if vsync_enabled else DisplayServer.VSYNC_DISABLED)
+	if not OS.has_feature("android"):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen_enabled else DisplayServer.WINDOW_MODE_WINDOWED)
+	radio_player.volume_db = linear_to_db(maxf(music_volume,0.0001))
+	radio_player.stream_paused = music_volume <= 0.0
+	settings_page.get_node("MusicVolume").set_value_no_signal(music_volume)
+	_refresh_touch_controls()
+
+func _load_settings() -> void:
+	var config := ConfigFile.new()
+	if config.load(settings_path) == OK:
+		music_volume = clampf(float(config.get_value("audio","volume",0.5)),0.0,1.0)
+		radio_index = posmod(int(config.get_value("audio","station",0)),radio_stations.size())
+		mirror_enabled = bool(config.get_value("display","mirror",true))
+		vsync_enabled = bool(config.get_value("display","vsync",true))
+		fullscreen_enabled = bool(config.get_value("display","fullscreen",false))
+		touch_layout = str(config.get_value("controls","touch_layout","compact"))
+		if touch_layout not in ["compact","full"]:
+			touch_layout = "compact"
+	_apply_settings()
+
+func _save_settings() -> void:
+	var config := ConfigFile.new()
+	config.set_value("audio","volume",music_volume)
+	config.set_value("audio","station",radio_index)
+	config.set_value("display","mirror",mirror_enabled)
+	config.set_value("display","vsync",vsync_enabled)
+	config.set_value("display","fullscreen",fullscreen_enabled)
+	config.set_value("controls","touch_layout",touch_layout)
+	var result := config.save(settings_path)
+	if result != OK:
+		telemetry.record("ERROR","settings_save",{"code":result})
 
 func _exit_game() -> void:
 	get_tree().quit()
@@ -825,8 +932,8 @@ func _toggle_hud() -> void:
 func _set_hud_visible(visible_now: bool) -> void:
 	hud_visible = visible_now
 	menu.visible = visible_now
-	rear_mirror.visible = not visible_now
-	rear_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED if visible_now else SubViewport.UPDATE_ALWAYS
+	rear_mirror.visible = mirror_enabled and not visible_now
+	rear_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS if rear_mirror.visible else SubViewport.UPDATE_DISABLED
 	_layout_menu()
 	if visible_now:
 		_show_main_menu_page()
@@ -1009,6 +1116,7 @@ func _cycle_touch_layout() -> void:
 	touch_active = true
 	touch_option.text = "TOUCH: "+touch_layout.to_upper()
 	_refresh_touch_controls()
+	_save_settings()
 
 func _refresh_touch_controls() -> void:
 	if not is_instance_valid(virtual_stick):
@@ -1040,5 +1148,6 @@ func _layout_menu(viewport_size := Vector2.ZERO) -> void:
 func _toggle_fullscreen() -> void:
 	if OS.has_feature("android"):
 		return
-	var current := DisplayServer.window_get_mode()
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if current == DisplayServer.WINDOW_MODE_FULLSCREEN else DisplayServer.WINDOW_MODE_FULLSCREEN)
+	fullscreen_enabled = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
+	_apply_settings()
+	_save_settings()

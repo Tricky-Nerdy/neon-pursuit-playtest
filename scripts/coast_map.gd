@@ -35,9 +35,6 @@ var _world_built := false
 @export_range(30.0, 900.0, 10.0, "suffix:s") var night_duration_seconds := 120.0
 
 func _ready() -> void:
-	# Generated nodes deliberately have no scene owner: preview the live map in
-	# the editor without baking thousands of duplicate nodes into main.tscn.
-	# Re-entering the tree must not append another map or duplicate curve points.
 	if _world_built:
 		return
 	_world_built = true
@@ -62,7 +59,6 @@ func advance_day_night(delta: float) -> void:
 	time_of_day = fmod(time_of_day + delta, cycle_seconds)
 	var daylight := time_of_day < day_duration_seconds
 	var sun_t := (time_of_day / day_duration_seconds) if daylight else ((time_of_day - day_duration_seconds) / night_duration_seconds)
-	# The sun completes a visible arc during day and stays below the horizon at night.
 	var elevation := lerpf(-12.0, 62.0, sin(sun_t * PI)) if daylight else -16.0
 	sun_light.rotation_degrees = Vector3(-elevation, lerpf(-118.0, 62.0, sun_t), 0.0)
 	var warm := clampf(sin(sun_t * PI), 0.0, 1.0) if daylight else 0.0
@@ -80,6 +76,7 @@ func advance_day_night(delta: float) -> void:
 		textured_sky.set_shader_parameter("horizon", sky_material.sky_horizon_color)
 		textured_sky.set_shader_parameter("ground", sky_material.ground_bottom_color)
 		textured_sky.set_shader_parameter("cloud_color", Color(0.09,0.12,0.22).lerp(Color(0.96,0.94,0.88), warm))
+		textured_sky.set_shader_parameter("daylight", warm)
 	var lamps_on := not daylight or warm < 0.18
 	for lamp in street_lights:
 		lamp.visible = lamps_on
@@ -92,7 +89,6 @@ func add_overhang_light(fixture_at: Vector3, yaw: float) -> void:
 		overhang_lamp_material.albedo_color = Color(1.0,0.89,0.68)
 		overhang_lamp_material.emission = Color(1.0,0.82,0.55)
 		overhang_lamp_material.emission_energy_multiplier = 2.0
-	# The housing is 0.4 high. Put the luminous panel and light below it.
 	var panel := box(Vector3(3.4,0.08,0.75), fixture_at + Vector3.DOWN * 0.24, Color.WHITE, yaw)
 	panel.material_override = overhang_lamp_material
 	var lamp := OmniLight3D.new()
@@ -229,7 +225,6 @@ func _batch_boxes() -> void:
 			mesh.set_instance_transform(index,batch.transforms[index])
 		instance.multimesh = mesh
 		instance.material_override = batch.material
-		# Retain CPU transforms for headless geometry review/export.
 		instance.set_meta("review_transforms",batch.transforms)
 		add_child(instance)
 
@@ -244,153 +239,39 @@ func _build_curves() -> void:
 		route.append(curve.sample_baked(length * i / 32.0) + Vector3.UP * 2.15)
 	shortcut.add_point(Vector3(-530,0,-50), Vector3.ZERO, Vector3(130,0,90))
 	shortcut.add_point(Vector3(-180,0,75), Vector3(-110,0,0), Vector3(100,0,0))
-	shortcut.add_point(Vector3(180,0,45), Vector3(-120,0,15), Vector3(130,0,40))
-	shortcut.add_point(Vector3(500,0,180), Vector3(-90,0,-120), Vector3.ZERO)
-
-func sample(distance: float) -> Vector3:
-	return curve.sample_baked(fposmod(distance, length), true) + Vector3.UP * 2.15
-
-func heading_at(distance: float) -> float:
-	var direction := sample(distance + 4.0) - sample(distance)
-	return atan2(-direction.x, -direction.z)
-
-func nearest_distance(at: Vector3) -> float:
-	return curve.get_closest_offset(Vector3(at.x,0,at.z))
-
-func road_distance(at: Vector3) -> float:
-	var flat := Vector3(at.x,0,at.z)
-	return flat.distance_to(closest_road_point(at))
-
-func material(color: Color, emission := false) -> StandardMaterial3D:
-	var key := color.to_html() + str(emission)
-	if materials.has(key):
-		return materials[key]
-	var m := StandardMaterial3D.new()
-	m.albedo_color = color
-	m.roughness = 0.72
-	if emission:
-		m.emission_enabled = true
-		m.emission = color
-		m.emission_energy_multiplier = 1.35
-	materials[key] = m
-	return m
-
-func box(size: Vector3, at: Vector3, color: Color, yaw := 0.0, solid := false, glow := false) -> MeshInstance3D:
-	var node := MeshInstance3D.new()
-	var mesh := BoxMesh.new()
-	mesh.size = size
-	node.mesh = mesh
-	node.material_override = material(color, glow)
-	node.position = at
-	node.rotation.y = yaw
-	add_child(node)
-	if solid:
-		var body := StaticBody3D.new()
-		var collision := CollisionShape3D.new()
-		var shape := BoxShape3D.new()
-		shape.size = size
-		collision.shape = shape
-		body.add_child(collision)
-		body.position = at
-		body.rotation.y = yaw
-		add_child(body)
-	else:
-		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	return node
-
-func _ribbon(path: Curve3D, width: float, height: float, color: Color) -> void:
-	var count := int(path.get_baked_length()/7.0)+1
-	var left := PackedVector3Array()
-	var right := PackedVector3Array()
-	var span := path.get_baked_length()
-	var closed := path.get_point_position(0).distance_to(path.get_point_position(path.point_count-1)) < 0.1
-	for i in count+1:
-		var distance := span*i/count
-		var at := path.sample_baked(distance,true)
-		var before := fposmod(distance-2,span) if closed else maxf(0,distance-2)
-		var after := fposmod(distance+2,span) if closed else minf(span,distance+2)
-		var tangent := (path.sample_baked(after,true)-path.sample_baked(before,true)).normalized()
-		var side := Vector3(tangent.z,0,-tangent.x)*width*0.5
-		at.y = height
-		left.append(at-side)
-		right.append(at+side)
-	var vertices := PackedVector3Array()
-	var normals := PackedVector3Array()
-	for i in count:
-		# Godot front faces wind clockwise viewed from above.
-		for triangle in [[left[i],right[i],left[i+1]],[right[i],right[i+1],left[i+1]]]:
-			# Offset edges can fold inside a tight bend; keep every face visible from above.
-			if (triangle[1]-triangle[0]).cross(triangle[2]-triangle[0]).y > 0:
-				triangle.reverse()
-			for point in triangle:
-				vertices.append(point)
-				normals.append(Vector3.UP)
-	var arrays := []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_NORMAL] = normals
-	var mesh := ArrayMesh.new()
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
-	var instance := MeshInstance3D.new()
-	instance.name = "RoadRibbon%d" % get_child_count()
-	instance.mesh = mesh
-	instance.material_override = material(color)
-	instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	add_child(instance)
-
-func marking_clear_of_junction(path: Curve3D, at: Vector3, yaw: float, marking_length: float) -> bool:
-	var axis := Vector3(sin(yaw), 0, cos(yaw))
-	# Check the whole stripe, not just its center, against every joining road.
-	for index in roads.size():
-		if roads[index] == path:
-			continue
-		for offset in [-marking_length * 0.5, 0.0, marking_length * 0.5]:
-			var point: Vector3 = at + axis * offset
-			point.y = 0.0
-			if point.distance_to(roads[index].get_closest_point(point)) < road_widths[index] * 0.5 + 1.0:
-				return false
-	return true
-
-func _road_marking(path: Curve3D, size: Vector3, at: Vector3, color: Color, yaw: float) -> void:
-	if not marking_clear_of_junction(path, at, yaw, size.z):
-		return
-	box(size, at, color, yaw)
-	road_markings.append({"path":path, "at":at, "yaw":yaw, "length":size.z})
+	shortcut.add_point(Vector3(180,0,45), Vector3(-120,0,15), Vector3(110,0,-15))
+	shortcut.add_point(Vector3(500,0,180), Vector3(-130,0,-90), Vector3.ZERO)
+	for i in 20:
+		road_samples.append(curve.sample_baked(length*i/20.0))
+	for i in 8:
+		road_samples.append(shortcut.sample_baked(shortcut.get_baked_length()*i/8.0))
+	event_sites = [curve.sample_baked(length*0.04),curve.sample_baked(length*0.22),curve.sample_baked(length*0.43),curve.sample_baked(length*0.68)]
 
 func _road(path: Curve3D, width: float, main: bool) -> void:
-	_ribbon(path, width + 8.0, 0.05, Color(0.47,0.55,0.57))
-	_ribbon(path, width, 0.10, Color(0.075,0.11,0.15))
+	var road_length := path.get_baked_length()
+	var steps := int(road_length/14.0)
+	var asphalt := mat(Color(0.07,0.075,0.09),0.78)
+	var edge := mat(Color(0.78,0.82,0.86),0.62)
+	var line := mat(Color(0.0,0.9,0.85),0.36,true)
 	var distance := 0.0
-	while distance < path.get_baked_length():
-		var at := path.sample_baked(distance, true)
-		var direction := (path.sample_baked(minf(distance + 2.0, path.get_baked_length()), true) - at).normalized()
-		var yaw := atan2(-direction.x, -direction.z)
-		var side := Vector3(direction.z,0,-direction.x)
-		road_samples.append(at)
-		_road_marking(path, Vector3(0.24,0.025,6), at + Vector3.UP * 0.14, Color(0.9,0.83,0.63), yaw)
-		for sign_value in [-1.0,1.0]:
-			_road_marking(path, Vector3(0.35,0.035,14), at + side * (width * 0.5 - 1.0) * sign_value + Vector3.UP * 0.15, Color(0.35,0.85,0.91), yaw)
-		if main and int(distance) % 90 < 18:
-			for sign_value in [-1.0,1.0]:
-				var post_at: Vector3 = at + side * (width * 0.5 + 3.0) * sign_value
-				# A post beside this road can still stand inside a joining road.
-				# Include the lamp footprint and keep the junction shoulder clear.
-				if not marking_clear_of_junction(path, post_at, yaw, 0.7):
-					continue
-				box(Vector3(0.5,2.7,0.5), post_at + Vector3.UP * 1.4, Color(0.20,0.30,0.35), yaw)
-				var lamp_at : Vector3 = post_at + Vector3.UP * 2.8
-				box(Vector3(0.7,0.3,0.7), lamp_at, Color(1.0,0.82,0.55), yaw, false, true)
-				var lamp := OmniLight3D.new()
-				lamp.name = "StreetLight%d" % street_lights.size()
-				lamp.position = lamp_at + Vector3.DOWN * 0.15
-				lamp.light_color = Color(1.0,0.78,0.50)
-				lamp.light_energy = 3.2
-				lamp.omni_range = 24.0
-				lamp.omni_attenuation = 1.25
-				lamp.shadow_enabled = false
-				add_child(lamp)
-				street_lights.append(lamp)
-		distance += 18.0
+	var stripe_positions: Array[Vector3] = []
+	for i in steps:
+		var d0 := road_length*i/steps
+		var d1 := road_length*(i+1)/steps
+		var p0 := path.sample_baked(d0,true)
+		var p1 := path.sample_baked(d1,true)
+		var mid := (p0+p1)*0.5 + Vector3.UP*0.06
+		var yaw := atan2(p1.x-p0.x,p1.z-p0.z)
+		box(Vector3(width,0.12,p0.distance_to(p1)+0.7),mid,Color.WHITE,yaw,false,false,asphalt)
+		if not _near_foreign_road_junction(path, mid):
+			for side in [-1,1]:
+				var lateral := Vector3(cos(yaw),0,-sin(yaw))*width*0.45*side
+				box(Vector3(0.34,0.05,p0.distance_to(p1)+0.5),mid+lateral+Vector3.UP*0.08,Color.WHITE,yaw,false,false,edge)
+			if i%2==0:
+				stripe_positions.append(mid+Vector3.UP*0.09)
+				box(Vector3(0.28,0.045,p0.distance_to(p1)*0.55),mid+Vector3.UP*0.09,Color.WHITE,yaw,false,true,line)
+		distance += p0.distance_to(p1)
+	road_markings.append({"road":path,"stripes":stripe_positions})
 	if main:
 		for i in 8:
 			var at := sample(length * (i + 0.45) / 8.0)
@@ -412,37 +293,50 @@ func _environment() -> void:
 	sky_mat.sky_horizon_color = Color(0.75,0.84,0.88)
 	sky_mat.ground_horizon_color = Color(0.60,0.72,0.75)
 	sky_mat.ground_bottom_color = Color(0.17,0.26,0.32)
-	# A seamless noise texture gives the coastal sky soft cloud detail.
+	# Build a seamless panoramic cloud texture in memory. Unlike the old flat
+	# XZ projection, the shader samples it as an equirectangular sky texture so
+	# the detail wraps the full horizon like a conventional textured skybox.
 	var noise := FastNoiseLite.new()
 	noise.seed = 7319
 	noise.frequency = 0.009
 	noise.fractal_octaves = 5
 	var clouds := NoiseTexture2D.new()
-	clouds.width = 1024
+	clouds.width = 2048
 	clouds.height = 1024
 	clouds.seamless = true
 	clouds.noise = noise
 	var sky_shader := Shader.new()
 	sky_shader.code = """shader_type sky;
-uniform sampler2D clouds : repeat_enable, filter_linear_mipmap;
+uniform sampler2D panorama : repeat_enable, filter_linear_mipmap;
 uniform vec4 zenith : source_color;
 uniform vec4 horizon : source_color;
 uniform vec4 ground : source_color;
 uniform vec4 cloud_color : source_color;
+uniform float daylight = 1.0;
+const float PI = 3.14159265359;
 void sky() {
-    float altitude = max(EYEDIR.y, 0.0);
+    vec3 dir = normalize(EYEDIR);
+    float longitude = atan(dir.z, dir.x) / (2.0 * PI) + 0.5;
+    float latitude = asin(clamp(dir.y, -1.0, 1.0)) / PI + 0.5;
+    vec2 uv = vec2(longitude, latitude);
+    float altitude = max(dir.y, 0.0);
     vec3 base = mix(horizon.rgb, zenith.rgb, pow(altitude, 0.45));
-    // Project onto a cloud layer above the viewer: no longitude seam or pole pinch.
-    vec2 uv = EYEDIR.xz / (altitude + 0.18) * 0.14;
-    float detail = texture(clouds, uv).r;
-    float cover = smoothstep(0.49, 0.69, detail);
-    cover *= smoothstep(0.01, 0.16, EYEDIR.y) * 0.78;
-    COLOR = EYEDIR.y >= 0.0 ? mix(base, cloud_color.rgb, cover) : ground.rgb;
+    float detail = texture(panorama, uv).r;
+    float broad = texture(panorama, vec2(uv.x * 0.5 + TIME * 0.0006, uv.y)).r;
+    float cover = smoothstep(0.47, 0.70, mix(detail, broad, 0.35));
+    cover *= smoothstep(-0.02, 0.16, dir.y) * mix(0.32, 0.82, daylight);
+    vec3 upper = mix(base, cloud_color.rgb, cover);
+    COLOR = dir.y >= 0.0 ? upper : ground.rgb;
 }
 """
 	textured_sky = ShaderMaterial.new()
 	textured_sky.shader = sky_shader
-	textured_sky.set_shader_parameter("clouds", clouds)
+	textured_sky.set_shader_parameter("panorama", clouds)
+	textured_sky.set_shader_parameter("zenith", sky_mat.sky_top_color)
+	textured_sky.set_shader_parameter("horizon", sky_mat.sky_horizon_color)
+	textured_sky.set_shader_parameter("ground", sky_mat.ground_bottom_color)
+	textured_sky.set_shader_parameter("cloud_color", Color(0.96,0.94,0.88))
+	textured_sky.set_shader_parameter("daylight", 1.0)
 	sky.sky_material = textured_sky
 	env.sky = sky
 	env.background_mode = Environment.BG_SKY
@@ -463,52 +357,7 @@ void sky() {
 	sun.light_color = Color(1,0.91,0.76)
 	sun.light_energy = 1.35
 	sun.shadow_enabled = true
-	sun.directional_shadow_max_distance = 220
-	sun_light = sun
+	sun.directional_shadow_max_distance = 1200.0
 	add_child(sun)
-	advance_day_night(0.0)
-
-func _island() -> void:
-	box(Vector3(12000,0.2,12000), Vector3(0,-2.5,0), Color(0.04,0.34,0.43))
-	var water := ShaderMaterial.new()
-	var shader := Shader.new()
-	shader.code = """shader_type spatial;
-render_mode cull_disabled;
-varying vec2 water_world_xz;
-void vertex() {
-    water_world_xz = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
-}
-void fragment() {
-    // Broad, low-contrast swells anchored to the world, without a camera-space grid.
-    float swell = sin(dot(water_world_xz, vec2(0.006, 0.003)) + TIME * 0.12);
-    ALBEDO = vec3(0.025, 0.24, 0.30) + vec3(0.008, 0.018, 0.018) * swell;
-    ROUGHNESS = 0.65;
-    METALLIC = 0.05;
-}
-"""
-	water.shader = shader
-	get_child(get_child_count()-1).material_override = water
+	sun_light = sun
 	scenery = Scenery.new()
-	add_child(scenery)
-	scenery.build_terrain(self)
-
-func is_driveable_land(at: Vector3) -> bool:
-	return scenery.is_land(Vector2(at.x,at.z))
-
-func _sign(text_value: String, width: float, at: Vector3, yaw: float) -> void:
-	box(Vector3(width,5,0.5),at,Color(0.045,0.15,0.2),yaw)
-	var label := Label3D.new()
-	label.text = text_value
-	label.font_size = 80
-	label.pixel_size = 0.035
-	label.modulate = Color(0.75,1,0.95)
-	label.position = at + Vector3(sin(yaw),0,cos(yaw))*0.4
-	label.rotation.y = yaw
-	add_child(label)
-
-func _rock_collision(node: Node) -> void:
-	if node is MeshInstance3D:
-		node.create_convex_collision()
-	for child in node.get_children():
-		if child is Node3D and not child is StaticBody3D:
-			_rock_collision(child)

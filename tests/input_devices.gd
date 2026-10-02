@@ -40,10 +40,10 @@ func _run() -> void:
     for rival in game.traffic: rival.set_physics_process(false)
     var current_settings := FileAccess.get_file_as_string("res://project.godot").replace("\r\n", "\n")
     var uploaded_settings := FileAccess.get_file_as_string("res://docs/merge/uploaded_project.godot.txt").replace("\r\n", "\n")
-    # Releases may change version metadata; the live-camera plugin adds one
+    # Release branding/version metadata may change; the live-camera plugin adds one
     # editor-only section. Keep all uploaded gameplay/input/display settings exact.
     var version_lines := RegEx.new()
-    version_lines.compile("(?m)^config/(version|map_version)=.*\\n")
+    version_lines.compile("(?m)^config/(name|version|map_version)=.*\\n")
     current_settings = version_lines.sub(current_settings, "", true)
     uploaded_settings = version_lines.sub(uploaded_settings, "", true)
     var editor_section := RegEx.new()
@@ -56,7 +56,7 @@ func _run() -> void:
             if actual_lines[i] != expected_lines[i]:
                 print("SETTINGS_DIFF line ", i, " actual=", actual_lines[i], " expected=", expected_lines[i])
                 break
-    check(current_settings == uploaded_settings, "uploaded gameplay settings preserved with explicit version and editor-plugin exceptions")
+    check(current_settings == uploaded_settings, "uploaded gameplay settings preserved with explicit release-metadata and editor-plugin exceptions")
     check(not Input.use_accumulated_input,"input events are not accumulated until the render frame")
     check(game.player.CRAFT[0].speed == 62 and game.player.CRAFT[1].speed == 78 and game.player.CRAFT[2].speed == 53,"all three user craft speeds retained")
     game.touch_active = true

@@ -38,8 +38,8 @@ func _run() -> void:
     game._select_mode(0)
     for brain in game.brains: brain.active = false
     for rival in game.traffic: rival.set_physics_process(false)
-    var current_settings := FileAccess.get_file_as_string("res://project.godot")
-    var uploaded_settings := FileAccess.get_file_as_string("res://docs/merge/uploaded_project.godot.txt")
+    var current_settings := FileAccess.get_file_as_string("res://project.godot").replace("\r\n", "\n")
+    var uploaded_settings := FileAccess.get_file_as_string("res://docs/merge/uploaded_project.godot.txt").replace("\r\n", "\n")
     # Releases may change version metadata; the live-camera plugin adds one
     # editor-only section. Keep all uploaded gameplay/input/display settings exact.
     var version_lines := RegEx.new()

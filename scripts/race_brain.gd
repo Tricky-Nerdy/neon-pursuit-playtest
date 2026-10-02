@@ -1,3 +1,4 @@
+@tool
 extends RefCounted
 class_name RaceBrain
 
@@ -165,7 +166,8 @@ func _traffic_gap(pack: Array[Node3D], player: HoverShip) -> float:
     var nearest := INF
     var forward := Vector3(-sin(ship.heading),0,-cos(ship.heading))
     var actors: Array[Node3D] = pack.duplicate()
-    actors.append(player)
+    if player != null and not actors.has(player):
+        actors.append(player)
     for other in actors:
         if other == ship or not other.visible:
             continue
@@ -181,7 +183,8 @@ func _choose_lane(pack: Array[Node3D], player: HoverShip, delta: float, forward:
         var best_lane := lane
         var best_score := -INF
         var actors: Array[Node3D] = pack.duplicate()
-        actors.append(player)
+        if player != null and not actors.has(player):
+            actors.append(player)
         for candidate in [-8.0,0.0,8.0]:
             var score := 0.0
             for other in actors:

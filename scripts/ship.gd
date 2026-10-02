@@ -92,6 +92,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
     if Engine.is_editor_hint():
         return
+    simulate_drive(delta)
+
+func simulate_drive(delta: float) -> void:
     var stats: Dictionary = CRAFT[craft_index]
     var pad_steer := Input.get_axis("pad_left","pad_right") if human_controlled else 0.0
     var steer := clampf(steer_axis + mouse_steer_axis + pad_steer + float(int(input_right or (human_controlled and Input.is_action_pressed("right"))) - int(input_left or (human_controlled and Input.is_action_pressed("left")))), -0.8, 0.8)
@@ -122,8 +125,16 @@ func _physics_process(delta: float) -> void:
     var forward := Vector3(-sin(heading), 0.0, -cos(heading))
     var right_axis := Vector3(cos(heading), 0.0, -sin(heading))
     velocity = forward * forward_speed + right_axis * side_speed
-    move_and_slide()
-    if get_slide_collision_count() > 0:
+    if Engine.is_editor_hint():
+        # The editor does not tick the game physics loop. Move with the same
+        # velocity using an explicit timestep and collision query instead.
+        var contact := move_and_collide(velocity * delta)
+        if contact != null:
+            var impact := maxf(0.0, -forward.dot(contact.get_normal()))
+            forward_speed *= 1.0 - clampf(impact, 0.0, 1.0) * 0.24
+    else:
+        move_and_slide()
+    if not Engine.is_editor_hint() and get_slide_collision_count() > 0:
         var impact := 0.0
         for i in get_slide_collision_count():
             var normal := get_slide_collision(i).get_normal()

@@ -33,12 +33,13 @@ func _run() -> void:
 	var racer: HoverShip = game._editor_racers[0]
 	var before := racer.position
 	var before_time: float = world.time_of_day
-	game._process(1.0)
-	check(racer.position.distance_to(before) > 40.0, "racers move along the map in editor mode")
+	for step in 120:
+		game._process(1.0 / 60.0)
+	check(racer.position.distance_to(before) > 15.0, "racers move along the map in editor mode")
 	check(world.time_of_day > before_time, "day/night clock advances in editor mode")
-	check(world.road_distance(racer.position) < 0.5, "editor racer stays on the road")
-	check(not racer.is_physics_processing() and racer.collision_layer == 0,
-		"editor racers do not run runtime driving physics")
+	check(world.road_distance(racer.position) < 24.0, "editor racer stays on the road")
+	check(not racer.is_physics_processing() and racer.collision_layer == 4,
+		"editor drives craft with explicit fixed simulation steps")
 	world.time_of_day = world.day_duration_seconds + 1.0
 	game._process(0.0)
 	check(world.street_lights[0].visible, "editor night cycle switches street lights on")
@@ -48,7 +49,7 @@ func _run() -> void:
 		"reinitializing does not duplicate editor racers")
 	game.coast = null
 	game._editor_racers.clear()
-	game._editor_offsets.clear()
+	game.brains.clear()
 	game._process(0.0)
 	check(game._editor_racers.size() == 4 and game.get_node("Vehicles").get_child_count() == 4,
 		"editor processing restores preview after script reload without duplicates")
@@ -56,6 +57,8 @@ func _run() -> void:
 	await create_timer(0.2).timeout
 	check(game._editor_racers[0].position.distance_to(automatic_start) > 1.0,
 		"racers animate automatically without directly calling process")
+	check(game.brains.size() == 4 and game.brains[0].race_time > 0.0, "real race brains advance in editor mode")
+	check(racer.forward_speed > 0.0, "shared craft driving model accelerates racers")
 	# Editor-generated geometry must not become saved scene content.
 	var packed := PackedScene.new()
 	check(packed.pack(game) == OK, "preview scene can be saved")

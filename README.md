@@ -112,6 +112,6 @@ This is a playable prototype and playtest project, not a finished commercial rel
 
 ### Editing the map
 
-Open `scenes/main.tscn` in Godot’s 3D editor. The World now generates the same terrain, roads, and scenery in the editor, with an animated day/night cycle and four moving racers, so the `World/FreeRoamSpawns` markers can be positioned against the actual map without running the game. Generated geometry and racers are previews and are not saved into the scene; edit the spawn markers normally. Reopen the scene after pulling this change.
+Open `scenes/main.tscn` in Godot’s 3D editor. The World now generates the same terrain, roads, and scenery in the editor, with an animated day/night cycle and four racers running the same AI and craft driving model as gameplay, so the `World/FreeRoamSpawns` markers can be positioned against the actual map without running the game. Generated geometry and editor simulation racers are transient and are not saved into the scene; edit the spawn markers normally. Reopen the scene after pulling this change.
 
 Editor regression check: `godot --headless --editor --path . --script tests/editor_map.gd`.

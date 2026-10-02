@@ -106,34 +106,42 @@ var gameplay_root: Node3D
 var ui_layer: CanvasLayer
 var free_roam_spawn: Marker3D
 
-# Editor animation uses the real craft visuals and map curves. Runtime physics,
-# player input, UI, telemetry, and progress saves only run when playing the game.
+# Run the same AI and craft driving model in the editing viewport.
+# The editor owns its camera/input; generated simulation nodes remain unsaved.
 var _editor_racers: Array[HoverShip] = []
-var _editor_offsets: Array[float] = []
+var _editor_step_accumulator := 0.0
 
 func _ready_editor_simulation() -> void:
 	coast = get_node_or_null("World") as CoastMap
 	vehicles_root = get_node_or_null("Vehicles") as Node3D
 	if coast == null or vehicles_root == null or not _editor_racers.is_empty():
 		return
-	# Script refreshes can reset fields without rerunning _ready().
 	if not coast._world_built:
 		coast._ready()
+	traffic.clear()
+	brains.clear()
+	rival_distances.clear()
 	for i in 4:
 		var racer_name := "EditorRacer%d" % (i + 1)
 		var racer := vehicles_root.get_node_or_null(racer_name) as HoverShip
-		if racer == null:
+		var fresh := racer == null
+		if fresh:
 			racer = ShipScene.instantiate() as HoverShip
 			racer.name = racer_name
 			racer.human_controlled = false
 			racer.craft_index = i % HoverShip.CRAFT.size()
 			vehicles_root.add_child(racer)
+			racer.reset_to(coast.sample(i * 16.0), coast.heading_at(i * 16.0))
 		racer.set_physics_process(false)
-		racer.collision_layer = 0
-		racer.collision_mask = 0
+		racer.collision_layer = 4
+		racer.collision_mask = 5
 		_editor_racers.append(racer)
-		_editor_offsets.append(coast.length * i / 4.0)
-	_process_editor_simulation(0.0)
+		traffic.append(racer)
+		var brain := BrainScript.new()
+		brain.setup(racer, coast, i)
+		brain.begin(coast.curve, coast.nearest_distance(racer.position), "race", 1)
+		brains.append(brain)
+		rival_distances.append(0.0)
 
 func _process_editor_simulation(delta: float) -> void:
 	if _editor_racers.is_empty():
@@ -141,14 +149,14 @@ func _process_editor_simulation(delta: float) -> void:
 	if not is_instance_valid(coast) or coast.sun_light == null:
 		return
 	coast.advance_day_night(delta)
-	for i in _editor_racers.size():
-		var racer := _editor_racers[i]
-		if not is_instance_valid(racer):
-			continue
-		_editor_offsets[i] = fposmod(_editor_offsets[i] + delta * (55.0 + i * 5.0), coast.length)
-		racer.position = coast.sample(_editor_offsets[i])
-		racer.heading = coast.heading_at(_editor_offsets[i])
-		racer.rotation.y = racer.heading
+	# Fixed steps keep AI/acceleration independent of editor frame rate.
+	_editor_step_accumulator += minf(delta, 0.25)
+	while _editor_step_accumulator >= 1.0 / 60.0:
+		_editor_step_accumulator -= 1.0 / 60.0
+		_move_traffic(1.0 / 60.0)
+		for racer in _editor_racers:
+			if is_instance_valid(racer):
+				racer.simulate_drive(1.0 / 60.0)
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -596,7 +604,8 @@ func _move_traffic(delta: float) -> void:
 			brain.finish_time = event_time
 			telemetry.record("INFO","rival_finish",{"driver":RaceBrain.PROFILES[i].name,"seconds":event_time})
 		if brain.state != brain.last_state:
-			telemetry.record("INFO","ai_state",{"driver":i,"from":brain.last_state,"to":brain.state})
+			if telemetry != null:
+				telemetry.record("INFO","ai_state",{"driver":i,"from":brain.last_state,"to":brain.state})
 			brain.last_state = brain.state
 		if event_active and mode == 4 and player.position.distance_to(traffic[i].position) < 7 and crash_cooldown <= 0:
 			pursuit_heat = minf(100,pursuit_heat+15)

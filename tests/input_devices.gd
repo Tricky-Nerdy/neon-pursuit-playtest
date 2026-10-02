@@ -47,6 +47,13 @@ func _run() -> void:
     current_settings = version_lines.sub(current_settings, "", true)
     uploaded_settings = version_lines.sub(uploaded_settings, "", true)
     current_settings = current_settings.replace('[editor_plugins]\\n\\nenabled=PackedStringArray("res://addons/live_editor_camera/plugin.cfg")\\n\\n', "")
+    if current_settings != uploaded_settings:
+        var actual_lines := current_settings.split("\n")
+        var expected_lines := uploaded_settings.split("\n")
+        for i in mini(actual_lines.size(), expected_lines.size()):
+            if actual_lines[i] != expected_lines[i]:
+                print("SETTINGS_DIFF line ", i, " actual=", actual_lines[i], " expected=", expected_lines[i])
+                break
     check(current_settings == uploaded_settings, "uploaded gameplay settings preserved with explicit version and editor-plugin exceptions")
     check(not Input.use_accumulated_input,"input events are not accumulated until the render frame")
     check(game.player.CRAFT[0].speed == 62 and game.player.CRAFT[1].speed == 78 and game.player.CRAFT[2].speed == 53,"all three user craft speeds retained")

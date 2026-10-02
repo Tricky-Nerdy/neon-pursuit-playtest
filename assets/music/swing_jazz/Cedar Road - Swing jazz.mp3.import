@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bopk2cdnksm4j"
+path="res://.godot/imported/Cedar Road - Swing jazz.mp3-d8a5349f16a85836c7d4e6bd6ef26294.mp3str"
+
+[deps]
+
+source_file="res://assets/music/swing_jazz/Cedar Road - Swing jazz.mp3"
+dest_files=["res://.godot/imported/Cedar Road - Swing jazz.mp3-d8a5349f16a85836c7d4e6bd6ef26294.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

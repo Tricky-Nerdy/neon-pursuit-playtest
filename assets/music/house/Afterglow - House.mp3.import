@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ks8h2cy6bqbk"
+path="res://.godot/imported/Afterglow - House.mp3-ca82f12d3063593bfd1e48ba24ccbe5a.mp3str"
+
+[deps]
+
+source_file="res://assets/music/house/Afterglow - House.mp3"
+dest_files=["res://.godot/imported/Afterglow - House.mp3-ca82f12d3063593bfd1e48ba24ccbe5a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

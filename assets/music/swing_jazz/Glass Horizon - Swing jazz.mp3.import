@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cvullskcjlo5e"
+path="res://.godot/imported/Glass Horizon - Swing jazz.mp3-e1ffebeb6bb768598690d6e4d5c0d313.mp3str"
+
+[deps]
+
+source_file="res://assets/music/swing_jazz/Glass Horizon - Swing jazz.mp3"
+dest_files=["res://.godot/imported/Glass Horizon - Swing jazz.mp3-e1ffebeb6bb768598690d6e4d5c0d313.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

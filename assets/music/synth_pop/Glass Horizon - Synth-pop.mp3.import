@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3jcy2v7dstoj"
+path="res://.godot/imported/Glass Horizon - Synth-pop.mp3-025d24134582124ee9a7dbfe0fc2d6c3.mp3str"
+
+[deps]
+
+source_file="res://assets/music/synth_pop/Glass Horizon - Synth-pop.mp3"
+dest_files=["res://.godot/imported/Glass Horizon - Synth-pop.mp3-025d24134582124ee9a7dbfe0fc2d6c3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

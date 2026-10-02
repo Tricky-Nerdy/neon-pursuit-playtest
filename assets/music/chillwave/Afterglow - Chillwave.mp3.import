@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bkmigosy7wv23"
+path="res://.godot/imported/Afterglow - Chillwave.mp3-7e5112c669794b4250dc24fd0dda94aa.mp3str"
+
+[deps]
+
+source_file="res://assets/music/chillwave/Afterglow - Chillwave.mp3"
+dest_files=["res://.godot/imported/Afterglow - Chillwave.mp3-7e5112c669794b4250dc24fd0dda94aa.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

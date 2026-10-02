@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ca7toistcofgq"
+path="res://.godot/imported/Redline - Acoustic.mp3-aaf16d9b87370048bba14200ef7f2d97.mp3str"
+
+[deps]
+
+source_file="res://assets/music/acoustic/Redline - Acoustic.mp3"
+dest_files=["res://.godot/imported/Redline - Acoustic.mp3-aaf16d9b87370048bba14200ef7f2d97.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

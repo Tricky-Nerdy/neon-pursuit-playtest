@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bm5r4cj3fyu4g"
+path="res://.godot/imported/Redline - Drum and bass.mp3-27701b655374e703a2f266fca917923a.mp3str"
+
+[deps]
+
+source_file="res://assets/music/drum_and_bass/Redline - Drum and bass.mp3"
+dest_files=["res://.godot/imported/Redline - Drum and bass.mp3-27701b655374e703a2f266fca917923a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

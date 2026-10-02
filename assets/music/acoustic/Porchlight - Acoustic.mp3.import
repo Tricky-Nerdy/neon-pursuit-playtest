@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://rfu3m41pqofm"
+path="res://.godot/imported/Porchlight - Acoustic.mp3-5793d8926d63b598c14a756a33482b71.mp3str"
+
+[deps]
+
+source_file="res://assets/music/acoustic/Porchlight - Acoustic.mp3"
+dest_files=["res://.godot/imported/Porchlight - Acoustic.mp3-5793d8926d63b598c14a756a33482b71.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

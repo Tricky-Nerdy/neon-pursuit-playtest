@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bu3ajtk7lqgwd"
+path="res://.godot/imported/Glass Horizon - Americana.mp3-c536243e5a6ec003783714dc74ac4e19.mp3str"
+
+[deps]
+
+source_file="res://assets/music/americana/Glass Horizon - Americana.mp3"
+dest_files=["res://.godot/imported/Glass Horizon - Americana.mp3-c536243e5a6ec003783714dc74ac4e19.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

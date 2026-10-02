@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dcp62pmbva4ob"
+path="res://.godot/imported/Island Dawn - Synth-pop.mp3-71990a1a80f302dea5502886b3b29f8f.mp3str"
+
+[deps]
+
+source_file="res://assets/music/synth_pop/Island Dawn - Synth-pop.mp3"
+dest_files=["res://.godot/imported/Island Dawn - Synth-pop.mp3-71990a1a80f302dea5502886b3b29f8f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

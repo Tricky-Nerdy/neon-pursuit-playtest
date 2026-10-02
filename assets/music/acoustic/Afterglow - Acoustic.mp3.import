@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://byqrsi1kj2kij"
+path="res://.godot/imported/Afterglow - Acoustic.mp3-99a14521c89ace8b2c137f27c6198585.mp3str"
+
+[deps]
+
+source_file="res://assets/music/acoustic/Afterglow - Acoustic.mp3"
+dest_files=["res://.godot/imported/Afterglow - Acoustic.mp3-99a14521c89ace8b2c137f27c6198585.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

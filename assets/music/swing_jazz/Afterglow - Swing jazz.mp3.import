@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://1v6xc0yw2m82"
+path="res://.godot/imported/Afterglow - Swing jazz.mp3-0c41d82f32378a4e83a55ee0e9dd30cf.mp3str"
+
+[deps]
+
+source_file="res://assets/music/swing_jazz/Afterglow - Swing jazz.mp3"
+dest_files=["res://.godot/imported/Afterglow - Swing jazz.mp3-0c41d82f32378a4e83a55ee0e9dd30cf.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

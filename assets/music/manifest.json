@@ -4,7 +4,7 @@
     {
       "title": "Afterglow",
       "genre": "Acoustic",
-      "path": "assets/music/acoustic/afterglow.mp3",
+      "path": "assets/music/acoustic/Afterglow - Acoustic.mp3",
       "duration_seconds": 180.454,
       "bytes": 4338560,
       "sha256": "3fa206f992c7689c218f56a0428bce76c13eb4d3186ffcadec04ea6b18f0833e",
@@ -13,7 +13,7 @@
     {
       "title": "Cedar Road",
       "genre": "Acoustic",
-      "path": "assets/music/acoustic/cedar_road.mp3",
+      "path": "assets/music/acoustic/Cedar Road - Acoustic.mp3",
       "duration_seconds": 130.795,
       "bytes": 3146749,
       "sha256": "ce0bd0f994ab52e6e5929e9c95fcb0f70e9277ec35dd9714be66b7b1c65dd36b",
@@ -22,7 +22,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Acoustic",
-      "path": "assets/music/acoustic/glass_horizon.mp3",
+      "path": "assets/music/acoustic/Glass Horizon - Acoustic.mp3",
       "duration_seconds": 171.442,
       "bytes": 4122266,
       "sha256": "bb6416225dc0020512369dd955c5f46b6d35d0a52e978005e37c884030b74260",
@@ -31,7 +31,7 @@
     {
       "title": "Harbor House",
       "genre": "Acoustic",
-      "path": "assets/music/acoustic/harbor_house.mp3",
+      "path": "assets/music/acoustic/Harbor House - Acoustic.mp3",
       "duration_seconds": 179.331,
       "bytes": 4311601,
       "sha256": "a47ffa58e2e4a3284e25a3c0c45fc26e8959a4a63595e1019c58b9628faf786e",
@@ -40,7 +40,7 @@
     {
       "title": "Island Dawn",
       "genre": "Acoustic",
-      "path": "assets/music/acoustic/island_dawn.mp3",
+      "path": "assets/music/acoustic/Island Dawn - Acoustic.mp3",
       "duration_seconds": 177.398,
       "bytes": 4265208,
       "sha256": "9949dd1305b3d4ad09add527423d7822de5fc4833567c8b2394bb4b82fadf9e6",
@@ -49,7 +49,7 @@
     {
       "title": "Porchlight",
       "genre": "Acoustic",
-      "path": "assets/music/acoustic/porchlight.mp3",
+      "path": "assets/music/acoustic/Porchlight - Acoustic.mp3",
       "duration_seconds": 179.252,
       "bytes": 4309720,
       "sha256": "a420e2a923903a015e13036b214d5791c3cdccbe3909628284ffd70a009f993f",
@@ -58,7 +58,7 @@
     {
       "title": "Redline",
       "genre": "Acoustic",
-      "path": "assets/music/acoustic/redline.mp3",
+      "path": "assets/music/acoustic/Redline - Acoustic.mp3",
       "duration_seconds": 174.002,
       "bytes": 4183706,
       "sha256": "9322d8ce9d8fdc9912331a0cd8e1105933b869332fb5eff19d4395081dd4b8f5",
@@ -67,7 +67,7 @@
     {
       "title": "Afterglow",
       "genre": "Americana",
-      "path": "assets/music/americana/afterglow.mp3",
+      "path": "assets/music/americana/Afterglow - Americana.mp3",
       "duration_seconds": 174.08,
       "bytes": 4185587,
       "sha256": "efcf8428cec99c3b7b4b39e6c43d3ff01deed3e1ea3c0af0866fc6cfdf46ef32",
@@ -76,7 +76,7 @@
     {
       "title": "Cedar Road",
       "genre": "Americana",
-      "path": "assets/music/americana/cedar_road.mp3",
+      "path": "assets/music/americana/Cedar Road - Americana.mp3",
       "duration_seconds": 177.084,
       "bytes": 4257685,
       "sha256": "7cc159be2f6ab79b5ad9ac7a9fd5d1d72fef829f18143b908b66fd6a74abcd54",
@@ -85,7 +85,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Americana",
-      "path": "assets/music/americana/glass_horizon.mp3",
+      "path": "assets/music/americana/Glass Horizon - Americana.mp3",
       "duration_seconds": 170.893,
       "bytes": 4109100,
       "sha256": "d8a82924abb6f58c6096c2ed91b9f9de9bd33a550ff749234717f2908b0b5a8c",
@@ -94,7 +94,7 @@
     {
       "title": "Harbor House",
       "genre": "Americana",
-      "path": "assets/music/americana/harbor_house.mp3",
+      "path": "assets/music/americana/Harbor House - Americana.mp3",
       "duration_seconds": 173.714,
       "bytes": 4176809,
       "sha256": "1a976e0ea109db890f2bd1793a69cfd5504c1a0ed79d282323730302988bba07",
@@ -103,7 +103,7 @@
     {
       "title": "Island Dawn",
       "genre": "Americana",
-      "path": "assets/music/americana/island_dawn.mp3",
+      "path": "assets/music/americana/Island Dawn - Americana.mp3",
       "duration_seconds": 175.255,
       "bytes": 4213799,
       "sha256": "384c004b0ff79ee1d5e52e914514720d5e6d7c85e1e78498fa644f2921155981",
@@ -112,7 +112,7 @@
     {
       "title": "Porchlight",
       "genre": "Americana",
-      "path": "assets/music/americana/porchlight.mp3",
+      "path": "assets/music/americana/Porchlight - Americana.mp3",
       "duration_seconds": 176.64,
       "bytes": 4247027,
       "sha256": "c15662f492ca9e57e0a20b1656abea40bf69324d05314413b5052653c61f1134",
@@ -121,7 +121,7 @@
     {
       "title": "Redline",
       "genre": "Americana",
-      "path": "assets/music/americana/redline.mp3",
+      "path": "assets/music/americana/Redline - Americana.mp3",
       "duration_seconds": 179.905,
       "bytes": 4325394,
       "sha256": "967a7330de193372f624891c6fc2b26cadc345520b1a6ac8fd7d92eb79b81d38",
@@ -130,7 +130,7 @@
     {
       "title": "Afterglow",
       "genre": "Chillwave",
-      "path": "assets/music/chillwave/afterglow.mp3",
+      "path": "assets/music/chillwave/Afterglow - Chillwave.mp3",
       "duration_seconds": 157.91,
       "bytes": 3797512,
       "sha256": "152de8f88f71894fc453a6f82dfa1b709c9f6b64d9c4ab83987220e941c6d3ba",
@@ -139,7 +139,7 @@
     {
       "title": "Cedar Road",
       "genre": "Chillwave",
-      "path": "assets/music/chillwave/cedar_road.mp3",
+      "path": "assets/music/chillwave/Cedar Road - Chillwave.mp3",
       "duration_seconds": 179.383,
       "bytes": 4312855,
       "sha256": "5518ae57c2467d675aa7a014b1ac0bcb15469998bf76d23d4914b93862d4b682",
@@ -148,7 +148,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Chillwave",
-      "path": "assets/music/chillwave/glass_horizon.mp3",
+      "path": "assets/music/chillwave/Glass Horizon - Chillwave.mp3",
       "duration_seconds": 167.393,
       "bytes": 4025090,
       "sha256": "38eaa5e3ddac8cbf930e754ae1ddac6f84ca67033e75f95b649593389f13e078",
@@ -157,7 +157,7 @@
     {
       "title": "Harbor House",
       "genre": "Chillwave",
-      "path": "assets/music/chillwave/harbor_house.mp3",
+      "path": "assets/music/chillwave/Harbor House - Chillwave.mp3",
       "duration_seconds": 162.403,
       "bytes": 3905345,
       "sha256": "78f1b8500b28b20bbbfab35b5b0f59ad95ee424e076c50adacec72028e7b9797",
@@ -166,7 +166,7 @@
     {
       "title": "Island Dawn",
       "genre": "Chillwave",
-      "path": "assets/music/chillwave/island_dawn.mp3",
+      "path": "assets/music/chillwave/Island Dawn - Chillwave.mp3",
       "duration_seconds": 175.36,
       "bytes": 4216307,
       "sha256": "2df85ecc74e6925a1cf5da53d281f56e1f1709a3ebfd4d18b0873f133cc10a47",
@@ -175,7 +175,7 @@
     {
       "title": "Porchlight",
       "genre": "Chillwave",
-      "path": "assets/music/chillwave/porchlight.mp3",
+      "path": "assets/music/chillwave/Porchlight - Chillwave.mp3",
       "duration_seconds": 160.183,
       "bytes": 3852055,
       "sha256": "94cb8c253147e88166151e62e802f6836efde356af393bd78d6090ef041062a2",
@@ -184,7 +184,7 @@
     {
       "title": "Redline",
       "genre": "Chillwave",
-      "path": "assets/music/chillwave/redline.mp3",
+      "path": "assets/music/chillwave/Redline - Chillwave.mp3",
       "duration_seconds": 175.125,
       "bytes": 4210664,
       "sha256": "6438667a8ab9d496ba6bdc739d57daf8f1ffe4f8be1a615d109eba29f5b30ed7",
@@ -193,7 +193,7 @@
     {
       "title": "Afterglow",
       "genre": "Drum and bass",
-      "path": "assets/music/drum_and_bass/afterglow.mp3",
+      "path": "assets/music/drum_and_bass/Afterglow - Drum and bass.mp3",
       "duration_seconds": 175.726,
       "bytes": 4225084,
       "sha256": "61366ea8a1fc19435909567eec471374de9f5857ab1cbafcc86a90e15a2de694",
@@ -202,7 +202,7 @@
     {
       "title": "Cedar Road",
       "genre": "Drum and bass",
-      "path": "assets/music/drum_and_bass/cedar_road.mp3",
+      "path": "assets/music/drum_and_bass/Cedar Road - Drum and bass.mp3",
       "duration_seconds": 175.203,
       "bytes": 4212545,
       "sha256": "4bc528de88489f4915bec0114ea9ac712278514a866557458719d5cbe688f09a",
@@ -211,7 +211,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Drum and bass",
-      "path": "assets/music/drum_and_bass/glass_horizon.mp3",
+      "path": "assets/music/drum_and_bass/Glass Horizon - Drum and bass.mp3",
       "duration_seconds": 177.58,
       "bytes": 4269596,
       "sha256": "ec75aff9e88a46215adabfa55de6767ada7b79388eaad767ad034d6dcdcdf932",
@@ -220,7 +220,7 @@
     {
       "title": "Harbor House",
       "genre": "Drum and bass",
-      "path": "assets/music/drum_and_bass/harbor_house.mp3",
+      "path": "assets/music/drum_and_bass/Harbor House - Drum and bass.mp3",
       "duration_seconds": 179.958,
       "bytes": 4326648,
       "sha256": "dfb7de7c8e7e49dcc6e456a9792f75321e2750e024f929db86d133fb042d59d2",
@@ -229,7 +229,7 @@
     {
       "title": "Island Dawn",
       "genre": "Drum and bass",
-      "path": "assets/music/drum_and_bass/island_dawn.mp3",
+      "path": "assets/music/drum_and_bass/Island Dawn - Drum and bass.mp3",
       "duration_seconds": 177.267,
       "bytes": 4262073,
       "sha256": "5c96971ca88f7aff77153a0bc89bf7e0e6319e9bd30ef4fd67c22753ab63a319",
@@ -238,7 +238,7 @@
     {
       "title": "Porchlight",
       "genre": "Drum and bass",
-      "path": "assets/music/drum_and_bass/porchlight.mp3",
+      "path": "assets/music/drum_and_bass/Porchlight - Drum and bass.mp3",
       "duration_seconds": 174.184,
       "bytes": 4188094,
       "sha256": "efa7f6fd82264dd3a7ebbd053e12faf0dfac7ae37e9973bb02f16b3c9ef3098f",
@@ -247,7 +247,7 @@
     {
       "title": "Redline",
       "genre": "Drum and bass",
-      "path": "assets/music/drum_and_bass/redline.mp3",
+      "path": "assets/music/drum_and_bass/Redline - Drum and bass.mp3",
       "duration_seconds": 175.804,
       "bytes": 4226965,
       "sha256": "9bae2fc471f0fa200b0b499b5140847fdaa0c59ff336b84f88d91eb24cf9db39",
@@ -256,7 +256,7 @@
     {
       "title": "Afterglow",
       "genre": "Folk",
-      "path": "assets/music/folk/afterglow.mp3",
+      "path": "assets/music/folk/Afterglow - Folk.mp3",
       "duration_seconds": 180.14,
       "bytes": 4331036,
       "sha256": "eefc2ce26dd4958a646af41aa29e508073dae4b35314f9569bf9763731290675",
@@ -265,7 +265,7 @@
     {
       "title": "Cedar Road",
       "genre": "Folk",
-      "path": "assets/music/folk/cedar_road.mp3",
+      "path": "assets/music/folk/Cedar Road - Folk.mp3",
       "duration_seconds": 158.197,
       "bytes": 3804408,
       "sha256": "c055e4edc000c2ae83b1f9edfd86abbbb9387283c544b94e84d1cbb2d40a7ac9",
@@ -274,7 +274,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Folk",
-      "path": "assets/music/folk/glass_horizon.mp3",
+      "path": "assets/music/folk/Glass Horizon - Folk.mp3",
       "duration_seconds": 159.948,
       "bytes": 3846413,
       "sha256": "8fb7fc29e3f7bba925cdb413433adb15af65cc7397017b3f020161c6fd71d371",
@@ -283,7 +283,7 @@
     {
       "title": "Harbor House",
       "genre": "Folk",
-      "path": "assets/music/folk/harbor_house.mp3",
+      "path": "assets/music/folk/Harbor House - Folk.mp3",
       "duration_seconds": 160.94,
       "bytes": 3870236,
       "sha256": "b75e8023761863f889454c4ee70ca6a756eea69a24a1bba53fdb5ba65257ea72",
@@ -292,7 +292,7 @@
     {
       "title": "Island Dawn",
       "genre": "Folk",
-      "path": "assets/music/folk/island_dawn.mp3",
+      "path": "assets/music/folk/Island Dawn - Folk.mp3",
       "duration_seconds": 179.984,
       "bytes": 4327275,
       "sha256": "40f89a4c597bdd3f3371358ca0e7ff4f1030b04ed8c8557442d5c552453c519b",
@@ -301,7 +301,7 @@
     {
       "title": "Porchlight",
       "genre": "Folk",
-      "path": "assets/music/folk/porchlight.mp3",
+      "path": "assets/music/folk/Porchlight - Folk.mp3",
       "duration_seconds": 158.354,
       "bytes": 3808169,
       "sha256": "838704664c32e93ba4e66fb1fc108c0c5b4474b88fefa7647648d770c310b6ce",
@@ -310,7 +310,7 @@
     {
       "title": "Redline",
       "genre": "Folk",
-      "path": "assets/music/folk/redline.mp3",
+      "path": "assets/music/folk/Redline - Folk.mp3",
       "duration_seconds": 154.854,
       "bytes": 3724160,
       "sha256": "8372032b29e0539d1fe4b0b95dca83dbe8a73848b1455c2b378d103dba799f2b",
@@ -319,7 +319,7 @@
     {
       "title": "Afterglow",
       "genre": "House",
-      "path": "assets/music/house/afterglow.mp3",
+      "path": "assets/music/house/Afterglow - House.mp3",
       "duration_seconds": 176.144,
       "bytes": 4235115,
       "sha256": "6a6b0811ad098cf7b9a171021512d26d4a3ceb074224a1347a684680ae1046dc",
@@ -328,7 +328,7 @@
     {
       "title": "Cedar Road",
       "genre": "House",
-      "path": "assets/music/house/cedar_road.mp3",
+      "path": "assets/music/house/Cedar Road - House.mp3",
       "duration_seconds": 173.636,
       "bytes": 4174929,
       "sha256": "93e0343428346d7b052763f6fe659a79d2a5c2f41618464416be950fe60b17c6",
@@ -337,7 +337,7 @@
     {
       "title": "Glass Horizon",
       "genre": "House",
-      "path": "assets/music/house/glass_horizon.mp3",
+      "path": "assets/music/house/Glass Horizon - House.mp3",
       "duration_seconds": 175.909,
       "bytes": 4229472,
       "sha256": "481beb8de0bbab685b88bc112b2070670b86c8e618ac10f90e22bdd0a8a5b131",
@@ -346,7 +346,7 @@
     {
       "title": "Harbor House",
       "genre": "House",
-      "path": "assets/music/house/harbor_house.mp3",
+      "path": "assets/music/house/Harbor House - House.mp3",
       "duration_seconds": 163.971,
       "bytes": 3942961,
       "sha256": "5a24279bcaed0d4b2f98c01143ac00e0f803ae4502ba065add588db77aa84905",
@@ -355,7 +355,7 @@
     {
       "title": "Island Dawn",
       "genre": "House",
-      "path": "assets/music/house/island_dawn.mp3",
+      "path": "assets/music/house/Island Dawn - House.mp3",
       "duration_seconds": 167.863,
       "bytes": 4036375,
       "sha256": "21b5217bcbf0bcf5af59b4b29e787aa0e85ca233d32c7f39d21c10d52f6badc3",
@@ -364,7 +364,7 @@
     {
       "title": "Porchlight",
       "genre": "House",
-      "path": "assets/music/house/porchlight.mp3",
+      "path": "assets/music/house/Porchlight - House.mp3",
       "duration_seconds": 145.972,
       "bytes": 3511000,
       "sha256": "57c547503be2ef52925fce77779bc108054b47e1924b7972a397429107898032",
@@ -373,7 +373,7 @@
     {
       "title": "Redline",
       "genre": "House",
-      "path": "assets/music/house/redline.mp3",
+      "path": "assets/music/house/Redline - House.mp3",
       "duration_seconds": 178.939,
       "bytes": 4302197,
       "sha256": "07fe833b3822e3a2efc96017fe61b16e0e6949e3d9fafdb1b0652839c8755704",
@@ -382,7 +382,7 @@
     {
       "title": "Afterglow",
       "genre": "Island reggae",
-      "path": "assets/music/island_reggae/afterglow.mp3",
+      "path": "assets/music/island_reggae/Afterglow - Island reggae.mp3",
       "duration_seconds": 177.006,
       "bytes": 4255804,
       "sha256": "5c8579e061bf5c5d2f95b7b5b4e6c3eed01f3bae88bfcb96d20d6790747c01ce",
@@ -391,7 +391,7 @@
     {
       "title": "Cedar Road",
       "genre": "Island reggae",
-      "path": "assets/music/island_reggae/cedar_road.mp3",
+      "path": "assets/music/island_reggae/Cedar Road - Island reggae.mp3",
       "duration_seconds": 172.722,
       "bytes": 4152986,
       "sha256": "d942be8a15803cd6a228e9eab9647beb1400440d0062214520134f5a1e03eb75",
@@ -400,7 +400,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Island reggae",
-      "path": "assets/music/island_reggae/glass_horizon.mp3",
+      "path": "assets/music/island_reggae/Glass Horizon - Island reggae.mp3",
       "duration_seconds": 182.282,
       "bytes": 4382445,
       "sha256": "2db51a0e8a6e65bea535971247ac5600b053fc84e7a144728bc913b069e9bc1a",
@@ -409,7 +409,7 @@
     {
       "title": "Harbor House",
       "genre": "Island reggae",
-      "path": "assets/music/island_reggae/harbor_house.mp3",
+      "path": "assets/music/island_reggae/Harbor House - Island reggae.mp3",
       "duration_seconds": 176.797,
       "bytes": 4250788,
       "sha256": "af06e0784d8f118df4a71d7ac1bff16263e0490c563c8784e52bd91700c6ac87",
@@ -418,7 +418,7 @@
     {
       "title": "Island Dawn",
       "genre": "Island reggae",
-      "path": "assets/music/island_reggae/island_dawn.mp3",
+      "path": "assets/music/island_reggae/Island Dawn - Island reggae.mp3",
       "duration_seconds": 175.491,
       "bytes": 4219441,
       "sha256": "9abc6fa63a6c014f751b1b08a61317d90de223ce95d38d20ca03fba06e03f6ea",
@@ -427,7 +427,7 @@
     {
       "title": "Porchlight",
       "genre": "Island reggae",
-      "path": "assets/music/island_reggae/porchlight.mp3",
+      "path": "assets/music/island_reggae/Porchlight - Island reggae.mp3",
       "duration_seconds": 176.692,
       "bytes": 4248280,
       "sha256": "73f6d4411eab3bc4769aa40b0b10654c5df6c1e7cd3446aa8975b9b5498e7922",
@@ -436,7 +436,7 @@
     {
       "title": "Redline",
       "genre": "Island reggae",
-      "path": "assets/music/island_reggae/redline.mp3",
+      "path": "assets/music/island_reggae/Redline - Island reggae.mp3",
       "duration_seconds": 174.367,
       "bytes": 4192483,
       "sha256": "adacb58ffaa6a8b4a744682650cbf696a2c666e7056f6dbb6f5fc4cfcd0383b5",
@@ -445,7 +445,7 @@
     {
       "title": "Afterglow",
       "genre": "Punk rock",
-      "path": "assets/music/punk_rock/afterglow.mp3",
+      "path": "assets/music/punk_rock/Afterglow - Punk rock.mp3",
       "duration_seconds": 163.004,
       "bytes": 3919765,
       "sha256": "830b6b935c2f50535492230c54c0e9bc791f61ec486761ce0be55aa263b61948",
@@ -454,7 +454,7 @@
     {
       "title": "Cedar Road",
       "genre": "Punk rock",
-      "path": "assets/music/punk_rock/cedar_road.mp3",
+      "path": "assets/music/punk_rock/Cedar Road - Punk rock.mp3",
       "duration_seconds": 183.04,
       "bytes": 4400627,
       "sha256": "eee4117499d94d320bd7640fabedbc25cc84ac6bac61869dcd6370deabb8c0d5",
@@ -463,7 +463,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Punk rock",
-      "path": "assets/music/punk_rock/glass_horizon.mp3",
+      "path": "assets/music/punk_rock/Glass Horizon - Punk rock.mp3",
       "duration_seconds": 175.778,
       "bytes": 4226338,
       "sha256": "df4742e27c0afbe534ce5e7dc456ec4695bb720b9415d046d364da6620d877fd",
@@ -472,7 +472,7 @@
     {
       "title": "Harbor House",
       "genre": "Punk rock",
-      "path": "assets/music/punk_rock/harbor_house.mp3",
+      "path": "assets/music/punk_rock/Harbor House - Punk rock.mp3",
       "duration_seconds": 178.625,
       "bytes": 4294674,
       "sha256": "e16c73e7695885547aff4d02e99f9933e4d55b83fa45e11325aea1f6f2136d43",
@@ -481,7 +481,7 @@
     {
       "title": "Island Dawn",
       "genre": "Punk rock",
-      "path": "assets/music/punk_rock/island_dawn.mp3",
+      "path": "assets/music/punk_rock/Island Dawn - Punk rock.mp3",
       "duration_seconds": 177.554,
       "bytes": 4268969,
       "sha256": "dbc550d491ee59fafbee310278decf79bfbe3a1c1c1c1e16e28218123f358edb",
@@ -490,7 +490,7 @@
     {
       "title": "Porchlight",
       "genre": "Punk rock",
-      "path": "assets/music/punk_rock/porchlight.mp3",
+      "path": "assets/music/punk_rock/Porchlight - Punk rock.mp3",
       "duration_seconds": 177.528,
       "bytes": 4268343,
       "sha256": "c935d94cdfbdc65d4163ea08b38cf6a578817088bac700ee0a6169e495b7c4bb",
@@ -499,7 +499,7 @@
     {
       "title": "Redline",
       "genre": "Punk rock",
-      "path": "assets/music/punk_rock/redline.mp3",
+      "path": "assets/music/punk_rock/Redline - Punk rock.mp3",
       "duration_seconds": 177.084,
       "bytes": 4257685,
       "sha256": "639ab9a4a75775a534476bf8e7c93906820e6170d225ef459dd034aaa2723d09",
@@ -508,7 +508,7 @@
     {
       "title": "Afterglow",
       "genre": "Swing jazz",
-      "path": "assets/music/swing_jazz/afterglow.mp3",
+      "path": "assets/music/swing_jazz/Afterglow - Swing jazz.mp3",
       "duration_seconds": 128.94,
       "bytes": 3102236,
       "sha256": "1ec44bd859443878fc8dc1127739346590d8eda93ee249f2ba3ddb7910eb9b55",
@@ -517,7 +517,7 @@
     {
       "title": "Cedar Road",
       "genre": "Swing jazz",
-      "path": "assets/music/swing_jazz/cedar_road.mp3",
+      "path": "assets/music/swing_jazz/Cedar Road - Swing jazz.mp3",
       "duration_seconds": 179.383,
       "bytes": 4312855,
       "sha256": "3018de49bcbd5f7d0911b8ba1849a256224576d031767a9a96e44911081a022a",
@@ -526,7 +526,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Swing jazz",
-      "path": "assets/music/swing_jazz/glass_horizon.mp3",
+      "path": "assets/music/swing_jazz/Glass Horizon - Swing jazz.mp3",
       "duration_seconds": 175.491,
       "bytes": 4219441,
       "sha256": "39dbfc2c176f5eb7a4cac0c9c7f8fefcec2071612a2289b10eda67540579ad53",
@@ -535,7 +535,7 @@
     {
       "title": "Harbor House",
       "genre": "Swing jazz",
-      "path": "assets/music/swing_jazz/harbor_house.mp3",
+      "path": "assets/music/swing_jazz/Harbor House - Swing jazz.mp3",
       "duration_seconds": 181.316,
       "bytes": 4359249,
       "sha256": "0cefc275e6ae4f462a1c697ca634a366650a9a535b75bfdce7c93f07dfe03f16",
@@ -544,7 +544,7 @@
     {
       "title": "Island Dawn",
       "genre": "Swing jazz",
-      "path": "assets/music/swing_jazz/island_dawn.mp3",
+      "path": "assets/music/swing_jazz/Island Dawn - Swing jazz.mp3",
       "duration_seconds": 168.098,
       "bytes": 4042018,
       "sha256": "d7ef698b3dec9e610b9dd76b6c35f90e3fbe5ac9ca18ea1d5d4b680905e6c864",
@@ -553,7 +553,7 @@
     {
       "title": "Porchlight",
       "genre": "Swing jazz",
-      "path": "assets/music/swing_jazz/porchlight.mp3",
+      "path": "assets/music/swing_jazz/Porchlight - Swing jazz.mp3",
       "duration_seconds": 177.006,
       "bytes": 4255804,
       "sha256": "4501c16e749d958a9f361311db5a07e84979581eabac89ee796de0902baa260c",
@@ -562,7 +562,7 @@
     {
       "title": "Redline",
       "genre": "Swing jazz",
-      "path": "assets/music/swing_jazz/redline.mp3",
+      "path": "assets/music/swing_jazz/Redline - Swing jazz.mp3",
       "duration_seconds": 175.752,
       "bytes": 4225711,
       "sha256": "e09f3542c1c30638260c9f8f6d1156dc5662040d7cdc4806538f63b233481978",
@@ -571,7 +571,7 @@
     {
       "title": "Afterglow",
       "genre": "Synth-pop",
-      "path": "assets/music/synth_pop/afterglow.mp3",
+      "path": "assets/music/synth_pop/Afterglow - Synth-pop.mp3",
       "duration_seconds": 181.368,
       "bytes": 4360503,
       "sha256": "13b698f69e363efb71c536a7ef0f065070a72aa39f3d9f0c21856529b3398bcf",
@@ -580,7 +580,7 @@
     {
       "title": "Cedar Road",
       "genre": "Synth-pop",
-      "path": "assets/music/synth_pop/cedar_road.mp3",
+      "path": "assets/music/synth_pop/Cedar Road - Synth-pop.mp3",
       "duration_seconds": 170.971,
       "bytes": 4110981,
       "sha256": "1e5fe349ac2cf453458378ce8bd7b746e78a5ad98f372d22d52ccc9c88f4f280",
@@ -589,7 +589,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Synth-pop",
-      "path": "assets/music/synth_pop/glass_horizon.mp3",
+      "path": "assets/music/synth_pop/Glass Horizon - Synth-pop.mp3",
       "duration_seconds": 176.875,
       "bytes": 4252669,
       "sha256": "5a844fc996cd42793001229b1a77c51a8ab45dab705996b6ad5a093789b0f402",
@@ -598,7 +598,7 @@
     {
       "title": "Harbor House",
       "genre": "Synth-pop",
-      "path": "assets/music/synth_pop/harbor_house.mp3",
+      "path": "assets/music/synth_pop/Harbor House - Synth-pop.mp3",
       "duration_seconds": 168.464,
       "bytes": 4050795,
       "sha256": "96a6b4067420994cbf7d93ed3cacfeeb12563b656eabf54cc168dfb7736c997e",
@@ -607,7 +607,7 @@
     {
       "title": "Island Dawn",
       "genre": "Synth-pop",
-      "path": "assets/music/synth_pop/island_dawn.mp3",
+      "path": "assets/music/synth_pop/Island Dawn - Synth-pop.mp3",
       "duration_seconds": 174.263,
       "bytes": 4189975,
       "sha256": "228a97412a4ccc8ce0a70c730b9b7bd2cfed9adbf92183325dd584319a965972",
@@ -616,7 +616,7 @@
     {
       "title": "Porchlight",
       "genre": "Synth-pop",
-      "path": "assets/music/synth_pop/porchlight.mp3",
+      "path": "assets/music/synth_pop/Porchlight - Synth-pop.mp3",
       "duration_seconds": 177.215,
       "bytes": 4260819,
       "sha256": "9d10d713fdcf2a8774beb335d38a2b676c40682581bb70228b6f5951139054e7",
@@ -625,7 +625,7 @@
     {
       "title": "Redline",
       "genre": "Synth-pop",
-      "path": "assets/music/synth_pop/redline.mp3",
+      "path": "assets/music/synth_pop/Redline - Synth-pop.mp3",
       "duration_seconds": 174.707,
       "bytes": 4200633,
       "sha256": "8128e620c2e86cf5025d303d3be01d0155b34a7b8f16a565a1b9862b960d875c",
@@ -634,7 +634,7 @@
     {
       "title": "Afterglow",
       "genre": "Synthwave",
-      "path": "assets/music/synthwave/afterglow.mp3",
+      "path": "assets/music/synthwave/Afterglow - Synthwave.mp3",
       "duration_seconds": 179.435,
       "bytes": 4314109,
       "sha256": "416d557d90a3dacf7e64f81d232c6cbe3e8d144190f2cde32ca007693d97095e",
@@ -643,7 +643,7 @@
     {
       "title": "Cedar Road",
       "genre": "Synthwave",
-      "path": "assets/music/synthwave/cedar_road.mp3",
+      "path": "assets/music/synthwave/Cedar Road - Synthwave.mp3",
       "duration_seconds": 175.595,
       "bytes": 4221949,
       "sha256": "68f1ca6e575508a1aefbcb82181a7370f4929ea85ad4d4d49e1e73cbdf904f2c",
@@ -652,7 +652,7 @@
     {
       "title": "Glass Horizon",
       "genre": "Synthwave",
-      "path": "assets/music/synthwave/glass_horizon.mp3",
+      "path": "assets/music/synthwave/Glass Horizon - Synthwave.mp3",
       "duration_seconds": 176.797,
       "bytes": 4250788,
       "sha256": "f80ce924a54e906eaa4e9142a83dd064ab87d031a5fe786d0558a9e7be749ce7",
@@ -661,7 +661,7 @@
     {
       "title": "Harbor House",
       "genre": "Synthwave",
-      "path": "assets/music/synthwave/harbor_house.mp3",
+      "path": "assets/music/synthwave/Harbor House - Synthwave.mp3",
       "duration_seconds": 174.472,
       "bytes": 4194991,
       "sha256": "c774ee88e7d29239d64b5b9d27ebf596ed39cb3254658e5faf17362219f46b62",
@@ -670,7 +670,7 @@
     {
       "title": "Island Dawn",
       "genre": "Synthwave",
-      "path": "assets/music/synthwave/island_dawn.mp3",
+      "path": "assets/music/synthwave/Island Dawn - Synthwave.mp3",
       "duration_seconds": 170.057,
       "bytes": 4089038,
       "sha256": "5c1e4c2d77f65decaa95799dafeb26f4db947891f0196739a9952e4576c159e3",
@@ -679,7 +679,7 @@
     {
       "title": "Porchlight",
       "genre": "Synthwave",
-      "path": "assets/music/synthwave/porchlight.mp3",
+      "path": "assets/music/synthwave/Porchlight - Synthwave.mp3",
       "duration_seconds": 178.155,
       "bytes": 4283389,
       "sha256": "818d7a6e3471d23255e36bfe8e79c43a3e529f222773c8ffa9215c2b249557cb",
@@ -688,7 +688,7 @@
     {
       "title": "Redline",
       "genre": "Synthwave",
-      "path": "assets/music/synthwave/redline.mp3",
+      "path": "assets/music/synthwave/Redline - Synthwave.mp3",
       "duration_seconds": 171.781,
       "bytes": 4130416,
       "sha256": "6c022e1332a52bc543d682018cddf3ebf5e3c27cd26285afecd8527ab543816f",

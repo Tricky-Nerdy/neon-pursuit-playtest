@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c1vr0gyg5fdid"
+path="res://.godot/imported/Glass Horizon - Acoustic.mp3-97c9d4cfd0a52a01021c797d3a4f262d.mp3str"
+
+[deps]
+
+source_file="res://assets/music/acoustic/Glass Horizon - Acoustic.mp3"
+dest_files=["res://.godot/imported/Glass Horizon - Acoustic.mp3-97c9d4cfd0a52a01021c797d3a4f262d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

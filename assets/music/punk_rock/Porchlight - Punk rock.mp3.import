@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cd2gean12x1jy"
+path="res://.godot/imported/Porchlight - Punk rock.mp3-6c48a18f9aa3ba245de2e7e7cc068913.mp3str"
+
+[deps]
+
+source_file="res://assets/music/punk_rock/Porchlight - Punk rock.mp3"
+dest_files=["res://.godot/imported/Porchlight - Punk rock.mp3-6c48a18f9aa3ba245de2e7e7cc068913.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

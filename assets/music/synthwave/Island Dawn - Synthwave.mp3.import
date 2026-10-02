@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b0gryl4vim8cg"
+path="res://.godot/imported/Island Dawn - Synthwave.mp3-2267f90f330ba6151e348b83729bad7d.mp3str"
+
+[deps]
+
+source_file="res://assets/music/synthwave/Island Dawn - Synthwave.mp3"
+dest_files=["res://.godot/imported/Island Dawn - Synthwave.mp3-2267f90f330ba6151e348b83729bad7d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

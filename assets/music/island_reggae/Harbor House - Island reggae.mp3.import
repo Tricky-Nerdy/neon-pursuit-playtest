@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://s73ghnh7isb1"
+path="res://.godot/imported/Harbor House - Island reggae.mp3-bffe5793f13c804be93b561e01830ced.mp3str"
+
+[deps]
+
+source_file="res://assets/music/island_reggae/Harbor House - Island reggae.mp3"
+dest_files=["res://.godot/imported/Harbor House - Island reggae.mp3-bffe5793f13c804be93b561e01830ced.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

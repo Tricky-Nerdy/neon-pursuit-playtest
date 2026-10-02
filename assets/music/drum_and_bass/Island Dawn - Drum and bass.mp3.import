@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bshkjbs04k6gc"
+path="res://.godot/imported/Island Dawn - Drum and bass.mp3-551a631e267d79bd4ae0588368007596.mp3str"
+
+[deps]
+
+source_file="res://assets/music/drum_and_bass/Island Dawn - Drum and bass.mp3"
+dest_files=["res://.godot/imported/Island Dawn - Drum and bass.mp3-551a631e267d79bd4ae0588368007596.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

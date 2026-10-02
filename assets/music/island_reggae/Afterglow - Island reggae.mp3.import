@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://vkmldo11drjo"
+path="res://.godot/imported/Afterglow - Island reggae.mp3-6eb5fb9bff5de1807f170279ec9684b0.mp3str"
+
+[deps]
+
+source_file="res://assets/music/island_reggae/Afterglow - Island reggae.mp3"
+dest_files=["res://.godot/imported/Afterglow - Island reggae.mp3-6eb5fb9bff5de1807f170279ec9684b0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ludqwuk8sj5v"
+path="res://.godot/imported/Glass Horizon - Punk rock.mp3-f77ff39d606c5f794d5dc58bacbdf478.mp3str"
+
+[deps]
+
+source_file="res://assets/music/punk_rock/Glass Horizon - Punk rock.mp3"
+dest_files=["res://.godot/imported/Glass Horizon - Punk rock.mp3-f77ff39d606c5f794d5dc58bacbdf478.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dii5ruqtpks0w"
+path="res://.godot/imported/Island Dawn - Americana.mp3-1d30cd6b2bf8c0568f80fb3fd39321a7.mp3str"
+
+[deps]
+
+source_file="res://assets/music/americana/Island Dawn - Americana.mp3"
+dest_files=["res://.godot/imported/Island Dawn - Americana.mp3-1d30cd6b2bf8c0568f80fb3fd39321a7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

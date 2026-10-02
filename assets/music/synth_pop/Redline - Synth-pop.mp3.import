@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ckkehujdlf1xo"
+path="res://.godot/imported/Redline - Synth-pop.mp3-4818b2af9ba82569ce54960f8cdacf55.mp3str"
+
+[deps]
+
+source_file="res://assets/music/synth_pop/Redline - Synth-pop.mp3"
+dest_files=["res://.godot/imported/Redline - Synth-pop.mp3-4818b2af9ba82569ce54960f8cdacf55.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

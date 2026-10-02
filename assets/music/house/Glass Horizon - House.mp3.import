@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cxc7f0rwgdvdb"
+path="res://.godot/imported/Glass Horizon - House.mp3-f53cc4e8b8cdaee9ccb32f7077b79831.mp3str"
+
+[deps]
+
+source_file="res://assets/music/house/Glass Horizon - House.mp3"
+dest_files=["res://.godot/imported/Glass Horizon - House.mp3-f53cc4e8b8cdaee9ccb32f7077b79831.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cukksnsp0jf1w"
+path="res://.godot/imported/Cedar Road - Synth-pop.mp3-d4a9c00b282be48280df4e4ecb8ccf84.mp3str"
+
+[deps]
+
+source_file="res://assets/music/synth_pop/Cedar Road - Synth-pop.mp3"
+dest_files=["res://.godot/imported/Cedar Road - Synth-pop.mp3-d4a9c00b282be48280df4e4ecb8ccf84.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

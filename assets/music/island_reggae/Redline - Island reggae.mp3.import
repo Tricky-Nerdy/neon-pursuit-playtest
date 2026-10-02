@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b24tq7v6y2r1p"
+path="res://.godot/imported/Redline - Island reggae.mp3-c6ea2bf4254df253eb9e1f6529cc5d63.mp3str"
+
+[deps]
+
+source_file="res://assets/music/island_reggae/Redline - Island reggae.mp3"
+dest_files=["res://.godot/imported/Redline - Island reggae.mp3-c6ea2bf4254df253eb9e1f6529cc5d63.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

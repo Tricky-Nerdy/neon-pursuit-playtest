@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d0tw5ylr6h7a8"
+path="res://.godot/imported/Cedar Road - Americana.mp3-874560da2f6e87885e3e6de0c0c182da.mp3str"
+
+[deps]
+
+source_file="res://assets/music/americana/Cedar Road - Americana.mp3"
+dest_files=["res://.godot/imported/Cedar Road - Americana.mp3-874560da2f6e87885e3e6de0c0c182da.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

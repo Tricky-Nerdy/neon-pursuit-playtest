@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bhwc2f2x7sc"
+path="res://.godot/imported/Glass Horizon - Folk.mp3-9fa702238cda23af6475cfb7227de7dd.mp3str"
+
+[deps]
+
+source_file="res://assets/music/folk/Glass Horizon - Folk.mp3"
+dest_files=["res://.godot/imported/Glass Horizon - Folk.mp3-9fa702238cda23af6475cfb7227de7dd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

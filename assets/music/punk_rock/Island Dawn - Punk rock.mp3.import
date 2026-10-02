@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://jfvfivtg7gef"
+path="res://.godot/imported/Island Dawn - Punk rock.mp3-a5787aa7213335a85ba144a8ef01757e.mp3str"
+
+[deps]
+
+source_file="res://assets/music/punk_rock/Island Dawn - Punk rock.mp3"
+dest_files=["res://.godot/imported/Island Dawn - Punk rock.mp3-a5787aa7213335a85ba144a8ef01757e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

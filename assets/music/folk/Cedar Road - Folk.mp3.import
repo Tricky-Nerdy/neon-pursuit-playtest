@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dbo5mew5pi8yy"
+path="res://.godot/imported/Cedar Road - Folk.mp3-b5991056bf3e0ad6e96d5384cb0bb88b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/folk/Cedar Road - Folk.mp3"
+dest_files=["res://.godot/imported/Cedar Road - Folk.mp3-b5991056bf3e0ad6e96d5384cb0bb88b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

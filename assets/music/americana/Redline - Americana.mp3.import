@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://yp8ks107qjjg"
+path="res://.godot/imported/Redline - Americana.mp3-5e82f601b0fddd700802c7534a3c7663.mp3str"
+
+[deps]
+
+source_file="res://assets/music/americana/Redline - Americana.mp3"
+dest_files=["res://.godot/imported/Redline - Americana.mp3-5e82f601b0fddd700802c7534a3c7663.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

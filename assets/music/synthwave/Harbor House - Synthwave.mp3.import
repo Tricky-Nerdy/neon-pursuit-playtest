@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cnyuil1at0umy"
+path="res://.godot/imported/Harbor House - Synthwave.mp3-c705275e53e451aa6e14b8d2fcd47bb0.mp3str"
+
+[deps]
+
+source_file="res://assets/music/synthwave/Harbor House - Synthwave.mp3"
+dest_files=["res://.godot/imported/Harbor House - Synthwave.mp3-c705275e53e451aa6e14b8d2fcd47bb0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://yt7i02cbkgs2"
+path="res://.godot/imported/Redline - Folk.mp3-301f6a3ab6b6ff2e32745fa4d62b82ad.mp3str"
+
+[deps]
+
+source_file="res://assets/music/folk/Redline - Folk.mp3"
+dest_files=["res://.godot/imported/Redline - Folk.mp3-301f6a3ab6b6ff2e32745fa4d62b82ad.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

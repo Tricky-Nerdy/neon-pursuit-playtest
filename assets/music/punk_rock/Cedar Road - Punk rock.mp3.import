@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c2efam5g4hb4j"
+path="res://.godot/imported/Cedar Road - Punk rock.mp3-86d8d883b0dc2215259f9fc9de2cc606.mp3str"
+
+[deps]
+
+source_file="res://assets/music/punk_rock/Cedar Road - Punk rock.mp3"
+dest_files=["res://.godot/imported/Cedar Road - Punk rock.mp3-86d8d883b0dc2215259f9fc9de2cc606.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

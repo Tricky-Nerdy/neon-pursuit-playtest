@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cqa3jh4evt6sc"
+path="res://.godot/imported/Glass Horizon - Chillwave.mp3-ac527d36e017d186a358505f6a13b1f0.mp3str"
+
+[deps]
+
+source_file="res://assets/music/chillwave/Glass Horizon - Chillwave.mp3"
+dest_files=["res://.godot/imported/Glass Horizon - Chillwave.mp3-ac527d36e017d186a358505f6a13b1f0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,7 +1,15 @@
 #EXTM3U
+#EXTINF:129,Afterglow
+afterglow.mp3
 #EXTINF:179,Cedar Road
 cedar_road.mp3
 #EXTINF:175,Glass Horizon
 glass_horizon.mp3
+#EXTINF:181,Harbor House
+harbor_house.mp3
+#EXTINF:168,Island Dawn
+island_dawn.mp3
 #EXTINF:177,Porchlight
 porchlight.mp3
+#EXTINF:176,Redline
+redline.mp3

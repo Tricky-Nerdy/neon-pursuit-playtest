@@ -34,4 +34,6 @@ transform = Transform3D(0.3756021, 0, 0.92678106, 0, 1, 0, -0.92678106, 0, 0.375
 
 [node name="Camera" type="Camera3D" parent="." unique_id=541573678]
 physics_interpolation_mode = 2
-current = true
+near = 0.5
+far = 12000.0
+current = false

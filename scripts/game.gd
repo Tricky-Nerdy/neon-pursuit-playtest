@@ -200,6 +200,10 @@ func _ready() -> void:
 		camera.fov = 75
 		camera.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 		add_child(camera)
+	# Activate only in gameplay; the editor owns its viewport camera.
+	camera.current = true
+	camera.near = 0.5
+	camera.far = 12000.0
 	_make_rivals()
 	_make_gate()
 	_make_ui()

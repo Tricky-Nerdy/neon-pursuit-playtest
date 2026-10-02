@@ -8,7 +8,10 @@ func check(ok: bool, label: String) -> void:
 		failures += 1
 
 func _initialize() -> void:
-	var flight = Flight.new()
+	call_deferred("_run")
+
+func _run() -> void:
+	var flight: RefCounted = Flight.new()
 	flight.move(Vector3(0, 0, -1), 1.0, false)
 	check(flight.pose.origin.is_equal_approx(Vector3(0, 0, -80)), "W travels along camera forward")
 	flight.pose = Transform3D.IDENTITY
@@ -28,7 +31,7 @@ func _initialize() -> void:
 	root.add_child(racer)
 	racer.position = Vector3(200, 3, 50)
 	flight.frame_racer(racer)
-	var direction := (racer.global_position + Vector3.UP * 2.0 - flight.pose.origin).normalized()
+	var direction: Vector3 = (racer.global_position + Vector3.UP * 2.0 - flight.pose.origin).normalized()
 	check((-flight.pose.basis.z).is_equal_approx(direction), "racer framing points toward moving craft")
 	racer.position.x += 100.0
 	flight.frame_racer(racer)

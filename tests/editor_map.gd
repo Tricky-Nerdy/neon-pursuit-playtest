@@ -16,7 +16,17 @@ func _run() -> void:
 	check(Engine.is_editor_hint(), "test runs in actual editor mode")
 	var scene := load("res://scenes/main.tscn") as PackedScene
 	var game := scene.instantiate()
-	root.add_child(game)
+	# Use an isolated viewport with an editor camera already present. Adding the
+	# scene directly to SceneTree.root makes Godot auto-select its first Camera3D,
+	# which is not how the actual 3D editor viewport is configured.
+	var preview := SubViewport.new()
+	preview.own_world_3d = true
+	root.add_child(preview)
+	var native_camera := Camera3D.new()
+	preview.add_child(native_camera)
+	native_camera.make_current()
+	var native_pose := native_camera.transform
+	preview.add_child(game)
 	await process_frame
 	var world := game.get_node("World") as CoastMap
 	check(world.scenery != null and world.scenery.terrain_mesh != null,
@@ -55,6 +65,8 @@ func _run() -> void:
 	var camera_state_unchanged := editor_cameras.size() == camera_current_state.size()
 	for i in editor_cameras.size():
 		camera_state_unchanged = camera_state_unchanged and editor_cameras[i].current == camera_current_state[i]
+	check(preview.get_camera_3d() == native_camera and native_camera.transform == native_pose,
+		"native editor camera remains current and stationary during simulation")
 	check(camera_state_unchanged,
 		"live racer and day-night simulation leaves editor camera state untouched")
 	world.time_of_day = world.day_duration_seconds + 1.0
@@ -96,6 +108,9 @@ func _run() -> void:
 	check(world.get_child_count() == count and world.curve.point_count == points,
 		"re-entering the tree does not duplicate map geometry")
 	game.queue_free()
+	await process_frame
+	await process_frame
+	preview.queue_free()
 	await process_frame
 	await process_frame
 	quit(failures)

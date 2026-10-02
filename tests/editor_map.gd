@@ -30,6 +30,18 @@ func _run() -> void:
 		"four racers appear in the editor")
 	check(game.player == null and game.telemetry == null and game.ui == null,
 		"editor simulation leaves player, telemetry, and gameplay UI inactive")
+
+	# A tool preview must never activate a gameplay Camera3D. The native 3D editor
+	# viewport owns its own editor camera, so any current scene camera here would
+	# steal or replace the fly-camera view the designer is using.
+	var editor_cameras: Array[Camera3D] = []
+	_collect_cameras(game, editor_cameras)
+	check(editor_cameras.all(func(camera: Camera3D) -> bool: return not camera.current),
+		"editor simulation does not steal camera ownership from the 3D editor")
+	var camera_current_state: Array[bool] = []
+	for camera in editor_cameras:
+		camera_current_state.append(camera.current)
+
 	var racer: HoverShip = game._editor_racers[0]
 	var before := racer.position
 	var before_time: float = world.time_of_day
@@ -40,6 +52,11 @@ func _run() -> void:
 	check(world.road_distance(racer.position) < 24.0, "editor racer stays on the road")
 	check(not racer.is_physics_processing() and racer.collision_layer == 4,
 		"editor drives craft with explicit fixed simulation steps")
+	var camera_state_unchanged := editor_cameras.size() == camera_current_state.size()
+	for i in editor_cameras.size():
+		camera_state_unchanged = camera_state_unchanged and editor_cameras[i].current == camera_current_state[i]
+	check(camera_state_unchanged,
+		"live racer and day-night simulation leaves editor camera state untouched")
 	world.time_of_day = world.day_duration_seconds + 1.0
 	game._process(0.0)
 	check(world.street_lights[0].visible, "editor night cycle switches street lights on")
@@ -53,6 +70,10 @@ func _run() -> void:
 	game._process(0.0)
 	check(game._editor_racers.size() == 4 and game.get_node("Vehicles").get_child_count() == 4,
 		"editor processing restores preview after script reload without duplicates")
+	var reloaded_cameras: Array[Camera3D] = []
+	_collect_cameras(game, reloaded_cameras)
+	check(reloaded_cameras.all(func(camera: Camera3D) -> bool: return not camera.current),
+		"script reload does not activate a gameplay camera in the editor")
 	var automatic_start: Vector3 = game._editor_racers[0].position
 	await create_timer(0.2).timeout
 	check(game._editor_racers[0].position.distance_to(automatic_start) > 1.0,
@@ -78,3 +99,9 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	quit(failures)
+
+func _collect_cameras(node: Node, cameras: Array[Camera3D]) -> void:
+	if node is Camera3D:
+		cameras.append(node as Camera3D)
+	for child in node.get_children():
+		_collect_cameras(child, cameras)

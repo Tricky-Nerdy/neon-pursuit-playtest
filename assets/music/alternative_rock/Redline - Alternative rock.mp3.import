@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://but7nwgsm00eh"
+path="res://.godot/imported/Redline - Alternative rock.mp3-72b2c1fbfeed0656d78616a59393249f.mp3str"
+
+[deps]
+
+source_file="res://assets/music/alternative_rock/Redline - Alternative rock.mp3"
+dest_files=["res://.godot/imported/Redline - Alternative rock.mp3-72b2c1fbfeed0656d78616a59393249f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

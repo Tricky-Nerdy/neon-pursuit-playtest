@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://yy3w5d3fv4y8"
+path="res://.godot/imported/Porchlight - Alternative rock.mp3-43a708e31d0f5589cfd3fae08f9930ea.mp3str"
+
+[deps]
+
+source_file="res://assets/music/alternative_rock/Porchlight - Alternative rock.mp3"
+dest_files=["res://.godot/imported/Porchlight - Alternative rock.mp3-43a708e31d0f5589cfd3fae08f9930ea.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

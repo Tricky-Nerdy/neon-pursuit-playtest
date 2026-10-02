@@ -1,59 +1,86 @@
 extends AudioStreamPlayer
-# Original synthesized station loops; no external media or network required.
-const RATE := 22050
-const TEMPOS := [96.0, 124.0, 150.0, 110.0]
+# Keep the first four stations in their original order for saved selections.
+const STATIONS := [
+	{"name":"AURORA JAZZ", "genre":"Swing jazz"},
+	{"name":"NEON FM", "genre":"Synth-pop"},
+	{"name":"COASTLINE PUNK", "genre":"Punk rock"},
+	{"name":"NIGHT DRIVE", "genre":"Synthwave"},
+	{"name":"PORCHLIGHT FM", "genre":"Acoustic"},
+	{"name":"CEDAR ROAD RADIO", "genre":"Americana"},
+	{"name":"MIRAGE FM", "genre":"Chillwave"},
+	{"name":"REDLINE RADIO", "genre":"Drum and bass"},
+	{"name":"WILLOW CREEK FM", "genre":"Folk"},
+	{"name":"HARBOR HOUSE", "genre":"House"},
+	{"name":"ISLAND DAWN RADIO", "genre":"Island reggae"},
+	{"name":"STATIC FM", "genre":"Alternative rock"},
+]
+const MANIFEST_PATH := "res://assets/music/manifest.json"
 var station := -1
-var loops: Dictionary = {}
+var playlists: Array = []
+var track_indices := PackedInt32Array()
+
+static func station_names() -> Array[String]:
+	var names: Array[String] = []
+	for entry in STATIONS:
+		names.append(entry.name)
+	return names
+
+func _ready() -> void:
+	track_indices.resize(STATIONS.size())
+	var manifest = JSON.parse_string(FileAccess.get_file_as_string(MANIFEST_PATH))
+	for entry in STATIONS:
+		var tracks: Array[String] = []
+		if manifest is Dictionary:
+			for track in manifest.get("tracks", []):
+				if track.get("genre", "") == entry.genre:
+					tracks.append("res://" + str(track.path))
+		tracks.sort()
+		playlists.append(tracks)
+		if tracks.is_empty():
+			push_error("No music tracks for station: " + entry.name)
+	finished.connect(_on_track_finished)
 
 func _exit_tree() -> void:
 	stop()
 	stream = null
-	loops.clear()
 
 func tune(index: int) -> void:
-	index = posmod(index,TEMPOS.size())
-	if station == index and playing:
+	index = posmod(index, STATIONS.size())
+	if station == index and (playing or stream_paused) and stream != null:
 		return
 	station = index
-	if not loops.has(index):
-		loops[index] = _compose(index)
-	stream = loops[index]
-	play()
+	_play_current_track()
 
-func _compose(index: int) -> AudioStreamWAV:
-	var beat: float = 60.0/TEMPOS[index]
-	var count := int(beat*16.0*RATE)
-	var pcm := PackedByteArray()
-	pcm.resize(count*2)
-	var notes := [0,3,7,5]
-	for sample in count:
-		var t := float(sample)/RATE
-		var step := int(t/beat)
-		var phase := fmod(t,beat)
-		var root_hz := 55.0*pow(2.0,float(notes[(step/4)%4])/12.0)
-		var bass := sin(TAU*root_hz*t)*exp(-phase*4.0)*0.2
-		var kick := sin(TAU*(45.0*phase+8.0*(1.0-exp(-phase*30.0))))*exp(-phase*24.0)*0.32
-		var hat_phase := fmod(t,beat/2.0)
-		var noise := sin(sample*12.9898+index*78.233)*43758.5453
-		noise = (noise-floor(noise))*2.0-1.0
-		var drums := noise*exp(-hat_phase*100.0)*0.08
-		if step%2 == 1:
-			drums += noise*exp(-phase*25.0)*0.12
-		var melody_hz := root_hz*pow(2.0,float([12,19,15,22][step%4])/12.0)
-		var tone := sin(TAU*melody_hz*t)
-		if index == 2:
-			tone = tanh(tone*3.0)
-		elif index == 0:
-			tone += sin(TAU*melody_hz*2.0*t)*0.25
-		var melody := tone*exp(-phase*(8.0 if index != 3 else 3.0))*0.12
-		var fade := minf(1.0,minf(t*100.0,(float(count-sample)/RATE)*100.0))
-		var value := int(clampf((bass+kick+drums+melody)*fade,-1.0,1.0)*32767.0)
-		pcm.encode_s16(sample*2,value)
-	var loop := AudioStreamWAV.new()
-	loop.format = AudioStreamWAV.FORMAT_16_BITS
-	loop.mix_rate = RATE
-	loop.data = pcm
-	loop.loop_mode = AudioStreamWAV.LOOP_FORWARD
-	loop.loop_begin = 0
-	loop.loop_end = count
-	return loop
+func _play_current_track() -> void:
+	# play()/stream replacement can clear pause, including when changing stations.
+	var was_paused := stream_paused
+	stop()
+	stream = null
+	var tracks: Array = playlists[station]
+	for attempt in tracks.size():
+		var path: String = tracks[track_indices[station]]
+		# Only keep the current MP3 in memory, rather than caching the whole library.
+		var audio := load_track(path)
+		if audio != null:
+			stream = audio
+			play()
+			stream_paused = was_paused
+			return
+		track_indices[station] = (track_indices[station] + 1) % tracks.size()
+	stream_paused = was_paused
+	push_error("No playable music for station: " + STATIONS[station].name)
+
+func load_track(path: String) -> AudioStreamMP3:
+	if not ResourceLoader.exists(path):
+		push_warning("Missing radio track: " + path)
+		return null
+	var audio := ResourceLoader.load(path, "AudioStreamMP3", ResourceLoader.CACHE_MODE_IGNORE) as AudioStreamMP3
+	if audio != null:
+		audio.loop = false
+	return audio
+
+func _on_track_finished() -> void:
+	if station < 0 or playlists[station].is_empty():
+		return
+	track_indices[station] = (track_indices[station] + 1) % playlists[station].size()
+	_play_current_track()

@@ -8,6 +8,13 @@ Use patch versions for fixes, minor versions for substantial playable features, 
 
 Versions here describe development checkpoints. No release tags existed when this history was written on October 1, 2026. A version label does not imply exported binaries or an Android release. The legacy application name is retained because it determines the existing user save directory.
 
+## Unreleased
+
+- Add ten full-length Alternative rock tracks from Runway, tagged as Neon Pursuit OST / STATIC FM, with source records, checksums and playlists.
+- Replace synthesized radio loops with the bundled MP3 library: 87 tracks on twelve stations, automatic track advance and playlist wraparound.
+- Preserve existing saved station indexes and keep playback muted when switching stations. Bundle the runtime manifest in Android, Windows and Linux exports.
+- Add regression coverage for all bundled tracks, real end-of-track advancement, station wrapping, saved settings and mute behavior.
+
 ## 0.7.1 — 2026-10-02 — Aurora Bay 5.0
 
 Development checkpoint for the changes already on main since 0.6.3; 0.7.0 was not separately published.

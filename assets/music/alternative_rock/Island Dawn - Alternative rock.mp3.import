@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dg0cm10fu0h6x"
+path="res://.godot/imported/Island Dawn - Alternative rock.mp3-1617780a600981b8cb0fc487e8b328de.mp3str"
+
+[deps]
+
+source_file="res://assets/music/alternative_rock/Island Dawn - Alternative rock.mp3"
+dest_files=["res://.godot/imported/Island Dawn - Alternative rock.mp3-1617780a600981b8cb0fc487e8b328de.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -65,7 +65,7 @@ var fullscreen_option: Button
 var vsync_option: Button
 var radio_label: Label
 var radio_index := 0
-var radio_stations := ["AURORA JAZZ","NEON FM","COASTLINE PUNK","NIGHT DRIVE"]
+var radio_stations := RadioScript.station_names()
 var last_pad_device := -1
 var hud_visible := false
 var gate_visual: Node3D

@@ -693,6 +693,126 @@
       "bytes": 4130416,
       "sha256": "6c022e1332a52bc543d682018cddf3ebf5e3c27cd26285afecd8527ab543816f",
       "source_task_id": "6f9b005a-e7df-471b-9223-6df2314181dd"
+    },
+    {
+      "title": "Afterglow",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Afterglow - Alternative rock.mp3",
+      "duration_seconds": 177.240816,
+      "bytes": 4254609,
+      "sha256": "e7ac9de7b6eb5dcf276a4b4b5ea00d5a39fb83ff0d54732a4cf03f78c27ba806",
+      "source_task_id": "b08995c0-8aa3-4801-97df-2b003185a11f",
+      "source_asset_id": "27ad76bd-23eb-4adc-b3cf-941533a50294",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
+    },
+    {
+      "title": "Cedar Road",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Cedar Road - Alternative rock.mp3",
+      "duration_seconds": 175.333878,
+      "bytes": 4208844,
+      "sha256": "b3f27026adcf5d4b98164e233513e8dca45bb91bdd7ef93147cb9e4465a5ba1c",
+      "source_task_id": "cc780cdc-2fb8-4fa7-a50e-c15040f69077",
+      "source_asset_id": "6231d593-0e5b-442e-95d4-445f7cf2e3a2",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
+    },
+    {
+      "title": "Copper Sky",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Copper Sky - Alternative rock.mp3",
+      "duration_seconds": 180.140333,
+      "bytes": 4324200,
+      "sha256": "2233e47fc36336f069d033b8132aac67f58f76b387025ec2645aca51fd5ba9b1",
+      "source_task_id": "40085c22-1bc9-4a01-9908-8c3f93d904d1",
+      "source_share_url": "https://app.runwayml.com/creation/52bed91f-69b4-408e-9a37-bfee783df2cf",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
+    },
+    {
+      "title": "Glass Horizon",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Glass Horizon - Alternative rock.mp3",
+      "duration_seconds": 180.323265,
+      "bytes": 4328592,
+      "sha256": "72e4bb3fa4ab5062e68097cd0ce5460784a49734776623a15ec65b22733c4163",
+      "source_task_id": "8eb20073-9c6b-42bb-91ca-0c795803de7c",
+      "source_asset_id": "22f82510-d4bb-4239-b5f3-8de038c61070",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
+    },
+    {
+      "title": "Harbor House",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Harbor House - Alternative rock.mp3",
+      "duration_seconds": 177.240816,
+      "bytes": 4254612,
+      "sha256": "d26b733b9f5002d1868e698767100ac15fdd91c50f1709fe62ffcd1269934e0e",
+      "source_task_id": "a13df94f-df5c-408a-b308-516246a9f944",
+      "source_asset_id": "22ddd362-29db-4bb0-88d0-9ebab2cf61b2",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
+    },
+    {
+      "title": "Island Dawn",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Island Dawn - Alternative rock.mp3",
+      "duration_seconds": 177.81551,
+      "bytes": 4268404,
+      "sha256": "33aa4b3e6241e0c6827b257c4a5bfad43a562894811d0fe82c788f2d8f878e7b",
+      "source_task_id": "cf72f001-91ff-4e92-b230-0e67277c9acf",
+      "source_asset_id": "56a4f7c2-7da8-420e-bad6-ce7aa75da441",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
+    },
+    {
+      "title": "Midnight Causeway",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Midnight Causeway - Alternative rock.mp3",
+      "duration_seconds": 175.229388,
+      "bytes": 4206343,
+      "sha256": "21265fed81234e96ade964a2fc711180a79220995334225bb5046b5579173046",
+      "source_task_id": "c587d5e5-04d8-48fd-92c8-e8de3fe80c85",
+      "source_asset_id": "66d8c14d-4e87-4277-a71b-a758551887d9",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
+    },
+    {
+      "title": "Porchlight",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Porchlight - Alternative rock.mp3",
+      "duration_seconds": 175.307755,
+      "bytes": 4208217,
+      "sha256": "50d3fdd6db4dd1efc6108fd70c2e6ca8f843afb2b88a1d0f03ebcb3948d950d8",
+      "source_task_id": "9e255577-c359-4cf6-9d56-09ce8ad42700",
+      "source_asset_id": "0fad25e4-1bb1-4c84-b788-b3d8f810fbae",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
+    },
+    {
+      "title": "Redline",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Redline - Alternative rock.mp3",
+      "duration_seconds": 177.998367,
+      "bytes": 4272788,
+      "sha256": "ef467214be2c59feee5dd2fc0c936c884b5351b2809c15ceeb70d7716a53493d",
+      "source_task_id": "c71068f1-053b-4d52-86dc-db5cdaff64f4",
+      "source_asset_id": "745632ac-7f87-45ff-a7b7-4a39a6b76d3f",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
+    },
+    {
+      "title": "Saltwater Signal",
+      "genre": "Alternative rock",
+      "path": "assets/music/alternative_rock/Saltwater Signal - Alternative rock.mp3",
+      "duration_seconds": 180.793469,
+      "bytes": 4339881,
+      "sha256": "863ed83ab1ad7d02bf3e7bc5b4dcab7ee0632a65574737d3c40726287a8262e2",
+      "source_task_id": "77fa9601-1689-4424-aa41-f392de49761b",
+      "source_asset_id": "7ba6c6b6-39ba-4b2f-8551-c92af4c63420",
+      "artist": "Neon Pursuit OST",
+      "album": "STATIC FM"
     }
   ]
 }

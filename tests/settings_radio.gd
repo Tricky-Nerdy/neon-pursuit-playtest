@@ -15,13 +15,18 @@ func _run() -> void:
 	assert(game.settings_page.visible and not game.main_menu_page.visible and not game.events_page.visible)
 	game._set_music_volume(0.0)
 	assert(game.radio_player.stream_paused)
+	game._cycle_radio(1)
+	assert(game.radio_player.stream_paused)
+	game._cycle_radio(-1)
+	assert(game.radio_player.stream_paused)
 	game._set_music_volume(0.35)
 	game._toggle_mirror()
 	game._toggle_vsync()
 	game._cycle_touch_layout()
 	game._cycle_radio(1)
 	assert(game.radio_player.playing)
-	assert(game.radio_player.stream.loop_mode == AudioStreamWAV.LOOP_FORWARD)
+	assert(game.radio_player.stream is AudioStreamMP3)
+	assert(not game.radio_player.stream.loop)
 	var first = game.radio_player.stream.data
 	game._cycle_radio(1)
 	assert(first != game.radio_player.stream.data)
@@ -39,14 +44,28 @@ func _run() -> void:
 	assert(game.rear_viewport.render_target_update_mode == SubViewport.UPDATE_DISABLED)
 	game._toggle_mirror()
 	assert(game.rear_mirror.visible)
-	for index in 4:
+	assert(game.radio_stations.size() == 12)
+	for index in game.radio_stations.size():
 		game.radio_player.tune(index)
+		await create_timer(0.05).timeout
 		assert(game.radio_player.stream.data.size() > 0)
-		assert(game.radio_player.stream.loop_end*2 == game.radio_player.stream.data.size())
+		assert(game.radio_player.stream.get_length() > 60.0)
+		assert(not game.radio_player.stream.loop)
+	game.radio_index = 10
+	game._cycle_radio(1)
+	assert(game.radio_label.text == "STATIC FM")
+	game.radio_index = 0
+	game._load_settings()
+	assert(game.radio_index == 11)
+	game._cycle_radio(1)
+	assert(game.radio_index == 0 and game.radio_label.text == "AURORA JAZZ")
+	game._cycle_radio(-1)
+	assert(game.radio_index == 11 and game.radio_label.text == "STATIC FM")
 	game._show_main_menu_page()
 	assert(not game.settings_page.visible)
 	DirAccess.remove_absolute(game.settings_path)
 	game.queue_free()
 	await process_frame
-	print("PASS: settings navigation, saved options, mute, mirror and four radio loops")
+	await create_timer(0.1).timeout
+	print("PASS: settings navigation, saved options, mute, mirror and twelve MP3 radio stations")
 	quit()

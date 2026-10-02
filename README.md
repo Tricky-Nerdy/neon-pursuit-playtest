@@ -55,7 +55,7 @@ Touch, keyboard, mouse, and gamepad input are supported. Android is a first-clas
 
 ## Settings and radio
 
-The menu’s Settings page saves music volume, VSync, fullscreen, rearview visibility, and touch layout between sessions. F11 and the fullscreen setting stay synchronized. The borderless rearview pauses rendering while hidden. Four radio stations play original locally synthesized looping music; use the menu arrows to switch stations and set music volume to zero to mute. These are instrumental loops, not streamed broadcasts. Separately, [the listening library](assets/music/README.md) contains **77 full-length MP3 tracks across seven themes and eleven genres**, with playlists, source credits and checksums. The MP3 library is not wired into the in-game radio. The requested expansion to ten themes and twelve stations remains future work.
+The menu’s Settings page saves music volume, VSync, fullscreen, rearview visibility, and touch layout between sessions. F11 and the fullscreen setting stay synchronized. The borderless rearview pauses rendering while hidden. **Twelve radio stations play 87 bundled full-length MP3s** from [the music library](assets/music/README.md), including ten Alternative rock tracks on **STATIC FM**. Use the menu arrows to switch stations and set music volume to zero to mute. Each station advances through its tracks automatically and loops its playlist, with offline playback on desktop and Android. The library includes listening playlists, source credits and checksums. The other eleven stations currently have seven themes each.
 
 ## Version history
 

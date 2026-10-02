@@ -38,7 +38,16 @@ func _run() -> void:
     game._select_mode(0)
     for brain in game.brains: brain.active = false
     for rival in game.traffic: rival.set_physics_process(false)
-    check(FileAccess.get_file_as_bytes("res://project.godot") == FileAccess.get_file_as_bytes("res://docs/merge/uploaded_project.godot.txt"),"uploaded project settings preserved byte-for-byte")
+    var current_settings := FileAccess.get_file_as_string("res://project.godot")
+    var uploaded_settings := FileAccess.get_file_as_string("res://docs/merge/uploaded_project.godot.txt")
+    # Releases may change version metadata; the live-camera plugin adds one
+    # editor-only section. Keep all uploaded gameplay/input/display settings exact.
+    var version_lines := RegEx.new()
+    version_lines.compile("(?m)^config/(version|map_version)=.*\\n")
+    current_settings = version_lines.sub(current_settings, "", true)
+    uploaded_settings = version_lines.sub(uploaded_settings, "", true)
+    current_settings = current_settings.replace('[editor_plugins]\\n\\nenabled=PackedStringArray("res://addons/live_editor_camera/plugin.cfg")\\n\\n', "")
+    check(current_settings == uploaded_settings, "uploaded gameplay settings preserved with explicit version and editor-plugin exceptions")
     check(not Input.use_accumulated_input,"input events are not accumulated until the render frame")
     check(game.player.CRAFT[0].speed == 62 and game.player.CRAFT[1].speed == 78 and game.player.CRAFT[2].speed == 53,"all three user craft speeds retained")
     game.touch_active = true

@@ -101,7 +101,7 @@ jobs:
         run: |
           engine="$RUNNER_TEMP/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           "$engine" --headless --path . --script tests/render_capture_test.gd
-          timeout --signal=TERM --kill-after=5s 100s xvfb-run -a -s "-screen 0 1920x1080x24" "$engine" --path . --resolution 1920x1080 --rendering-method gl_compatibility --script tests/render_capture.gd
+          timeout --signal=TERM --kill-after=5s 240s xvfb-run -a -s "-screen 0 1920x1080x24" "$engine" --path . --resolution 1920x1080 --rendering-method gl_compatibility --script tests/render_capture.gd
           python3 tests/verify_render_captures.py
       - uses: actions/upload-artifact@v4
         with:

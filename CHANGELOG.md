@@ -8,6 +8,18 @@ Use patch versions for fixes, minor versions for substantial playable features, 
 
 Versions here describe development checkpoints. No release tags existed when this history was written on October 1, 2026. A version label does not imply exported binaries or an Android release. The legacy application name is retained because it determines the existing user save directory.
 
+## 0.7.1 — 2026-10-02 — Aurora Bay 5.0
+
+Development checkpoint for the changes already on main since 0.6.3; 0.7.0 was not separately published.
+
+- Set the Godot application version and Android export version name to 0.7.1.
+- Document the live editor fly camera and tool-mode racer simulation, saved settings and borderless rearview already present on main.
+- Include the committed listening library: 77 full-length Runway-generated MP3s spanning seven themes and eleven genres, with playlists and source/checksum records. The in-game radio still uses four synthesized loops.
+- Keep Aurora Bay at map revision 5.0. Preserve the legacy application name to retain the existing save directory.
+- Ten themes and twelve stations are requested future work and are not claimed as delivered in this version.
+
+Validation: the preceding music commit `95ddec1` passed the GitHub Actions playtester test and gameplay-render jobs (run `37026497760`). This checkpoint changes version metadata and documentation only. A version label does not imply a published tag, exported binary or new device validation.
+
 ## 0.6.3 — 2026-10-01 — Aurora Bay 5.0
 
 Rendering implementation: [8588695](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/85886954e053e62bfb5b4e0dabe0d976410473c1).

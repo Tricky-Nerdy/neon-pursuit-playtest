@@ -1,6 +1,6 @@
 # Neon Pursuit: Aurora Bay
 
-**Current build:** Neon Pursuit **v0.6.3**\
+**Current build:** Neon Pursuit **v0.7.1**\
 **Map:** Aurora Bay **5.0**  
 **Branch:** `main`  
 **Targets:** Android, Windows, Linux  
@@ -55,15 +55,16 @@ Touch, keyboard, mouse, and gamepad input are supported. Android is a first-clas
 
 ## Settings and radio
 
-The menu’s Settings page saves music volume, VSync, fullscreen, rearview visibility, and touch layout between sessions. F11 and the fullscreen setting stay synchronized. The borderless rearview pauses rendering while hidden. Four radio stations play original locally synthesized looping music; use the menu arrows to switch stations and set music volume to zero to mute. These are instrumental loops, not streamed broadcasts.
+The menu’s Settings page saves music volume, VSync, fullscreen, rearview visibility, and touch layout between sessions. F11 and the fullscreen setting stay synchronized. The borderless rearview pauses rendering while hidden. Four radio stations play original locally synthesized looping music; use the menu arrows to switch stations and set music volume to zero to mute. These are instrumental loops, not streamed broadcasts. Separately, [the listening library](assets/music/README.md) contains **77 full-length MP3 tracks across seven themes and eleven genres**, with playlists, source credits and checksums. The MP3 library is not wired into the in-game radio. The requested expansion to ten themes and twelve stations remains future work.
 
 ## Version history
 
-The current development build is **v0.6.3**, with **Aurora Bay 5.0**. Game versions track gameplay, rendering and tooling changes; map revisions track the authored world. These are development milestones: this repository currently has **no release tags**. Earlier semantic versions below are retrospective labels, not published releases.
+The current development build is **v0.7.1**, with **Aurora Bay 5.0**. Game versions track gameplay, rendering and tooling changes; map revisions track the authored world. These are development milestones: this repository currently has **no release tags**. Earlier semantic versions below are retrospective labels, not published releases.
 
 | Game milestone | Map | Date | Evidence and changes |
 | --- | --- | --- | --- |
-| **v0.6.3 — current** | **5.0** | 2026-10-01 | [Rendering fixes](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/85886954e053e62bfb5b4e0dabe0d976410473c1): clear fog, stable world-space water, camera depth precision, junction-safe road stripes, readable night fill and six composed in-game screenshots. Project metadata now records this version. |
+| **v0.7.1 — current** | **5.0** | 2026-10-02 | Version metadata and release-history checkpoint covering the live editor camera, saved settings, borderless rearview, and 77 full-length listening tracks. The MP3 library is separate from the in-game radio. |
+| **v0.6.3 — rendering milestone** | **5.0** | 2026-10-01 | [Rendering fixes](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/85886954e053e62bfb5b4e0dabe0d976410473c1): clear fog, stable world-space water, camera depth precision, junction-safe road stripes, readable night fill and six composed in-game screenshots. Project metadata now records this version. |
 | **v0.6.2 — documented playtest** | **5.0** | 2026-10-01 | [Version documentation](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/d2bc88d), [overhang lights](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/006e95e), and [six tested captures](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/24c38c65383229ccef387011fe16d9f5e86e0233): headlights, street fixtures, regression/build tooling and actual Godot capture support. |
 | **v0.6.1 — retrospective lighting milestone** | **5.0 label used retrospectively** | 2026-10-01 | [Tunable cycle fix](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/8b3e433) and [vehicle headlights](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/8665ef8). Lighting work overlapped the scene refactor. |
 | **v0.6.0 — retrospective scene milestone** | **5.0 label used retrospectively** | 2026-10-01 | [Scene structure](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/9b6b1e4) and [gameplay binding](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/69ca00d): explicit World, Vehicles, Gameplay, UI and Camera nodes, reusable ship scene and free-roam spawns. |

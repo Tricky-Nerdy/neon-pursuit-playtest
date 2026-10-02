@@ -116,12 +116,18 @@ func _ready_editor_simulation() -> void:
 	vehicles_root = get_node_or_null("Vehicles") as Node3D
 	if coast == null or vehicles_root == null or not _editor_racers.is_empty():
 		return
+	# Script refreshes can reset fields without rerunning _ready().
+	if not coast._world_built:
+		coast._ready()
 	for i in 4:
-		var racer := ShipScene.instantiate() as HoverShip
-		racer.name = "EditorRacer%d" % (i + 1)
-		racer.human_controlled = false
-		racer.craft_index = i % HoverShip.CRAFT.size()
-		vehicles_root.add_child(racer)
+		var racer_name := "EditorRacer%d" % (i + 1)
+		var racer := vehicles_root.get_node_or_null(racer_name) as HoverShip
+		if racer == null:
+			racer = ShipScene.instantiate() as HoverShip
+			racer.name = racer_name
+			racer.human_controlled = false
+			racer.craft_index = i % HoverShip.CRAFT.size()
+			vehicles_root.add_child(racer)
 		racer.set_physics_process(false)
 		racer.collision_layer = 0
 		racer.collision_mask = 0
@@ -130,6 +136,8 @@ func _ready_editor_simulation() -> void:
 	_process_editor_simulation(0.0)
 
 func _process_editor_simulation(delta: float) -> void:
+	if _editor_racers.is_empty():
+		_ready_editor_simulation()
 	if not is_instance_valid(coast) or coast.sun_light == null:
 		return
 	coast.advance_day_night(delta)

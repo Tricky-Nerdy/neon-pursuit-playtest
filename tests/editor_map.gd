@@ -46,6 +46,16 @@ func _run() -> void:
 	game._ready_editor_simulation()
 	check(game.get_node("Vehicles").get_child_count() == racers_count,
 		"reinitializing does not duplicate editor racers")
+	game.coast = null
+	game._editor_racers.clear()
+	game._editor_offsets.clear()
+	game._process(0.0)
+	check(game._editor_racers.size() == 4 and game.get_node("Vehicles").get_child_count() == 4,
+		"editor processing restores preview after script reload without duplicates")
+	var automatic_start: Vector3 = game._editor_racers[0].position
+	await create_timer(0.2).timeout
+	check(game._editor_racers[0].position.distance_to(automatic_start) > 1.0,
+		"racers animate automatically without directly calling process")
 	# Editor-generated geometry must not become saved scene content.
 	var packed := PackedScene.new()
 	check(packed.pack(game) == OK, "preview scene can be saved")

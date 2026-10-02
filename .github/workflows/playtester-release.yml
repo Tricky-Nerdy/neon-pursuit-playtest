@@ -107,6 +107,19 @@ jobs:
         with:
           name: Aurora-Bay-5.0-Godot-Renders
           path: docs/screenshots/gameplay/*.png
+      - name: Publish verified screenshots to main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/screenshots/gameplay/*.png
+          if git diff --cached --quiet; then
+            echo "Gameplay screenshots already current."
+          else
+            git commit -m "Update verified Godot gameplay screenshots"
+            git push origin HEAD:main
+          fi
 
   build-linux:
     if: startsWith(github.ref, 'refs/tags/v')

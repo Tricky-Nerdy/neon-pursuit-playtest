@@ -51,7 +51,7 @@ Six new **1920 × 1080 screenshots captured from the running Godot game**, with 
 
 Choose Coast, Harbor, Canyon or Airfield. Events have levels, medals and saved records. Retry resets straight to the action; there are no race intro sequences. The compact driving HUD stays clear of diagnostic text; use **F3** (or the bottom menu button on touch) for the event and craft menu.
 
-Touch, keyboard, mouse, and gamepad input are supported. Android is a first-class playtest target; pushes to `main` run the regression suites before Android, Windows, and Linux build jobs are allowed to proceed. The camera follows close behind the craft. The look uses stylized 3D geometry, sky lighting, shadows, emissive road markings and reflective water. The built-in sky environment currently runs a 7-minute daylight and 4-minute night cycle. Real-time global illumination is not currently implemented.
+Touch, keyboard, mouse, and gamepad input are supported. Android is a first-class playtest target. Pushes to `main` run regression tests and gameplay-render capture; platform exports run from `v*` version tags after the tests pass. Windows and Linux builds are produced for tags. Android APK export is gated by the `ENABLE_ANDROID_RELEASE=true` repository variable and the persistent tester signing secrets described below. The camera follows close behind the craft. The look uses stylized 3D geometry, sky lighting, shadows, emissive road markings and reflective water. The built-in sky environment currently runs a 7-minute daylight and 4-minute night cycle. Real-time global illumination is not currently implemented.
 
 ## Settings and radio
 
@@ -63,7 +63,7 @@ The current development build is **v0.7.1**, with **Aurora Bay 5.0**. Game versi
 
 | Game milestone | Map | Date | Evidence and changes |
 | --- | --- | --- | --- |
-| **v0.7.1 — current** | **5.0** | 2026-10-02 | Version metadata and release-history checkpoint covering the live editor camera, saved settings, borderless rearview, and 77 full-length listening tracks. The MP3 library is separate from the in-game radio. |
+| **v0.7.1 — current** | **5.0** | 2026-10-02 | Version metadata and release-history checkpoint covering the live editor camera, saved settings, borderless rearview, and 77 full-length tracks at that checkpoint. The later radio update adds ten STATIC FM tracks, bringing the current bundled in-game library to 87. |
 | **v0.6.3 — rendering milestone** | **5.0** | 2026-10-01 | [Rendering fixes](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/85886954e053e62bfb5b4e0dabe0d976410473c1): clear fog, stable world-space water, camera depth precision, junction-safe road stripes, readable night fill and six composed in-game screenshots. Project metadata now records this version. |
 | **v0.6.2 — documented playtest** | **5.0** | 2026-10-01 | [Version documentation](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/d2bc88d), [overhang lights](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/006e95e), and [six tested captures](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/24c38c65383229ccef387011fe16d9f5e86e0233): headlights, street fixtures, regression/build tooling and actual Godot capture support. |
 | **v0.6.1 — retrospective lighting milestone** | **5.0 label used retrospectively** | 2026-10-01 | [Tunable cycle fix](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/8b3e433) and [vehicle headlights](https://github.com/Tricky-Nerdy/neon-pursuit-playtest/commit/8665ef8). Lighting work overlapped the scene refactor. |

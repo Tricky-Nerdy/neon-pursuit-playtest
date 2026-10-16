@@ -138,8 +138,8 @@ func _asset(name_value: String, at: Vector3, scale_value := 1.0, yaw := 0.0) -> 
     prop_roots.append(node)
     return node
 
-func _box(size: Vector3, at: Vector3, color: Color, solid := false, yaw := 0.0) -> void:
-    coast.box(size,at,color,yaw,solid)
+func _box(size: Vector3, at: Vector3, color: Color, solid := false, yaw := 0.0, night_glow := false) -> void:
+    coast.box(size,at,color,yaw,solid,false,night_glow)
     prop_count += 1
 
 func _safe(at: Vector3, radius: float) -> bool:
@@ -176,6 +176,13 @@ func _city() -> void:
             _box(Vector3(w*0.72,6,18),at+Vector3.UP*(h+10),tone)
             _box(Vector3(6,3,7),at+Vector3(3,h+14,0),Color(0.27,0.33,0.34))
             _box(Vector3(w+15,0.15,38),at+Vector3.UP*0.02,Color(0.51,0.53,0.49))
+            # Discrete glass panels switch on with the streetlights for a clear night skyline.
+            for floor_index in int(h/10.0):
+                var window_y := 11.0 + floor_index * 10.0
+                for pane in 3:
+                    var window_x := -w*0.3 + pane*w*0.3
+                    var window_color := Color(0.18,0.92,1.0) if (pane + floor_index) % 4 == 0 else Color(1.0,0.58,0.24)
+                    _box(Vector3(2.2,3.0,0.35),at+Vector3(window_x,window_y,-12.3),window_color,false,0.0,true)
     # Arcaded waterfront market.
     for i in 8:
         var at := Vector3(-225+i*29,0,520)

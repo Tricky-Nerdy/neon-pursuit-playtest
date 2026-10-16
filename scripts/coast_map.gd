@@ -14,6 +14,7 @@ var road_markings: Array[Dictionary] = []
 var boost_pads: Array[Vector3] = []
 var length := 0.0
 var materials: Dictionary = {}
+var night_glow_materials: Array[StandardMaterial3D] = []
 var landmark_count := 0
 var roads: Array[Curve3D] = []
 var circuits: Array[Curve3D] = []
@@ -83,6 +84,8 @@ func advance_day_night(delta: float) -> void:
 	var lamps_on := not daylight or warm < 0.18
 	for lamp in street_lights:
 		lamp.visible = lamps_on
+	for glow_material in night_glow_materials:
+		glow_material.emission_enabled = lamps_on
 	if overhang_lamp_material != null:
 		overhang_lamp_material.emission_enabled = lamps_on
 
@@ -261,6 +264,20 @@ func road_distance(at: Vector3) -> float:
 	var flat := Vector3(at.x,0,at.z)
 	return flat.distance_to(closest_road_point(at))
 
+func night_material(color: Color) -> StandardMaterial3D:
+	var key := "night:" + color.to_html()
+	if materials.has(key):
+		return materials[key]
+	var m := StandardMaterial3D.new()
+	m.albedo_color = color.darkened(0.72)
+	m.roughness = 0.48
+	m.emission = color
+	m.emission_energy_multiplier = 2.4
+	m.emission_enabled = false
+	materials[key] = m
+	night_glow_materials.append(m)
+	return m
+
 func material(color: Color, emission := false) -> StandardMaterial3D:
 	var key := color.to_html() + str(emission)
 	if materials.has(key):
@@ -275,12 +292,12 @@ func material(color: Color, emission := false) -> StandardMaterial3D:
 	materials[key] = m
 	return m
 
-func box(size: Vector3, at: Vector3, color: Color, yaw := 0.0, solid := false, glow := false) -> MeshInstance3D:
+func box(size: Vector3, at: Vector3, color: Color, yaw := 0.0, solid := false, glow := false, night_glow := false) -> MeshInstance3D:
 	var node := MeshInstance3D.new()
 	var mesh := BoxMesh.new()
 	mesh.size = size
 	node.mesh = mesh
-	node.material_override = material(color, glow)
+	node.material_override = night_material(color) if night_glow else material(color, glow)
 	node.position = at
 	node.rotation.y = yaw
 	add_child(node)
@@ -351,10 +368,10 @@ func marking_clear_of_junction(path: Curve3D, at: Vector3, yaw: float, marking_l
 				return false
 	return true
 
-func _road_marking(path: Curve3D, size: Vector3, at: Vector3, color: Color, yaw: float) -> void:
+func _road_marking(path: Curve3D, size: Vector3, at: Vector3, color: Color, yaw: float, glow := false) -> void:
 	if not marking_clear_of_junction(path, at, yaw, size.z):
 		return
-	box(size, at, color, yaw)
+	box(size, at, color, yaw, false, glow)
 	road_markings.append({"path":path, "at":at, "yaw":yaw, "length":size.z})
 
 func _road(path: Curve3D, width: float, main: bool) -> void:
@@ -369,7 +386,7 @@ func _road(path: Curve3D, width: float, main: bool) -> void:
 		road_samples.append(at)
 		_road_marking(path, Vector3(0.24,0.025,6), at + Vector3.UP * 0.14, Color(0.9,0.83,0.63), yaw)
 		for sign_value in [-1.0,1.0]:
-			_road_marking(path, Vector3(0.35,0.035,14), at + side * (width * 0.5 - 1.0) * sign_value + Vector3.UP * 0.15, Color(0.35,0.85,0.91), yaw)
+			_road_marking(path, Vector3(0.35,0.035,14), at + side * (width * 0.5 - 1.0) * sign_value + Vector3.UP * 0.15, Color(0.35,0.85,0.91), yaw, true)
 		if main and int(distance) % 90 < 18:
 			for sign_value in [-1.0,1.0]:
 				var post_at: Vector3 = at + side * (width * 0.5 + 3.0) * sign_value
@@ -384,8 +401,8 @@ func _road(path: Curve3D, width: float, main: bool) -> void:
 				lamp.name = "StreetLight%d" % street_lights.size()
 				lamp.position = lamp_at + Vector3.DOWN * 0.15
 				lamp.light_color = Color(1.0,0.78,0.50)
-				lamp.light_energy = 3.2
-				lamp.omni_range = 24.0
+				lamp.light_energy = 4.0
+				lamp.omni_range = 30.0
 				lamp.omni_attenuation = 1.25
 				lamp.shadow_enabled = false
 				add_child(lamp)
@@ -451,7 +468,7 @@ void sky() {
 	env.reflected_light_source = Environment.REFLECTION_SOURCE_BG
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.glow_enabled = true
-	env.glow_intensity = 0.35
+	env.glow_intensity = 0.52
 	env.fog_enabled = false
 	env.fog_density = 0.0
 	env.fog_light_color = Color(0.57,0.72,0.8)

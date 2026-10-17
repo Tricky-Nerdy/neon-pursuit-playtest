@@ -14,7 +14,7 @@ The map connects 8.44 km of roads through the coast, harbor, canyon and airfield
 
 ### Aurora Bay 5.0
 
-Six new **1920 × 1080 screenshots captured from the running Godot game**, with runtime world geometry, lighting and UI. The coastal drive, harbor piers, canyon road, airfield, nighttime drive and overhead map use authored landmark views, road-aligned ship headings and fixed times of day.
+Six refreshed **1920 × 1080 screenshots captured directly from the running Godot game**, with runtime world geometry, lighting and UI. The coastal drive, harbor piers, canyon road, airfield, nighttime drive and overhead map use authored landmark views, road-aligned ship headings and fixed times of day.
 
 **Coast — daytime driving**
 

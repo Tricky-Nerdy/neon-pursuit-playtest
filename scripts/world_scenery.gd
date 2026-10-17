@@ -5,6 +5,8 @@ const OUTLINE := [Vector2(-10,610),Vector2(-250,600),Vector2(-450,500),Vector2(-
 const LAKE := [Vector2(-185,-425),Vector2(-90,-455),Vector2(-15,-375),Vector2(-65,-305),Vector2(-140,-310),Vector2(-195,-370)]
 var coast
 var noise := FastNoiseLite.new()
+var terrain_vertices := PackedVector3Array()
+var terrain_triangles := PackedInt32Array()
 var terrain_mesh: MeshInstance3D
 var prop_count := 0
 var terrain_peak := 0.0
@@ -89,6 +91,8 @@ func build_terrain(map) -> void:
         triangles.append_array(PackedInt32Array([a,b,c]))
         for index in [a,b,c]:
             normals[index] += normal
+    terrain_vertices = positions
+    terrain_triangles = triangles
     var colors := PackedColorArray()
     for i in positions.size():
         normals[i] = normals[i].normalized()
@@ -126,6 +130,25 @@ func build_terrain(map) -> void:
         edge.add_point(edge.get_point_position(0))
         coast._ribbon(edge,7,-1.65,Color(0.39,0.66,0.61))
 
+# Query the same local-space triangles used by rendering and trimesh collision.
+# NAN means no generated surface exists here; never substitute a noise sample.
+func terrain_surface_height(point: Vector2) -> float:
+    for i in range(0,terrain_triangles.size(),3):
+        var a := terrain_vertices[terrain_triangles[i]]
+        var b := terrain_vertices[terrain_triangles[i+1]]
+        var c := terrain_vertices[terrain_triangles[i+2]]
+        var ab := Vector2(b.x-a.x,b.z-a.z)
+        var ac := Vector2(c.x-a.x,c.z-a.z)
+        var ap := point-Vector2(a.x,a.z)
+        var determinant := ab.cross(ac)
+        if absf(determinant) < 0.000001:
+            continue
+        var u := ap.cross(ac)/determinant
+        var v := ab.cross(ap)/determinant
+        if u >= -0.000001 and v >= -0.000001 and u+v <= 1.000001:
+            return a.y+u*(b.y-a.y)+v*(c.y-a.y)
+    return NAN
+
 func _asset(name_value: String, at: Vector3, scale_value := 1.0, yaw := 0.0) -> Node3D:
     if not scenes.has(name_value):
         scenes[name_value] = load("res://assets/world/"+name_value+".glb")
@@ -137,6 +160,7 @@ func _asset(name_value: String, at: Vector3, scale_value := 1.0, yaw := 0.0) -> 
     # Imported GLB pivots can sit below or above their visible mesh.
     # Align foliage using the actual rendered bounds, not just the scene origin.
     if name_value == "pine" or name_value == "palm":
+        var surface_y := terrain_surface_height(Vector2(at.x,at.z))
         var bottom := INF
         for mesh_node in node.find_children("*", "MeshInstance3D", true, false):
             var mesh_instance := mesh_node as MeshInstance3D
@@ -146,9 +170,9 @@ func _asset(name_value: String, at: Vector3, scale_value := 1.0, yaw := 0.0) -> 
             for x in [box.position.x, box.end.x]:
                 for y in [box.position.y, box.end.y]:
                     for z in [box.position.z, box.end.z]:
-                        bottom = minf(bottom, mesh_instance.to_global(Vector3(x,y,z)).y)
-        if bottom != INF:
-            node.position.y += at.y - bottom
+                        bottom = minf(bottom, to_local(mesh_instance.to_global(Vector3(x,y,z))).y)
+        if bottom != INF and not is_nan(surface_y):
+            node.position.y += surface_y - bottom
     prop_count += 1
     prop_roots.append(node)
     return node

@@ -134,6 +134,21 @@ func _asset(name_value: String, at: Vector3, scale_value := 1.0, yaw := 0.0) -> 
     node.scale = Vector3.ONE*scale_value
     node.rotation.y = yaw
     add_child(node)
+    # Imported GLB pivots can sit below or above their visible mesh.
+    # Align foliage using the actual rendered bounds, not just the scene origin.
+    if name_value == "pine" or name_value == "palm":
+        var bottom := INF
+        for mesh_node in node.find_children("*", "MeshInstance3D", true, false):
+            var mesh_instance := mesh_node as MeshInstance3D
+            if mesh_instance.mesh == null:
+                continue
+            var box := mesh_instance.get_aabb()
+            for x in [box.position.x, box.end.x]:
+                for y in [box.position.y, box.end.y]:
+                    for z in [box.position.z, box.end.z]:
+                        bottom = minf(bottom, mesh_instance.to_global(Vector3(x,y,z)).y)
+        if bottom != INF:
+            node.position.y += at.y - bottom
     prop_count += 1
     prop_roots.append(node)
     return node

@@ -480,7 +480,9 @@ void sky() {
 	sun.light_color = Color(1,0.91,0.76)
 	sun.light_energy = 1.35
 	sun.shadow_enabled = true
-	sun.directional_shadow_max_distance = 220
+	sun.directional_shadow_max_distance = 360
+	sun.shadow_bias = 0.035
+	sun.shadow_normal_bias = 1.0
 	sun_light = sun
 	add_child(sun)
 	advance_day_night(0.0)
